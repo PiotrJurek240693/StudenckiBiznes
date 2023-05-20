@@ -1,2 +1,4 @@
-package connection.client;public class Client {
+package connection.client;
+
+public class Client {
 }
