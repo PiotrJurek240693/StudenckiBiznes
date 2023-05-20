@@ -19,6 +19,7 @@ public class Client extends Thread {
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         output = new PrintWriter(socket.getOutputStream(), true);
         working = true;
+        this.start();
         System.out.println("Połączono z serwerem.");
     }
 
@@ -27,15 +28,20 @@ public class Client extends Thread {
         try {
             while (working) {
                 String notificationContent = input.readLine();
+                if (notificationContent == null) {
+                    break;
+                }
                 System.out.println("Otrzymano wiadomość: " + notificationContent);
                 // TODO: Napisać funkcję interpretującą otrzymane wiadomości
             }
         } catch (IOException e) {
-            System.out.println("Bład podczas odbierania danych od serwera. Zostałeś rozłączony!");
-            try {
-                socket.close();
-            } catch (IOException ex) {
-                System.out.println("Bład rozłącznia od serwera!");
+            if (working) {
+                System.out.println("Bład podczas odbierania danych od serwera. Zostałeś rozłączony!");
+                try {
+                    socket.close();
+                } catch (IOException ex) {
+                    System.out.println("Bład podczas zamykania gniazda!");
+                }
             }
         }
         System.out.println("Rozłączono z serwerem!");
@@ -47,6 +53,11 @@ public class Client extends Thread {
 
     public void close() {
         working = false;
+        try {
+            socket.close();
+        } catch (IOException e) {
+            System.out.println("Bład podczas zamykania gniazda!");
+        }
         this.interrupt();
     }
 }

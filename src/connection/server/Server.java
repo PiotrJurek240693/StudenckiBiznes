@@ -14,6 +14,7 @@ public class Server extends Thread {
         serverSocket = new ServerSocket(8888);
         clientHandlers = new ArrayList<>();
         working = true;
+        this.start();
         System.out.println("Serwer nasłuchuje na porcie 8888.");
     }
 
@@ -29,8 +30,10 @@ public class Server extends Thread {
                 clientHandlers.add(clientHandler);
             }
         } catch (IOException e) {
-            System.out.println("Bład podczas dołączania nowego klienta!");
-            close();
+            if(working){
+                System.out.println("Bład podczas dołączania nowego klienta!");
+                close();
+            }
         }
         System.out.println("Serwer zakończył działanie.");
     }
@@ -46,6 +49,11 @@ public class Server extends Thread {
             ch.close();
         }
         working = false;
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("Bład podczas zamykania gniazda!");
+        }
         this.interrupt();
     }
 }

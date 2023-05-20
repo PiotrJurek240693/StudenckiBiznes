@@ -14,7 +14,7 @@ public class ClientHandler extends Thread {
         input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         output = new PrintWriter(clientSocket.getOutputStream(), true);
         working = true;
-        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + "rozpoczoł działanie.");
+        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " rozpoczoł działanie.");
     }
 
     @Override
@@ -22,18 +22,23 @@ public class ClientHandler extends Thread {
         try {
             while (working) {
                 String notificationContent = input.readLine();
+                if (notificationContent == null) {
+                    break;
+                }
                 System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " otrzymał wiadomość:\n" + notificationContent);
                 // TODO: Napisać funkcję interpretującą otrzymane wiadomości
             }
         } catch (IOException e) {
-            System.out.println("Bład podczas odbierania danych od klienta. Klient zostanie rozłączony!");
-            try {
-                clientSocket.close();
-            } catch (IOException ex) {
-                System.out.println("Bład rozłącznia klienta!");
+            if (working) {
+                System.out.println("Bład podczas odbierania danych od klienta. Klient zostanie rozłączony!");
+                try {
+                    clientSocket.close();
+                } catch (IOException ex) {
+                    System.out.println("Bład podczas zamykania gniazda!");
+                }
             }
         }
-        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + "zakończył działanie.");
+        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " zakończył działanie.");
     }
 
     public void sendMessage(String message) {
@@ -42,6 +47,11 @@ public class ClientHandler extends Thread {
 
     public void close() {
         working = false;
+        try {
+            clientSocket.close();
+        } catch (IOException e) {
+            System.out.println("Bład podczas zamykania gniazda!");
+        }
         this.interrupt();
     }
 }
