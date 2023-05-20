@@ -1,4 +1,52 @@
 package connection.client;
 
-public class Client {
+import connection.server.ClientHandler;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Client extends Thread {
+    private final Socket socket;
+    private final BufferedReader input;
+    private final PrintWriter output;
+    private boolean working;
+
+    Client(String serverIP, int port) throws IOException {
+        socket = new Socket(serverIP, port);
+        input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        output = new PrintWriter(socket.getOutputStream(), true);
+        working = true;
+        System.out.println("Połączono z serwerem.");
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (working) {
+                String notificationContent = input.readLine();
+                System.out.println("Otrzymano wiadomość: " + notificationContent);
+                // TODO: Napisać funkcję interpretującą otrzymane wiadomości
+            }
+        } catch (IOException e) {
+            System.out.println("Bład podczas odbierania danych od serwera. Zostałeś rozłączony!");
+            try {
+                socket.close();
+            } catch (IOException ex) {
+                System.out.println("Bład rozłącznia od serwera!");
+            }
+        }
+        System.out.println("Rozłączono z serwerem!");
+    }
+
+    public void sendMessage(String message) {
+        output.println(message);
+    }
+
+    public void close() {
+        working = false;
+        this.interrupt();
+    }
 }
