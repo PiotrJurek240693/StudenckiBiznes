@@ -1,11 +1,12 @@
 package gameLogic.squares;
 
+import gameLogic.Action;
 import gameLogic.Square;
 
 public class Dante implements Square {
-    public void doAction()
+    public Action doAction()
     {
-
+        return new Action('a',1);
     }
     private void so1()
     {

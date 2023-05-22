@@ -1,6 +1,6 @@
 package gameLogic;
 
 public interface Square {
-    void doAction();
+    Action doAction();
 
 }

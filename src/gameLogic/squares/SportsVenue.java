@@ -1,8 +1,15 @@
 package gameLogic.squares;
 
-public class SportsVenue extends Property{
-    public void doAction()
-    {
+import gameLogic.Action;
 
+public class SportsVenue extends Property{
+    public SportsVenue(int price) {
+        this.price=price;
+        this.payment=0;
+    }
+
+    public Action doAction()
+    {
+        return new Action('a',1);
     }
 }

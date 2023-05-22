@@ -1,10 +1,11 @@
 package gameLogic.squares;
 
+import gameLogic.Action;
 import gameLogic.Square;
 
 public class Start implements Square {
-    public void doAction()
+    public Action doAction()
     {
-
+        return new Action('a',1);
     }
 }
