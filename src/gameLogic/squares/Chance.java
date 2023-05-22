@@ -6,6 +6,6 @@ import gameLogic.Square;
 public class Chance implements Square {
     public Action doAction()
     {
-        return new Action('c',1);
+        return new Action('e',-1);
     }
 }

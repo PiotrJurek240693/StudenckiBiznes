@@ -15,6 +15,14 @@ public class Board {
         initSquares();
     }
 
+    public Action checkAction(int square)
+    {
+        if(square<0||square>=squares.size())
+        {
+            return new Action('e',-1);
+        }
+        return squares.get(square).doAction();
+    }
     private void initSquares() {
         squares.add(new Start());
         squares.add(new Building(60,UPGRADE_PRICE_ROW_1));

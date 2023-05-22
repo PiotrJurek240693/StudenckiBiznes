@@ -6,7 +6,7 @@ import gameLogic.Square;
 public class Dante implements Square {
     public Action doAction()
     {
-        return new Action('a',1);
+        return new Action('e',-1);
     }
     private void so1()
     {

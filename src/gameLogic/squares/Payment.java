@@ -11,6 +11,6 @@ public class Payment implements Square {
 
     public Action doAction()
     {
-        return new Action('a',1);
+        return new Action('e',-1);
     }
 }

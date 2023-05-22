@@ -12,6 +12,6 @@ public class Building extends Property {
 
     public Action doAction()
     {
-        return new Action('a',1);
+        return new Action('e',-1);
     }
 }

@@ -1,8 +1,8 @@
 package gameLogic;
 
 public class Action {
-
-    private char type;//p-player, b-board, c-cards,
+//TODO: ustandaryzować co oznacza jaka akcja
+    private char type;//p-player, b-board, c-cards, e-error
     private int action;
 
     public Action(char type,int action)
