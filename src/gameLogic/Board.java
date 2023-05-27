@@ -23,8 +23,71 @@ public class Board {
     public static final int DANTE_AGAIN = 10;
     public static final int FAILED_SUBIECT_FEE = 11;
 
+    private static Random randomGenerator = new Random();
     private ArrayList<Square> squares=new ArrayList<Square>();
+    private ArrayList<Action> actionsToSend=new ArrayList<Action>();
+    private Player[] players;
+    public Board(Player[] players)
+    {
+        this.players=players;
+        initSquares();
+    }
+    public void run()
+    {
+        boolean isRunning=true;
+        int playerIndex=0;
+        while(isRunning)
+        {
+            playerRound(playerIndex);
 
+            playerIndex++;
+            if(playerIndex==players.length)
+            {
+                playerIndex=0;
+            }
+        }
+    }
+    private void playerRound(int playerIndex)
+    {
+        boolean endedRound=false;
+        while(!endedRound)
+        {
+            int[] dices=rollDices(players[playerIndex].getDices());
+            // TODO: wysłać i wyświetlić żut kostkami
+            int position=doMove(playerIndex,howFar(dices));
+            // TODO: zrobić obsługę ruchu
+        }
+    }
+    private int howFar(int[] dices)
+    {
+        int sum=0;
+        for(int i=0;i<dices.length;i++)
+        {
+            sum+=dices[i];
+        }
+        return sum;
+    }
+    private int[] rollDices(int howMany)
+    {
+        int[] dices=new int[howMany];
+        for(int i=0;i<howMany;i++)
+        {
+            dices[i]=randomGenerator.nextInt(6)+1;
+        }
+        return dices;
+    }
+    public int doMove(int playerIndex,int move)
+    {
+        int position=players[playerIndex].getPosition();
+        position+=move;
+        if(position>squares.size())
+        {
+            position-=squares.size();
+        }
+        players[playerIndex].setPosition(position);
+        // TODO: wysłać i wyświetlić przesunięcie gracza
+        return position;
+    }
     private void initSquares() {
         squares.add(new Square("START", START,0));
         squares.add(new Property("INSTYTUT ZARZĄDZANIA", INSTITUTE,60,UPGRADE_PRICE_ROW_1));
