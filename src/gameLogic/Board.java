@@ -23,9 +23,11 @@ public class Board {
     public static final int DANTE_AGAIN = 10;
     public static final int FAILED_SUBIECT_FEE = 11;
 
+    public static final int NO_ONE = -1;
+    public static final int BANK = NO_ONE;
+
     private static Random randomGenerator = new Random();
     private ArrayList<Square> squares=new ArrayList<Square>();
-    private ArrayList<Action> actionsToSend=new ArrayList<Action>();
     private Player[] players;
     public Board(Player[] players)
     {
@@ -36,8 +38,7 @@ public class Board {
     {
         boolean isRunning=true;
         int playerIndex=0;
-        while(isRunning)
-        {
+        while(isRunning) {
             playerRound(playerIndex);
 
             playerIndex++;
@@ -50,19 +51,97 @@ public class Board {
     private void playerRound(int playerIndex)
     {
         boolean endedRound=false;
-        while(!endedRound)
-        {
+        while(!endedRound) {
+            // TODO: sprawdzić czy jest bankrutem jeśli jest to break
+            // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
             int[] dices=rollDices(players[playerIndex].getDices());
             // TODO: wysłać i wyświetlić żut kostkami
-            int position=doMove(playerIndex,howFar(dices));
-            // TODO: zrobić obsługę ruchu
+            // TODO: sprawdzić czy gracz ma ustawione robienie dante
+            doMove(playerIndex,howFar(dices));
+            doAction(playerIndex);
+            // TODO: dodać sprawdzenie czy był dublet
+            endedRound=true;
+        }
+    }
+    private void doAction(int playerIndex)
+    {
+        int position=players[playerIndex].getPosition();
+        Square square=squares.get(position);
+        if(square.isCards()) {
+            // TODO: dobrać karte i ją obsłużyć
+        } else if (square.isSpecial()) {
+            handleSpecial(square);
+        } else if (square.isProperty()) {
+            handleProperty(playerIndex, (Property) square);
+        } else {
+            pay(playerIndex,BANK,square.getFee());
+        }
+        // TODO: zrobić obsługę ruchu
+    }
+
+    private void handleSpecial(Square square)
+    {
+        switch (square.getType())
+        {
+            case DANTE:
+                // TODO: obsługa pola
+                break;
+            case LIBRARY:
+                // TODO: obsługa pola
+                break;
+            case DANTE_AGAIN:
+                // TODO: obsługa pola
+                break;
+        }
+    }
+
+    private void handleProperty(int playerIndex, Property square)
+    {
+        if(square.isMortgaged()){
+            return;
+        }
+        Property property= square;
+        int ownerIndex=property.getOwnerIndex();
+        if (ownerIndex==NO_ONE) {
+            // TODO: zaoferować kupno posiadłości lub licytacje
+        } else if (playerIndex!=ownerIndex){
+            pay(playerIndex,ownerIndex,square.getFee());
+        }
+    }
+
+    private void pay(int from,int to,int amount)
+    {
+        int moneyPaid=amount;
+        if(from!=BANK)
+        {
+            // TODO: zabrać graczowi o indexie [from] amount pieniędzy i obsłużyć bankructwo - wyliczyć ile zapłacił
+            moneyPaid=amount;
+        }
+        if(to!=BANK)
+        {
+            // TODO: dać graczowi o indeksie [to] moneyPaid pieniędzy
+        }
+    }
+    private void removePlayer(int playerIndex)
+    {
+        // TODO: ustawić gracza jako bankruta
+        for(int i=0;i<squares.size();i++)
+        {
+            Square square=squares.get(i);
+            if(square.isProperty())
+            {
+                Property property=(Property)square;
+                if(property.getOwnerIndex()==playerIndex)
+                {
+                    property.setOwnerIndex(NO_ONE);
+                }
+            }
         }
     }
     private int howFar(int[] dices)
     {
         int sum=0;
-        for(int i=0;i<dices.length;i++)
-        {
+        for(int i=0;i<dices.length;i++) {
             sum+=dices[i];
         }
         return sum;
@@ -70,23 +149,21 @@ public class Board {
     private int[] rollDices(int howMany)
     {
         int[] dices=new int[howMany];
-        for(int i=0;i<howMany;i++)
-        {
+        for(int i=0;i<howMany;i++) {
             dices[i]=randomGenerator.nextInt(6)+1;
         }
         return dices;
     }
-    public int doMove(int playerIndex,int move)
+    public void doMove(int playerIndex,int move)
     {
         int position=players[playerIndex].getPosition();
         position+=move;
-        if(position>squares.size())
-        {
+        if(position>squares.size()) {
             position-=squares.size();
+            pay(BANK,playerIndex,200);
         }
         players[playerIndex].setPosition(position);
         // TODO: wysłać i wyświetlić przesunięcie gracza
-        return position;
     }
     private void initSquares() {
         squares.add(new Square("START", START,0));
