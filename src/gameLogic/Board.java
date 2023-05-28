@@ -25,6 +25,7 @@ public class Board {
 
     public static final int NO_ONE = -1;
     public static final int BANK = NO_ONE;
+    public static final int RANDOMISE = -1;
 
     private static Random randomGenerator = new Random();
     private ArrayList<Square> squares=new ArrayList<Square>();
@@ -50,47 +51,73 @@ public class Board {
     }
     private void playerRound(int playerIndex)
     {
+        // TODO: (gameLogic) sprawdzić czy jest bankrutem jeśli jest to return;
+        // TODO: wysłać i wyświetlić kogo jest kolej
         boolean endedRound=false;
+        int doubles=0;
         while(!endedRound) {
-            // TODO: sprawdzić czy jest bankrutem jeśli jest to break
             // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
             int[] dices=rollDices(players[playerIndex].getDices());
-            // TODO: wysłać i wyświetlić żut kostkami
-            // TODO: sprawdzić czy gracz ma ustawione robienie dante
+            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante
             doMove(playerIndex,howFar(dices));
+            int position=players[playerIndex].getPosition();
             doAction(playerIndex);
-            // TODO: dodać sprawdzenie czy był dublet
-            endedRound=true;
+            if(isDouble(dices))
+            {
+                if(doubles==2) {
+                    goToDante(playerIndex,3);
+                    endedRound=true;
+                } else {
+                    endedRound=false;
+                }
+            }
+            else{
+                endedRound=true;
+            }
+            if(position!=players[playerIndex].getPosition())
+            {
+                // TODO: ponownie wysłać i wyświetlić pozycję gdyż uległa zmianie
+            }
         }
+    }
+    private void goToDante(int playerIndex,int time)
+    {
+        // TODO: (gameLogic) obsłużyć czas siedzenia w dante
+        players[playerIndex].setPosition(10);
+    }
+    private boolean isDouble(int[] dices)
+    {
+        // TODO: (gameLogic) dodać sprawdzenie czy był dublet
+        return false;
     }
     private void doAction(int playerIndex)
     {
         int position=players[playerIndex].getPosition();
         Square square=squares.get(position);
         if(square.isCards()) {
-            // TODO: dobrać karte i ją obsłużyć
+            // TODO: (gameLogic) dobrać karte i ją obsłużyć
+            // TODO: wysłać i wyświetlić kartę
         } else if (square.isSpecial()) {
-            handleSpecial(square);
+            handleSpecial(square,playerIndex);
         } else if (square.isProperty()) {
             handleProperty(playerIndex, (Property) square);
         } else {
             pay(playerIndex,BANK,square.getFee());
         }
-        // TODO: zrobić obsługę ruchu
     }
 
-    private void handleSpecial(Square square)
+    private void handleSpecial(Square square,int playerIndex)
     {
         switch (square.getType())
         {
             case DANTE:
-                // TODO: obsługa pola
+                // TODO: (gameLogic) obsługa pola
                 break;
             case LIBRARY:
-                // TODO: obsługa pola
+                // TODO: (gameLogic) obsługa pola
                 break;
             case DANTE_AGAIN:
-                // TODO: obsługa pola
+                goToDante(playerIndex,RANDOMISE);
                 break;
         }
     }
@@ -114,17 +141,18 @@ public class Board {
         int moneyPaid=amount;
         if(from!=BANK)
         {
-            // TODO: zabrać graczowi o indexie [from] amount pieniędzy i obsłużyć bankructwo - wyliczyć ile zapłacił
+            // TODO: (gameLogic) zabrać graczowi o indexie [from] amount pieniędzy i obsłużyć bankructwo - wyliczyć ile zapłacił
             moneyPaid=amount;
         }
         if(to!=BANK)
         {
-            // TODO: dać graczowi o indeksie [to] moneyPaid pieniędzy
+            // TODO: (gameLogic) dać graczowi o indeksie [to] moneyPaid pieniędzy
         }
+        // TODO: wysłać i wyświetlić nowy stan gotówki
     }
     private void removePlayer(int playerIndex)
     {
-        // TODO: ustawić gracza jako bankruta
+        // TODO: (gameLogic) ustawić gracza jako bankruta
         for(int i=0;i<squares.size();i++)
         {
             Square square=squares.get(i);
@@ -137,6 +165,7 @@ public class Board {
                 }
             }
         }
+        // TODO: wysłać i wyświetlić pola spowrotem do kupienia, gracz wyszarzony
     }
     private int howFar(int[] dices)
     {
@@ -152,6 +181,7 @@ public class Board {
         for(int i=0;i<howMany;i++) {
             dices[i]=randomGenerator.nextInt(6)+1;
         }
+        // TODO: wysłać i wyświetlić wyrzucone kostki
         return dices;
     }
     public void doMove(int playerIndex,int move)

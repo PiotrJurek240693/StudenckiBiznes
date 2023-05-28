@@ -6,7 +6,7 @@ public class Property extends Square {
     private int upgradePrice;
     private int ownerIndex;
     private boolean mortgaged;
-
+    private int upgrades;
     public boolean isMortgaged() {
         return mortgaged;
     }
@@ -16,7 +16,14 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    // TODO: dodać metody liczące ceny zastawienia i odkupienia zastawienia
+    public int mortgagePrice()
+    {
+        return (int) 0.5 * price;
+    }
+    public int mortgageFee()
+    {
+        return (int) 0.55 * price;
+    }
 
     public int getUpgrades() {
         return upgrades;
@@ -27,7 +34,9 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    private int upgrades;
+    public int getUpgradePrice() {
+        return upgradePrice;
+    }
 
     public int getOwnerIndex() {
         return ownerIndex;
@@ -53,9 +62,16 @@ public class Property extends Square {
     }
     private void calculateNewFee()
     {
-        // TODO: zrobić wyliczenie ceny względem upgrades
+        if(mortgaged) {
+            fee=0;
+        } else if (ownerIndex==NO_ONE) {
+            fee=0;
+        } else if (upgrades==0) {
+            fee=(int) 0.1 * price;
+        } else {
+            fee=upgrades*price;
+        }
 
-        price=0;
     }
 
 
