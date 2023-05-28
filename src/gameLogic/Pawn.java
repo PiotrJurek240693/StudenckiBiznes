@@ -2,9 +2,9 @@ package gameLogic;
 
 public class Pawn
 {
-    private static int position;
+    private int position;
 
-    public static int move(int shift)
+    public int move(int shift)
     {
         position += shift;
         if(position>=GameInfo.NUMBER_OF_SQUARES)
