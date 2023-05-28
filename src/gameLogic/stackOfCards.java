@@ -7,13 +7,13 @@ public class stackOfCards
     private List<Card> deck;
     private List<Card> usedCards;
 
-    public void initStackOfCardsChance(stackOfCards stack)
+    public void initStackOfCardsChance()
     {
         // TODO: dowiedziec sie ktore karty to sa Kasa Studencka a ktore Szansa
         Collections.shuffle(deck);
     }
 
-    public void initStackOfCardsKasaStudencka(stackOfCards stack)
+    public void initStackOfCardsKasaStudencka()
     {
         // TODO: dowiedziec sie ktore karty to sa Kasa Studencka a ktore Szansa
         Collections.shuffle(deck);
