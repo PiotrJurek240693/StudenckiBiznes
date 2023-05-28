@@ -9,7 +9,7 @@ public class ClientHandler extends Thread {
     private final PrintWriter output;
     private boolean working;
 
-    ClientHandler(Socket clientSocket) throws IOException {
+    public ClientHandler(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
         input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         output = new PrintWriter(clientSocket.getOutputStream(), true);
