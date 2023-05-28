@@ -11,7 +11,7 @@ public class Pawn
         if(position>=GameInfo.NUMBER_OF_SQUARES)
         {
             position = position%GameInfo.NUMBER_OF_SQUARES;
-            return GameInfo.START_FEE;
+            return GameInfo.START_SQUARE_ADDITION;
         }
         return 0;
     }
