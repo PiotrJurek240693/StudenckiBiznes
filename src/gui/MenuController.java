@@ -1,9 +1,6 @@
 package gui;
 
-import connection.server.Server;
 import javafx.application.Platform;
-
-import java.io.IOException;
 
 public class MenuController {
     public static void onExitButtonClick() {
@@ -24,5 +21,19 @@ public class MenuController {
 
     public static void onReturnToMultiOrSingleMenuButtonClick() {
         MenuShower.showMultiOrSingleMenu();
+    }
+
+    public static void onReturnToHostOrJoinMenuButtonClick() {
+        MenuShower.showHostOrJoinMenu();
+    }
+
+    public static void onJoinButtonClick() { MenuShower.showJoinMenu(); }
+
+    public static void onHostButtonClick() {
+        //TODO: Dodac uruchamianie serwera.
+    }
+
+    public static void onJoinToSessionButtonClick(String ip) {
+        //TODO: Dodac polaczenie z serwerem gry.
     }
 }
