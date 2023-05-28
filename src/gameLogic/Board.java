@@ -34,6 +34,7 @@ public class Board {
     {
         this.players=players;
         initSquares();
+        // TODO: dodać mieszanie kart na obu stosach
     }
     public void run()
     {
@@ -51,51 +52,77 @@ public class Board {
     }
     private void playerRound(int playerIndex)
     {
-        // TODO: (gameLogic) sprawdzić czy jest bankrutem jeśli jest to return;
+        // TODO: (gameLogic) sprawdzić czy gracz jest bankrutem, jeśli jest to return;
         // TODO: wysłać i wyświetlić kogo jest kolej
         boolean endedRound=false;
         int doubles=0;
         while(!endedRound) {
             // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
+            //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
+            //      -w jednym ruchu student może dobudować tylko 1 sale lub aule na jedno pole
+            //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
+            //      -aula może być postawiona tylko wtedy, kiedy student posiada już 4 sale na danym polu, wtedy 4 sale są zamieniane na 1 aule
+            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i...
+                // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
             int[] dices=rollDices(players[playerIndex].getDices());
-            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante
+            // TODO: (gameLogic) zmniejszyć graczowi czas nietypowej liczby kostek (nie mniej niż 0) i obsłużyć przywrócenie 2 kostek
+            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i jeśli nie ma doubla if(!isDouble(dices)) break;
             doMove(playerIndex,howFar(dices));
             int position=players[playerIndex].getPosition();
             doAction(playerIndex);
             if(isDouble(dices))
             {
-                if(doubles==2) {
+                if(doubles>=2) {
                     goToDante(playerIndex,3);
                     endedRound=true;
                 } else {
                     endedRound=false;
                 }
+                doubles++;
             }
             else{
                 endedRound=true;
             }
             if(position!=players[playerIndex].getPosition())
             {
-                // TODO: ponownie wysłać i wyświetlić pozycję gdyż uległa zmianie
+                // TODO: ponownie wysłać i wyświetlić pozycję, gdyż uległa zmianie
             }
         }
     }
     private void goToDante(int playerIndex,int time)
     {
-        // TODO: (gameLogic) obsłużyć czas siedzenia w dante
+        if(time==RANDOMISE) {
+            time = randomGenerator.nextInt(4);
+            // TODO: wysłać i wyświetlić na co idzie gracz - 0-SO,1-PP1,2-PP2,3-SO2
+        }
+        // TODO: (gameLogic) sprawdzić czy gracz ma kartę wyjścia z dante
+        {
+            time=0;
+            // TODO: wysłać i wyświetlić użycie karty wyjścia z dante
+            // TODO: (gameLogic) usunąć graczowi kartę wyjścia z dante
+            // TODO: dodać kartę wyjścia z dante na spód talii
+        }
         players[playerIndex].setPosition(10);
+        // TODO: (gameLogic) ustawić graczowi time kolejek w dante
     }
     private boolean isDouble(int[] dices)
     {
-        // TODO: (gameLogic) dodać sprawdzenie czy był dublet
-        return false;
+        boolean isDouble=false;
+        for(int i=0;i<dices.length-1;i++){
+            for(int j=i+1;j<dices.length;j++){
+                if(dices[i]==dices[j]){
+                    isDouble=true;
+                }
+            }
+        }
+        return isDouble;
     }
     private void doAction(int playerIndex)
     {
         int position=players[playerIndex].getPosition();
         Square square=squares.get(position);
         if(square.isCards()) {
-            // TODO: (gameLogic) dobrać karte i ją obsłużyć
+            // TODO: (gameLogic - puźniej) dobrać karte i ją obsłużyć
             // TODO: wysłać i wyświetlić kartę
         } else if (square.isSpecial()) {
             handleSpecial(square,playerIndex);
@@ -111,10 +138,11 @@ public class Board {
         switch (square.getType())
         {
             case DANTE:
-                // TODO: (gameLogic) obsługa pola
+                // TODO: obsługa wyświetlenia gracza na polu odwiedzający
                 break;
             case LIBRARY:
-                // TODO: (gameLogic) obsługa pola
+                // TODO: (gameLogic) obsługa pola - zmiana graczowi ilość kostek na 3 i czasu nietypowej ilości kostek na 1
+                // TODO: wysłanie i wyświetlenie darmowej herbaty
                 break;
             case DANTE_AGAIN:
                 goToDante(playerIndex,RANDOMISE);
@@ -152,7 +180,7 @@ public class Board {
     }
     private void removePlayer(int playerIndex)
     {
-        // TODO: (gameLogic) ustawić gracza jako bankruta
+        // TODO: (gameLogic) ustawić graczowi bankructwo
         for(int i=0;i<squares.size();i++)
         {
             Square square=squares.get(i);
@@ -165,7 +193,7 @@ public class Board {
                 }
             }
         }
-        // TODO: wysłać i wyświetlić pola spowrotem do kupienia, gracz wyszarzony
+        // TODO: wysłać i wyświetlić pola z powrotem do kupienia, gracz wyszarzony
     }
     private int howFar(int[] dices)
     {
@@ -210,7 +238,7 @@ public class Board {
         squares.add(new Property("INSTYTUT TECHNOLOGII POLIMERÓW I BARWNIKÓW",INSTITUTE,140, UPGRADE_PRICE_ROW_2));
         squares.add(new Property("ZATOKA SPORTU", SPORT_VANUE,150,UNUPGRADABLE));
         squares.add(new Property("INSTYTUT CHEMII OGÓLNEJ I EKOLOGICZNEJ",INSTITUTE,140,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TCHNIKI RADIACYJNEJ",INSTITUTE,160,UPGRADE_PRICE_ROW_2));
+        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TECHNIKI RADIACYJNEJ",INSTITUTE,160,UPGRADE_PRICE_ROW_2));
         squares.add(new Property("PARKING KAMPUS B",PARKING,200,UNUPGRADABLE));
         squares.add(new Property("INSTYTUT MATERIAŁOZNAWSTWA TEKSTYLIÓW I KOMPOZYTÓW POLIMEROWYCH",INSTITUTE,180,UPGRADE_PRICE_ROW_2));
         squares.add(new Square("KASA STUDENCKA",STUDENT_CASH,0));
