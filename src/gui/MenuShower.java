@@ -75,6 +75,7 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(20);
         button1.setTranslateY(110);
+        button1.setOnAction(event -> {MenuController.onSingleplayerButtonClick();});
 
         // Tworzenie przycisku 2
         Button button2 = new Button("Muliplayer");
@@ -201,5 +202,60 @@ public class MenuShower {
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
+    }
+
+    public static void showQuantity()
+    {
+        ImageView Quantity = new ImageView();
+        Image MenuPowitlaneImage = new Image("file:../../assets/WyborIlosciGraczy.png");
+
+        // Ustawianie wczytanego obrazu z MenuPowitalne
+        Quantity.setImage(MenuPowitlaneImage);
+        Quantity.setFitWidth(ScreenSettings.screenWidth);
+        Quantity.setFitHeight(ScreenSettings.screenHeight);
+
+        // Tworzenie przycisku 1
+        Button button1 = new Button("Wyjście");
+        button1.getStyleClass().add("przyciski_menu_powitalne");
+        button1.setTranslateX(0);
+        button1.setTranslateY(300);
+        button1.setOnAction(event -> {MenuController.onReturnToMultiOrSingleMenuButtonClick();});
+
+        // Tworzenie przycisku 3
+        Button button3 = new Button("");
+        button3.getStyleClass().add("przyciski_niewidzialne");
+        button3.setTranslateX(0);
+        button3.setTranslateY(-340);
+        button3.setVisible(false);
+
+
+        // Tworzenie przycisku 4
+        Button button4 = new Button("");
+        button4.getStyleClass().add("przyciski_niewidzialne");
+        button4.setTranslateX(0);
+        button4.setTranslateY(-120);
+        button4.setVisible(false);
+
+        // Tworzenie przycisku 5
+        Button button5 = new Button("");
+        button5.getStyleClass().add("przyciski_niewidzialne");
+        button5.setTranslateX(0);
+        button5.setTranslateY(100);
+        button5.setVisible(false);
+
+
+
+        // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
+        StackPane root = new StackPane();
+        root.getChildren().addAll(Quantity, button3, button4, button5, button1);
+
+
+        // Tworzenie sceny i ustawianie jej w Stage
+        Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+
+        ScreenSettings.primaryStage.setScene(scene);
+        ScreenSettings.primaryStage.show();
+
     }
 }

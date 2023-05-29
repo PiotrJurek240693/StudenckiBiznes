@@ -19,6 +19,9 @@ public class MenuController {
         MenuShower.showHostOrJoinMenu();
     }
 
+    public static void onSingleplayerButtonClick() {
+        MenuShower.showQuantity();
+    }
     public static void onReturnToMultiOrSingleMenuButtonClick() {
         MenuShower.showMultiOrSingleMenu();
     }
@@ -30,6 +33,7 @@ public class MenuController {
     public static void onJoinButtonClick() { MenuShower.showJoinMenu(); }
 
     public static void onHostButtonClick() {
+        MenuShower.showQuantity();
         //TODO: Dodac uruchamianie serwera.
     }
 
