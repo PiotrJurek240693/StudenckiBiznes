@@ -10,7 +10,7 @@ public class Server extends Thread {
     private final ServerSocket serverSocket;
     private boolean working;
 
-    Server() throws IOException {
+    public Server() throws IOException {
         serverSocket = new ServerSocket(8888);
         clientHandlers = new ArrayList<>();
         working = true;
