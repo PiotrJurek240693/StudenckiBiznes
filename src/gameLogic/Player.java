@@ -11,8 +11,6 @@ public class Player {
     private boolean hasElectricDeficiency = false;
     private boolean throwTwoDices = true;
 
-
-
     public int setPosition(int shift)
     {
         int value;

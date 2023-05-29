@@ -2,21 +2,11 @@ package gameLogic;
 
 public class Square {
 
-    public static final int INSTITUTE = 1;
-    public static final int STUDENT_CASH = 2;
-    public static final int PARKING = 4;
-    public static final int CATHEDRAL = 5;
-    public static final int CHANCE = 6;
-    public static final int DANTE = 7;
-    public static final int SPORT_VANUE = 8;
-    public static final int LIBRARY = 9;
-    public static final int DANTE_AGAIN = 10;
-
-    private int type;
+    private TypesOfSqueres type;
     private String name;
     protected int fee;
 
-    public int getType() {
+    public TypesOfSqueres getType() {
         return type;
     }
 
@@ -30,7 +20,7 @@ public class Square {
 
     public boolean isSpecial()
     {
-        if(type==DANTE||type==LIBRARY||type==DANTE_AGAIN)
+        if(type==TypesOfSqueres.DANTE||type==TypesOfSqueres.LIBRARY||type==TypesOfSqueres.DANTE_AGAIN)
         {
             return true;
         }
@@ -38,7 +28,7 @@ public class Square {
     }
     public boolean isProperty()
     {
-        if(type==INSTITUTE||type==PARKING||type==CATHEDRAL||type==SPORT_VANUE)
+        if(type==TypesOfSqueres.INSTITUTE||type==TypesOfSqueres.PARKING||type==TypesOfSqueres.CATHEDRAL||type==TypesOfSqueres.SPORT_VANUE)
         {
             return true;
         }
@@ -46,14 +36,14 @@ public class Square {
     }
     public boolean isCards()
     {
-        if(type==CHANCE||type==STUDENT_CASH)
+        if(type==TypesOfSqueres.CHANCE||type==TypesOfSqueres.STUDENT_CASH)
         {
             return true;
         }
         return false;
     }
 
-    public Square(String name,int type,int fee)
+    public Square(String name,TypesOfSqueres type,int fee)
     {
         this.name=name;
         this.type=type;
