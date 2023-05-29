@@ -51,7 +51,7 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    public Property(String name,int type, int price, int upgradePrice)
+    public Property(String name,TypesOfSqueres type, int price, int upgradePrice)
     {
         super(name, type, 0);
         this.price=price;

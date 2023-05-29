@@ -17,7 +17,8 @@ public class Game {
         }
     }
 
-    public Game(GameType gameType) throws IOException {
+    public Game(GameType gameType) throws IOException
+    {
         if(gameType == GameType.MultiplayerClient){
             throw new IllegalArgumentException();
         }
