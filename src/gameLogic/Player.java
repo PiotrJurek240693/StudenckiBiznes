@@ -47,9 +47,10 @@ public class Player {
         moneyAmount += amount;
     }
 
-    public void takeMoney(int amount)
+    public int takeMoney(int amount)
     {
         // TODO: rozwiązanie konfliktu z Property
+        return 0;
     }
 
     public boolean isCardChance()
