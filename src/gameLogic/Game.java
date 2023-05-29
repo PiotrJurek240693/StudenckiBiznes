@@ -4,8 +4,10 @@ import connection.client.Client;
 import connection.server.Server;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Game {
+    static private List<Player> players;
     private Server server;
     private Client client;
     public Game(GameType gameType, String serverIP) throws IOException {
@@ -34,5 +36,11 @@ public class Game {
         if(client != null){
             client.close();
         }
+    }
+
+
+    public static List<Player> getPlayers()
+    {
+        return players;
     }
 }
