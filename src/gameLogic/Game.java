@@ -10,19 +10,19 @@ public class Game {
     private Client client;
     public Game(GameType gameType, String serverIP) throws IOException {
         if(gameType == GameType.MultiplayerClient){
-            server = new Client(serverIP, 8888);
+            client = new Client(serverIP, 8888);
         }
         else if(gameType == GameType.MultiplayerHost){
-            client = new Server();
+            server = new Server();
         }
     }
 
-    public Game(GameType gameType) {
+    public Game(GameType gameType) throws IOException {
         if(gameType == GameType.MultiplayerClient){
             throw new IllegalArgumentException();
         }
         else if(gameType == GameType.MultiplayerHost){
-            client = new Server();
+            server = new Server();
         }
     }
 
