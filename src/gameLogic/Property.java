@@ -67,7 +67,7 @@ public class Property extends Square {
         } else if (ownerIndex==NO_ONE) {
             fee=0;
         } else if (upgrades==0) {
-            fee=(int) 0.1 * price;
+            fee=(int) (0.1 * price);
         } else {
             fee=upgrades*price;
         }
