@@ -14,5 +14,6 @@ public interface Card
     int ONLINE_SITE_VALUE = 20;
     int DANTE_RELIEF = -1;
     int MONEY_FOUND_VALUE = 10;
+    int NONE = 0;
     void takeAction(Player player);
 }

@@ -43,4 +43,11 @@ public class Game {
     {
         return players;
     }
+
+    public static Player choosePlayer(List<Player> availablePlayers)
+    {
+        // TODO: funkcja przekazuje graczy, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
+        // Gracza wybierajacego nie ma wsrod availablePlayers
+        return null;
+    }
 }
