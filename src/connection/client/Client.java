@@ -14,7 +14,7 @@ public class Client extends Thread {
     private final PrintWriter output;
     private boolean working;
 
-    Client(String serverIP, int port) throws IOException {
+    public Client(String serverIP, int port) throws IOException {
         socket = new Socket(serverIP, port);
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         output = new PrintWriter(socket.getOutputStream(), true);

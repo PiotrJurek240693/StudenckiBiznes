@@ -1,0 +1,13 @@
+.przyciski_menu_powitalne {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-radius: 20px;
+    -fx-border-width: 15px;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-font-family: "Segoe Print";
+    -fx-min-width: 400px;
+    -fx-min-height: 80px;
+}
