@@ -13,7 +13,7 @@ public class Card_Birthday implements Card
     // i każdy ze studentów daje po 20m$. Nie otrzymują pieniędzy za przejście przez start
     public void takeAction(Player player)
     {
-        int money = NONE;
+        int money = GameInfo.NONE;
         for(Player current : Game.getPlayers())
         {
             current.setPosition(GameInfo.NUMBER_OF_SQUARES + LIBRARY_TEA_SQUARE - current.getPosition());

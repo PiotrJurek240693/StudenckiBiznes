@@ -15,5 +15,6 @@ public class Pawn
         }
         return 0;
     }
+    public void getToSquare(int squareIndex){position=squareIndex;}
 
 }

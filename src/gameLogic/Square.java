@@ -6,6 +6,8 @@ public class Square {
     private String name;
     protected int fee;
 
+
+
     public TypesOfSqueres getType() {
         return type;
     }
@@ -49,4 +51,5 @@ public class Square {
         this.type=type;
         this.fee=fee;
     }
+
 }

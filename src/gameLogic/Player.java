@@ -1,16 +1,44 @@
 package gameLogic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
+    private final int playerIndex = Game.getPlayers().size();
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
     private boolean isBankrupt = false;
     private final Pawn pawn = new Pawn();
     private boolean isCardChance = false;
-    private boolean isCardKasaStudencka = false;
     private boolean hasErasmus = false;
     private boolean hasElectricDeficiency = false;
     private boolean throwTwoDices = true;
 
+
+
+
+
+    public int valueOfProperties(List<Property> properties)
+    {
+        int suma = GameInfo.NONE;
+        for(Property temp : properties)
+            suma += temp.valueOfProperty();
+
+        return suma;
+    }
+    public List<Property> ownedProperties()
+    {
+        List<Property> tempList = new ArrayList<>();
+        for(Square square : Game.getBoard().getSquares())
+            if(square instanceof Property temp && temp.getOwnerIndex()==playerIndex)
+                tempList.add(temp);
+
+        return tempList;
+    }
+    public int getPlayerIndex()
+    {
+        return playerIndex;
+    }
     public int setPosition(int shift)
     {
         int value;
@@ -19,6 +47,11 @@ public class Player {
             return 0;
         moneyAmount += value;
         return 1;
+    }
+
+    public boolean checkIfCanTakeMoney(int amount)
+    {
+        return valueOfProperties( ownedProperties() ) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
     }
 
     public int getDices(){return 2;}
@@ -37,6 +70,7 @@ public class Player {
 
     public void setInDante(int numberOfRounds)
     {
+        pawn.getToSquare(GameInfo.DANTE_SQUARE_INDEX);
         inDante += numberOfRounds;
     }
 
@@ -49,8 +83,25 @@ public class Player {
 
     public int takeMoney(int amount)
     {
-        // TODO: rozwiązanie konfliktu z Property
-        return 0;
+        if(!checkIfCanTakeMoney(amount))
+        {
+            for(Property property : ownedProperties())
+                property.sellProperty();
+            setInBankrupt();
+            return moneyAmount;
+        }
+
+        Property property;
+
+        while(amount>moneyAmount)
+        {
+            property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
+            moneyAmount += property.sellProperty();
+        }
+
+        moneyAmount -= amount;
+
+        return amount;
     }
 
     public boolean isCardChance()
@@ -62,17 +113,6 @@ public class Player {
     {
         isCardChance = cardChance;
     }
-
-    public boolean isCardKasaStudencka()
-    {
-        return isCardKasaStudencka;
-    }
-
-    public void setCardKasaStudencka(boolean cardKasaStudencka)
-    {
-        isCardKasaStudencka = cardKasaStudencka;
-    }
-
     public boolean isHasErasmus()
     {
         return hasErasmus;
@@ -101,5 +141,9 @@ public class Player {
     public void setThrowTwoDices(boolean throwTwoDices)
     {
         this.throwTwoDices = throwTwoDices;
+    }
+    public int getMoneyAmount()
+    {
+        return moneyAmount;
     }
 }
