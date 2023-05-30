@@ -86,5 +86,22 @@ public class Property extends Square {
         return valueOfProperty();
     }
 
+    public boolean hasAuditorium()
+    {
+        // TODO: sprawdzanie czy property posiada aule
+        return true;
+    }
+
+    public void destroyAuditorium()
+    {
+        // TODO: niszczenie auli
+    }
+    public int howManyRooms()
+    {
+        // TODO: zwracanie ilosci sal
+        return 0;
+    }
+
+
 
 }

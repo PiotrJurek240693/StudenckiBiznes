@@ -62,4 +62,10 @@ public class Game {
         // do funkcji przekazuje rowniez sume, ktora jest potrzebna do wyplacenia (dla podgladu dla gracza)
         return null;
     }
+    public static int chooseNumber()
+    {
+        // TODO: funkcja pobiera od gracza wartosc od -3 do 3
+        return 0;
+    }
 }
+

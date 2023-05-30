@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Player {
     private final int playerIndex = Game.getPlayers().size();
+    private final Pawn pawn = new Pawn();
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
     private boolean isBankrupt = false;
-    private final Pawn pawn = new Pawn();
     private boolean isCardChance = false;
     private boolean hasErasmus = false;
     private boolean hasElectricDeficiency = false;
@@ -26,6 +26,8 @@ public class Player {
 
         return suma;
     }
+
+
     public List<Property> ownedProperties()
     {
         List<Property> tempList = new ArrayList<>();
@@ -35,26 +37,63 @@ public class Player {
 
         return tempList;
     }
-    public int getPlayerIndex()
-    {
-        return playerIndex;
-    }
-    public int setPosition(int shift)
+
+
+    public void setPosition(int shift)
     {
         int value;
         value = pawn.move(shift);
-        if(value==0)
-            return 0;
         moneyAmount += value;
-        return 1;
+    }
+
+
+
+    public int takeMoney(int amount)
+    {
+        if(!checkIfCanTakeMoney(amount))
+        {
+            for(Property property : ownedProperties())
+                property.sellProperty();
+            setInBankrupt();
+            return moneyAmount;
+        }
+
+        Property property;
+
+        while(amount>moneyAmount)
+        {
+            property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
+            moneyAmount += property.sellProperty();
+        }
+
+        moneyAmount -= amount;
+
+        return amount;
+    }
+
+
+
+    public void unconditionalMove(int squareNumber)
+    {
+        pawn.getToSquare(squareNumber);
+    }
+
+
+    public int getPlayerIndex()
+    {
+        return playerIndex;
     }
 
     public boolean checkIfCanTakeMoney(int amount)
     {
         return valueOfProperties( ownedProperties() ) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
     }
-
-    public int getDices(){return 2;}
+    public int getDices()
+    {
+        if(throwTwoDices)
+            return 2;
+        return 1;
+    }
 
     public int getPosition(){return pawn.getPosition();}
 
@@ -79,29 +118,6 @@ public class Player {
     public void giveMoney(int amount)
     {
         moneyAmount += amount;
-    }
-
-    public int takeMoney(int amount)
-    {
-        if(!checkIfCanTakeMoney(amount))
-        {
-            for(Property property : ownedProperties())
-                property.sellProperty();
-            setInBankrupt();
-            return moneyAmount;
-        }
-
-        Property property;
-
-        while(amount>moneyAmount)
-        {
-            property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
-            moneyAmount += property.sellProperty();
-        }
-
-        moneyAmount -= amount;
-
-        return amount;
     }
 
     public boolean isCardChance()

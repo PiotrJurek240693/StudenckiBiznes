@@ -14,5 +14,7 @@ public interface Card
     int ONLINE_SITE_VALUE = 20;
     int DANTE_RELIEF = -1;
     int MONEY_FOUND_VALUE = 10;
+    int ROOM_RENOVATION_PRICE = 30;
+    int AUDITORIUM_RENOVATION_PRICE = 125;
     void takeAction(Player player);
 }

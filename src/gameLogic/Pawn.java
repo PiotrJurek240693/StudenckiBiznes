@@ -13,8 +13,13 @@ public class Pawn
             position = position%GameInfo.NUMBER_OF_SQUARES;
             return GameInfo.START_SQUARE_ADDITION;
         }
+        if(position<0)
+            position += GameInfo.NUMBER_OF_SQUARES;
         return 0;
     }
-    public void getToSquare(int squareIndex){position=squareIndex;}
+    public void getToSquare(int squareIndex)
+    {
+        position=squareIndex;
+    }
 
 }

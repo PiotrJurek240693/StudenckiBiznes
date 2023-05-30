@@ -16,8 +16,7 @@ public class Card_Birthday implements Card
         int money = GameInfo.NONE;
         for(Player current : Game.getPlayers())
         {
-            current.setPosition(GameInfo.NUMBER_OF_SQUARES + LIBRARY_TEA_SQUARE - current.getPosition());
-            current.takeMoney(GameInfo.START_SQUARE_ADDITION);   // Poniewaz gracz zawsze przechodzi przez pole startowe
+            current.unconditionalMove(LIBRARY_TEA_SQUARE);
             if(current!=player)
                 money += current.takeMoney(LIBRARY_TEA_SQUARE_VALUE);
         }
