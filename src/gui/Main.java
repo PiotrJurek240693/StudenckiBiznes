@@ -9,7 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         ScreenSettings.primaryStage = primaryStage;
         ScreenSettings.initializeScreen();
-        MenuShower.showMainMenu();
+        MenuShower.showBoard();
     }
 
     public static void main(String[] args) {
