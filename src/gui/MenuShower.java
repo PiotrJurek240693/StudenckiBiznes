@@ -456,11 +456,171 @@ public class MenuShower {
         Biblioteka.setRotate(90);
 
 
+        //BAiS 1
+
+        ImageView Bais1 = new ImageView();
+        Image Bais1Image = new Image("file:../../assets/BAiŚ1.png");
+        Bais1.setImage(Bais1Image);
+        Bais1.setTranslateY(-427);
+        Bais1.setTranslateX(36);
+
+        //Szansa 2
+
+        ImageView Szansa2 = new ImageView();
+        Image Szansa2Image = new Image("file:../../assets/SZANSA2.png");
+        Szansa2.setImage(Szansa2Image);
+        Szansa2.setTranslateY(-427);
+        Szansa2.setTranslateX(114);
+
+
+        //BAiS 2
+
+        ImageView Bais2 = new ImageView();
+        Image Bais2Image = new Image("file:../../assets/BAiŚ1.png");
+        Bais2.setImage(Bais2Image);
+        Bais2.setTranslateY(-427);
+        Bais2.setTranslateX(192);
+
+        //BAiS 3
+
+        ImageView Bais3 = new ImageView();
+        Image Bais3Image = new Image("file:../../assets/BAiŚ3.png");
+        Bais3.setImage(Bais3Image);
+        Bais3.setTranslateY(-427);
+        Bais3.setTranslateX(270);
+
+
+        //Parking C
+
+        ImageView ParkingC = new ImageView();
+        Image ParkingCImage = new Image("file:../../assets/PARKINGC.png");
+        ParkingC.setImage(ParkingCImage);
+        ParkingC.setTranslateY(-427);
+        ParkingC.setTranslateX(348);
+
+        //IPiOS 1
+
+        ImageView Ipios1 = new ImageView();
+        Image Ipios1Image = new Image("file:../../assets/IPiOS1.png");
+        Ipios1.setImage(Ipios1Image);
+        Ipios1.setTranslateY(-427);
+        Ipios1.setTranslateX(426);
+
+        //IPiOS 2
+
+        ImageView Ipios2 = new ImageView();
+        Image Ipios2Image = new Image("file:../../assets/IPiOS1.png");
+        Ipios2.setImage(Ipios2Image);
+        Ipios2.setTranslateY(-427);
+        Ipios2.setTranslateX(504);
+
+        //Centrum Sportu
+
+        ImageView CentrumSportu = new ImageView();
+        Image CentrumSportuImage = new Image("file:../../assets/CENTRUMSPORTU.png");
+        CentrumSportu.setImage(CentrumSportuImage);
+        CentrumSportu.setTranslateY(-427);
+        CentrumSportu.setTranslateX(582);
+
+        //IPiOS 3
+
+        ImageView Ipios3 = new ImageView();
+        Image Ipios3Image = new Image("file:../../assets/IPiOS3.png");
+        Ipios3.setImage(Ipios3Image);
+        Ipios3.setTranslateY(-427);
+        Ipios3.setTranslateX(660);
+
+        //Pora na Dante
+
+        ImageView PoraNaDante = new ImageView();
+        Image PoraNaDanteImage = new Image("file:../../assets/PORANADANTE.png");
+        PoraNaDante.setImage(PoraNaDanteImage);
+        PoraNaDante.setTranslateY(-427);
+        PoraNaDante.setTranslateX(750);
+        PoraNaDante.setRotate(180);
+
+
+        //Warunek
+
+        ImageView Warunek = new ImageView();
+        Image WarunekImage = new Image("file:../../assets/WARUNEK.png");
+        Warunek.setImage(WarunekImage);
+        Warunek.setTranslateY(206);
+        Warunek.setTranslateX(750);
+        Warunek.setRotate(-90);
+
+        //WEEIA1
+
+        ImageView Weeia1 = new ImageView();
+        Image Weeia1Image = new Image("file:../../assets/WEEIA1.png");
+        Weeia1.setImage(Weeia1Image);
+        Weeia1.setTranslateY(128);
+        Weeia1.setTranslateX(750);
+
+        //Szansa 3
+
+        ImageView Szansa3 = new ImageView();
+        Image Szansa3Image = new Image("file:../../assets/SZANSA3.png");
+        Szansa3.setImage(Szansa3Image);
+        Szansa3.setTranslateY(50);
+        Szansa3.setTranslateX(750);
+        Szansa3.setRotate(-90);
+
+        //Parking Rektora
+
+        ImageView ParkingRektora = new ImageView();
+        Image ParkingRektoraImage = new Image("file:../../assets/PARKINGREKTORA.png");
+        ParkingRektora.setImage(ParkingRektoraImage);
+        ParkingRektora.setTranslateY(-28);
+        ParkingRektora.setTranslateX(750);
+        ParkingRektora.setRotate(-90);
+
+        //FTIMS 3
+
+        ImageView Ftims3 = new ImageView();
+        Image Ftims3Image = new Image("file:../../assets/FTIMS3.png");
+        Ftims3.setImage(Ftims3Image);
+        Ftims3.setTranslateY(-106);
+        Ftims3.setTranslateX(750);
+        Ftims3.setRotate(-90);
+
+        //Kasa studencka 3
+
+        ImageView Kasastudencka3 = new ImageView();
+        Image Kasastudencka3Image = new Image("file:../../assets/KASASTUDENCKA3.png");
+        Kasastudencka3.setImage(Kasastudencka3Image);
+        Kasastudencka3.setTranslateY(-184);
+        Kasastudencka3.setTranslateX(750);
+        Kasastudencka3.setRotate(-90);
+
+        //FTIMS 2
+
+        ImageView Ftims2 = new ImageView();
+        Image Ftims2Image = new Image("file:../../assets/FTIMS1.png");
+        Ftims2.setImage(Ftims2Image);
+        Ftims2.setTranslateY(-262);
+        Ftims2.setTranslateX(750);
+        Ftims2.setRotate(-90);
+
+        //FTIMS 1
+
+        ImageView Ftims1 = new ImageView();
+        Image Ftims1Image = new Image("file:../../assets/FTIMS1.png");
+        Ftims1.setImage(Ftims1Image);
+        Ftims1.setTranslateY(-340);
+        Ftims1.setTranslateX(750);
+        Ftims1.setRotate(-90);
+
+
+
+
+
 
         StackPane root = new StackPane();
         root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
                 Wm1, Wm2, Szansa1, Wm3, Wiezienie, Wch1, Wch2, ZatokaSportu, Wch3, ParkingB, Wtmiwt1, Wtmiwt2, Kasastudencka2,
-                Wtmiwt3, Biblioteka);
+                Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
+                Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
