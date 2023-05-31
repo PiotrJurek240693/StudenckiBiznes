@@ -1,6 +1,7 @@
 package gameLogic;
 import java.util.*;
-import gameLogic.cards.Card;
+
+import gameLogic.cards.*;
 
 public class stackOfCards
 {
@@ -9,27 +10,42 @@ public class stackOfCards
 
     public void initStackOfCardsChance()
     {
-        // TODO: dowiedziec sie ktore karty to sa Kasa Studencka a ktore Szansa
+        deck.add(new Card_PP2());
+        deck.add(new Card_Condition());
+        deck.add(new Card_ElectricDeficiency());
+        deck.add(new Card_CrossingRedLight());
+        deck.add(new Card_Busy());
+        deck.add(new Card_BrokenLeg());
+        deck.add(new Card_Renovation());
+        deck.add(new Card_Lost());
         Collections.shuffle(deck);
     }
 
     public void initStackOfCardsKasaStudencka()
     {
-        // TODO: dowiedziec sie ktore karty to sa Kasa Studencka a ktore Szansa
+        deck.add(new Card_Birthday());
+        deck.add(new Card_Busted());
+        deck.add(new Card_Connections());
+        deck.add(new Card_Erasmus());
+        deck.add(new Card_FoundMoney());
+        deck.add(new Card_FreeFromDante());
+        deck.add(new Card_GoodGrade());
+        deck.add(new Card_OnlineSite());
+        deck.add(new Card_Scholarship());
         Collections.shuffle(deck);
     }
 
     public Card drawCard()
     {
-        Card result;
-        result = deck.get(deck.size()+GameInfo.SUB_INDEX);
-        deck.remove(deck.size()+GameInfo.SUB_INDEX);
         if(deck.isEmpty())
         {
             deck.addAll(usedCards);
             usedCards.clear();
             Collections.shuffle(deck);
         }
+        Card result;
+        result = deck.get(deck.size()+GameInfo.SUB_INDEX);
+        deck.remove(deck.size()+GameInfo.SUB_INDEX);
         return result;
     }
 

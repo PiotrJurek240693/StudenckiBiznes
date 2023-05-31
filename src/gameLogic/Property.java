@@ -18,11 +18,11 @@ public class Property extends Square {
 
     public int mortgagePrice()
     {
-        return (int) 0.5 * price;
+        return (int) (0.5 * price);
     }
     public int mortgageFee()
     {
-        return (int) 0.55 * price;
+        return (int) (0.55 * price);
     }
 
     public int getUpgrades() {
@@ -73,6 +73,35 @@ public class Property extends Square {
         }
 
     }
+
+    public int valueOfProperty()
+    {
+        // TODO: Zrobic wyliczenie wartosci pola (zliczyc wartosci aul i sal)
+        return 0;
+    }
+
+    public int sellProperty()
+    {
+        // TODO: Przywrocic oobiekt do wartosci poczatkowych
+        return valueOfProperty();
+    }
+
+    public boolean hasAuditorium()
+    {
+        // TODO: sprawdzanie czy property posiada aule
+        return true;
+    }
+
+    public void destroyAuditorium()
+    {
+        // TODO: niszczenie auli
+    }
+    public int howManyRooms()
+    {
+        // TODO: zwracanie ilosci sal
+        return 0;
+    }
+
 
 
 }

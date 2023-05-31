@@ -16,6 +16,7 @@ public class Board {
     public static final int RANDOMISE = -1;
 
     private static Random randomGenerator = new Random();
+
     private ArrayList<Square> squares=new ArrayList<Square>();
     private Player[] players;
     public Board(Player[] players)
@@ -253,6 +254,9 @@ public class Board {
         squares.add(new Square("WARUNEK", TypesOfSqueres.FAILED_SUBIECT_FEE,100));
         squares.add(new Property("KATEDRA MIKROELEKTRONIKI I TECHNIK INFORMATYCZNYCH",TypesOfSqueres.CATHEDRAL,400,UPGRADE_PRICE_ROW_4));
     }
-
+    public ArrayList<Square> getSquares()
+    {
+        return squares;
+    }
 
 }

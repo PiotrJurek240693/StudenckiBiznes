@@ -1,12 +1,25 @@
 package gameLogic.cards;
 
+import gameLogic.Game;
+import gameLogic.GameInfo;
 import gameLogic.Player;
+
+import java.lang.reflect.Array;
+import java.util.List;
 
 public class Card_Birthday implements Card
 {
+    // Wszyscy gracze idą na pole DARMOWA HERBATA W BIBLIOTECE
+    // i każdy ze studentów daje po 20m$. Nie otrzymują pieniędzy za przejście przez start
     public void takeAction(Player player)
     {
-        // TODO: Sprawdzenie liczby graczy
-        // TODO: Wyslanie wszystkich graczy na pole LIBRARY_TEA_SQUARE
+        int money = GameInfo.NONE;
+        for(Player current : Game.getPlayers())
+        {
+            current.unconditionalMove(LIBRARY_TEA_SQUARE);
+            if(current!=player)
+                money += current.takeMoney(LIBRARY_TEA_SQUARE_VALUE);
+        }
+        player.giveMoney(money);
     }
 }
