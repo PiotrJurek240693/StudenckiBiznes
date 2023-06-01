@@ -1,5 +1,8 @@
 package gameLogic;
 
+import gameLogic.cards.Card;
+import gameLogic.cards.Card_FreeFromDante;
+
 import java.util.Random;
 
 import java.util.ArrayList;
@@ -20,11 +23,15 @@ public class Board {
     private static Random randomGenerator = new Random();
 
     private ArrayList<Square> squares=new ArrayList<Square>();
+    private StackOfCards chance=new StackOfCards();
+    private StackOfCards studentCash=new StackOfCards();
     private Player[] players;
     public Board(Player[] players)
     {
         this.players=players;
         initSquares();
+        chance.initStackOfCardsChance();
+        studentCash.initStackOfCardsStudentCash();
     }
     public void run()
     {
@@ -40,13 +47,20 @@ public class Board {
             }
         }
     }
-    private void offerUpgrade()
+    private void offerUpgrade(int playerIndex)
     {
-        // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
-        //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
-        //      -w jednym ruchu student może dobudować tylko 1 sale lub aule na jedno pole
-        //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
-        //      -aula może być postawiona tylko wtedy, kiedy student posiada już 4 sale na danym polu, wtedy 4 sale są zamieniane na 1 aule
+        ArrayList<Property> upgradeable=new ArrayList<Property>();
+        for (Square square : squares) {
+            if(square.isProperty())
+            {
+                Property property=(Property)square;
+                if(property.getUpgradePrice()!=UNUPGRADABLE && property.getOwnerIndex()==playerIndex)
+                {
+                    upgradeable.add(property);
+                }
+            }
+        }
+        Game.offerUpgrading(upgradeable);
     }
     private void playerRound(int playerIndex)
     {
@@ -56,9 +70,9 @@ public class Board {
         boolean endedRound=false;
         int doubles=0;
         while(!endedRound) {
-            offerUpgrade();
+            offerUpgrade(playerIndex);
             if(players[playerIndex].getInDante()>0) {
-                // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
+                Game.offerPlayerPayingForECTS(players[playerIndex].getInDante());
             }
 
             int[] dices=rollDices(players[playerIndex].getDices());
@@ -98,8 +112,7 @@ public class Board {
             time=0;
             // TODO: wysłać i wyświetlić użycie karty wyjścia z dante
             players[playerIndex].setCardChance(false);
-
-            // TODO: dodać kartę wyjścia z dante na spód talii
+            studentCash.returnCard(new Card_FreeFromDante());
         }
         players[playerIndex].setPosition(10);
         players[playerIndex].setInDante(time);
@@ -120,13 +133,23 @@ public class Board {
     {
         if(type==STUDENT_CASH)
         {
-
+            Card card=studentCash.drawCard();
+            card.takeAction(players[playerIndex]);
+            if(players[playerIndex].hasRecentlyGetCardChance())
+            {
+                players[playerIndex].setRecentlyGetCardChance(false);
+            }
+            else
+            {
+                studentCash.returnCard(card);
+            }
         }
         else if(type==CHANCE)
         {
-
+            Card card=chance.drawCard();
+            card.takeAction(players[playerIndex]);
+            chance.returnCard(card);
         }
-        // TODO: (gameLogic - puźniej) dobrać karte i ją obsłużyć
         // TODO: wysłać i wyświetlić kartę
     }
     private void doAction(int playerIndex)

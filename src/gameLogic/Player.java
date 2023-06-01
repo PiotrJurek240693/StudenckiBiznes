@@ -10,6 +10,16 @@ public class Player {
     private int inDante = 0;
     private boolean isBankrupt = false;
     private boolean isCardChance = false;
+
+    public boolean hasRecentlyGetCardChance() {
+        return hasRecentlyGetCardChance;
+    }
+
+    public void setRecentlyGetCardChance(boolean hasRecentlyGetCardChance) {
+        this.hasRecentlyGetCardChance = hasRecentlyGetCardChance;
+    }
+
+    private boolean hasRecentlyGetCardChance = false;
     private boolean hasErasmus = false;
     private boolean hasElectricDeficiency = false;
     private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
