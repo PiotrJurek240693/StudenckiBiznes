@@ -42,7 +42,8 @@ public class Board {
     }
     private void playerRound(int playerIndex)
     {
-        // TODO: (gameLogic) sprawdzić czy gracz jest bankrutem, jeśli jest to return;
+        if(players[playerIndex].isBankrupt()) return;
+
         // TODO: wysłać i wyświetlić kogo jest kolej
         boolean endedRound=false;
         int doubles=0;
@@ -53,7 +54,10 @@ public class Board {
             //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
             //      -aula może być postawiona tylko wtedy, kiedy student posiada już 4 sale na danym polu, wtedy 4 sale są zamieniane na 1 aule
             // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i...
+            if(players[playerIndex].getInDante()>0) {
                 // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
+
+            }
             int[] dices=rollDices(players[playerIndex].getDices());
             // TODO: (gameLogic) zmniejszyć graczowi czas nietypowej liczby kostek (nie mniej niż 0) i obsłużyć przywrócenie 2 kostek
             // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i jeśli nie ma doubla if(!isDouble(dices)) break;
@@ -159,18 +163,17 @@ public class Board {
         int moneyPaid=amount;
         if(from!=BANK)
         {
-            // TODO: (gameLogic) zabrać graczowi o indexie [from] amount pieniędzy i obsłużyć bankructwo - wyliczyć ile zapłacił
-            moneyPaid=amount;
+            moneyPaid=players[from].takeMoney(amount);
         }
         if(to!=BANK)
         {
-            // TODO: (gameLogic) dać graczowi o indeksie [to] moneyPaid pieniędzy
+            players[to].giveMoney(moneyPaid);
         }
         // TODO: wysłać i wyświetlić nowy stan gotówki
     }
     private void removePlayer(int playerIndex)
     {
-        // TODO: (gameLogic) ustawić graczowi bankructwo
+        players[playerIndex].setInBankrupt();
         for(int i=0;i<squares.size();i++)
         {
             Square square=squares.get(i);
