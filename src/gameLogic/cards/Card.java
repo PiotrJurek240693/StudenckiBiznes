@@ -16,5 +16,6 @@ public interface Card
     int MONEY_FOUND_VALUE = 10;
     int ROOM_RENOVATION_PRICE = 30;
     int AUDITORIUM_RENOVATION_PRICE = 125;
+    int ONE_DICE = 1;
     void takeAction(Player player);
 }

@@ -12,7 +12,7 @@ public class Player {
     private boolean isCardChance = false;
     private boolean hasErasmus = false;
     private boolean hasElectricDeficiency = false;
-    private boolean throwTwoDices = true;
+    private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
 
 
 
@@ -90,9 +90,7 @@ public class Player {
     }
     public int getDices()
     {
-        if(throwTwoDices)
-            return 2;
-        return 1;
+        return howManyDicesToThrow;
     }
 
     public int getPosition(){return pawn.getPosition();}
@@ -149,14 +147,14 @@ public class Player {
         this.hasElectricDeficiency = hasElectricDeficiency;
     }
 
-    public boolean isThrowTwoDices()
+    public int getHowManyDicesToThrow()
     {
-        return throwTwoDices;
+        return howManyDicesToThrow;
     }
 
-    public void setThrowTwoDices(boolean throwTwoDices)
+    public void setHowManyDicesToThrow(int howManyDicesToThrow)
     {
-        this.throwTwoDices = throwTwoDices;
+        this.howManyDicesToThrow = howManyDicesToThrow;
     }
     public int getMoneyAmount()
     {

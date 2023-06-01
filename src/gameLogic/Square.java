@@ -1,5 +1,7 @@
 package gameLogic;
 
+import static gameLogic.TypesOfSqueres.*;
+
 public class Square {
 
     private TypesOfSqueres type;
@@ -22,7 +24,7 @@ public class Square {
 
     public boolean isSpecial()
     {
-        if(type==TypesOfSqueres.DANTE||type==TypesOfSqueres.LIBRARY||type==TypesOfSqueres.DANTE_AGAIN)
+        if(type==DANTE||type==LIBRARY||type==DANTE_AGAIN)
         {
             return true;
         }
@@ -30,7 +32,7 @@ public class Square {
     }
     public boolean isProperty()
     {
-        if(type==TypesOfSqueres.INSTITUTE||type==TypesOfSqueres.PARKING||type==TypesOfSqueres.CATHEDRAL||type==TypesOfSqueres.SPORT_VANUE)
+        if(type==INSTITUTE||type==PARKING||type==CATHEDRAL||type==SPORT_VANUE)
         {
             return true;
         }
@@ -38,7 +40,7 @@ public class Square {
     }
     public boolean isCards()
     {
-        if(type==TypesOfSqueres.CHANCE||type==TypesOfSqueres.STUDENT_CASH)
+        if(type==CHANCE||type==STUDENT_CASH)
         {
             return true;
         }

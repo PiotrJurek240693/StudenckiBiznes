@@ -12,7 +12,7 @@ public class Card_Renovation implements Card
         int amount = GameInfo.NONE;
         for(Property property : player.ownedProperties())
         {
-            amount += property.howManyRooms()*ROOM_RENOVATION_PRICE;
+            amount += property.getUpgrades()*ROOM_RENOVATION_PRICE;
             if(property.hasAuditorium())
                 amount += AUDITORIUM_RENOVATION_PRICE;
         }

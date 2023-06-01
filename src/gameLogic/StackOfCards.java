@@ -3,7 +3,7 @@ import java.util.*;
 
 import gameLogic.cards.*;
 
-public class stackOfCards
+public class StackOfCards
 {
     private List<Card> deck;
     private List<Card> usedCards;
@@ -21,7 +21,7 @@ public class stackOfCards
         Collections.shuffle(deck);
     }
 
-    public void initStackOfCardsKasaStudencka()
+    public void initStackOfCardsStudentCash()
     {
         deck.add(new Card_Birthday());
         deck.add(new Card_Busted());

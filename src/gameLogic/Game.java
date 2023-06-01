@@ -4,6 +4,7 @@ import connection.client.Client;
 import connection.server.Server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -66,6 +67,23 @@ public class Game {
     {
         // TODO: funkcja pobiera od gracza wartosc od -3 do 3
         return 0;
+    }
+    public static void offerPlayerBuyingOrAuction()
+    {
+        // TODO: zaoferować kupno posiadłości lub licytacje
+    }
+    public static void offerPlayerPayingForECTS(int time)
+    {
+        // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
+    }
+
+    public static void offerUpgrading(ArrayList<Property> upgradeable)
+    {
+        // TODO: zapytać gracza co (czy) chce upelszyć z jego posiadłości - upgradeable
+        //      -w jednym ruchu student może zrobić tylko 1 ulepszenie na jedno pole
+        //              gotowe metody do wykorzystania: upgrade() i hasRecentlyGetUpgrade() i clearRecentlyGetUpgrade();
+        //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
+        //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
     }
 }
 

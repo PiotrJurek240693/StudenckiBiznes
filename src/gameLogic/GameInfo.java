@@ -9,4 +9,5 @@ public class GameInfo
     public static final int NONE = 0;
     public static final int DANTE_SQUARE_INDEX = 10;
     public static final int START_SQUARE_INDEX = 0;
+    public static final int INITIAL_NUMBER_OF_DICES = 2;
 }
