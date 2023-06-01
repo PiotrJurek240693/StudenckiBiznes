@@ -11,3 +11,88 @@
     -fx-min-width: 400px;
     -fx-min-height: 80px;
 }
+.przyciski_niewidzialne
+{
+    -fx-min-width: 900px;
+    -fx-min-height: 140px;
+    -fx-background-color: transparent;
+}
+.tekst
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-font-family: "Showcard Gothic";
+    -fx-min-width: 400px;
+    -fx-min-height: 80px;
+}
+
+.text_field
+{
+    -fx-text-fill: #750000;
+    -fx-background-color: white;
+    -fx-border-color: #CB3939;
+    -fx-border-width: 15px;
+    -fx-font-size: 25px;
+    -fx-font-family: "Showcard Gothic";
+}
+
+.pionki
+{
+    -fx-min-width: 145px;
+    -fx-min-height: 145px;
+    -fx-background-color: transparent;
+}
+
+.label
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 60px;
+}
+
+.saldo_blue
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #38B6FF;
+    -fx-font-size: 60px;
+}
+
+.saldo_red
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #AD1818;
+    -fx-font-size: 60px;
+}
+
+.saldo_green
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #268F28;
+    -fx-font-size: 60px;
+}
+
+.saldo_yellow
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #EBE21C;
+    -fx-font-size: 60px;
+}
+
+
+.test
+{
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+    -fx-background-color: black;
+}
+
+

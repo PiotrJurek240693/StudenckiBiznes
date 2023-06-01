@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -169,8 +170,9 @@ public class MenuShower {
         MenuPowitalne.setFitHeight(ScreenSettings.screenHeight);
 
         TextField textField = new TextField();
-        textField.setPromptText("Wprowadź tekst...");
+        textField.setPromptText("Wprowadz tekst...");
         textField.setMaxWidth(400);
+        textField.getStyleClass().add("text_field");
         textField.setTranslateX(20);
         textField.setTranslateY(110);
 
@@ -226,7 +228,7 @@ public class MenuShower {
         button3.getStyleClass().add("przyciski_niewidzialne");
         button3.setTranslateX(0);
         button3.setTranslateY(-340);
-        button3.setVisible(false);
+        button3.setOnAction(event -> {MenuController.onQuantityButtonClick();});
 
 
         // Tworzenie przycisku 4
@@ -234,14 +236,14 @@ public class MenuShower {
         button4.getStyleClass().add("przyciski_niewidzialne");
         button4.setTranslateX(0);
         button4.setTranslateY(-120);
-        button4.setVisible(false);
+        button4.setOnAction(event -> {MenuController.onQuantityButtonClick();});
 
         // Tworzenie przycisku 5
         Button button5 = new Button("");
         button5.getStyleClass().add("przyciski_niewidzialne");
         button5.setTranslateX(0);
         button5.setTranslateY(100);
-        button5.setVisible(false);
+        button5.setOnAction(event -> {MenuController.onQuantityButtonClick();});
 
 
 
@@ -613,6 +615,107 @@ public class MenuShower {
 
 
 
+        //Saldo gracz niebieski
+        ImageView SaldoNiebieski = new ImageView();
+        Image SaldoNiebieskiImage = new Image("file:../../assets/SALDONIEBIESKI.png");
+        SaldoNiebieski.setImage(SaldoNiebieskiImage);
+        SaldoNiebieski.setTranslateX(-626);
+        SaldoNiebieski.setTranslateY(-376);
+
+        //Label dla gracza 1
+        Label Gracz1 = new Label("GRACZ 1");
+        Gracz1.getStyleClass().add("label");
+        Gracz1.setTranslateX(-626);
+        Gracz1.setTranslateY(-425);
+
+        //Label_saldo dla gracza niebiskiego
+        Label Saldo1 = new Label("2000M$");
+        Saldo1.getStyleClass().add("saldo_blue");
+        Saldo1.setTranslateX(-626);
+        Saldo1.setTranslateY(-330);
+
+
+
+
+        //Saldo gracz czerwony
+        ImageView SaldoCzerwony = new ImageView();
+        Image SaldoCzerwonyImage = new Image("file:../../assets/SALDOCZERWONY.png");
+        SaldoCzerwony.setImage(SaldoCzerwonyImage);
+        SaldoCzerwony.setTranslateX(-278);
+        SaldoCzerwony.setTranslateY(-376);
+
+        //Label dla gracza 2
+        Label Gracz2 = new Label("GRACZ 2");
+        Gracz2.getStyleClass().add("label");
+        Gracz2.setTranslateX(-278);
+        Gracz2.setTranslateY(-425);
+
+        //Label_saldo dla gracza czerwonego
+        Label Saldo2 = new Label("2000M$");
+        Saldo2.getStyleClass().add("saldo_red");
+        Saldo2.setTranslateX(-278);
+        Saldo2.setTranslateY(-330);
+
+
+
+
+        //Saldo gracz zolty
+        ImageView SaldoZolty = new ImageView();
+        Image SaldoZoltyImage = new Image("file:../../assets/SALDOZOLTY.png");
+        SaldoZolty.setImage(SaldoZoltyImage);
+        SaldoZolty.setTranslateX(-278);
+        SaldoZolty.setTranslateY(-176);
+
+        //Label dla gracza 3
+        Label Gracz3 = new Label("GRACZ 3");
+        Gracz3.getStyleClass().add("label");
+        Gracz3.setTranslateX(-626);
+        Gracz3.setTranslateY(-225);
+
+        //Label_saldo dla gracza zoltego
+        Label Saldo3 = new Label("2000M$");
+        Saldo3.getStyleClass().add("saldo_yellow");
+        Saldo3.setTranslateX(-278);
+        Saldo3.setTranslateY(-130);
+
+
+
+
+        //Saldo gracz zielony
+        ImageView SaldoZielony = new ImageView();
+        Image SaldoZielonyImage = new Image("file:../../assets/SALDOZIELONY.png");
+        SaldoZielony.setImage(SaldoZielonyImage);
+        SaldoZielony.setTranslateX(-626);
+        SaldoZielony.setTranslateY(-176);
+
+        //Label dla gracza 4
+        Label Gracz4 = new Label("GRACZ 4");
+        Gracz4.getStyleClass().add("label");
+        Gracz4.setTranslateX(-278);
+        Gracz4.setTranslateY(-225);
+
+        //Label_saldo dla gracza zielonego
+        Label Saldo4 = new Label("2000M$");
+        Saldo4.getStyleClass().add("saldo_green");
+        Saldo4.setTranslateX(-626);
+        Saldo4.setTranslateY(-130);
+
+        ImageView Kostka1 = new ImageView();
+        Image Kostka1Image = new Image("file:../../assets/Kostka4.png");
+        Kostka1.setImage(Kostka1Image);
+        Kostka1.setTranslateX(-400);
+        Kostka1.setTranslateY(250);
+        Kostka1.setRotate(40);
+
+        ImageView Kostka2 = new ImageView();
+        Image Kostka2Image = new Image("file:../../assets/Kostka2.png");
+        Kostka2.setImage(Kostka2Image);
+        Kostka2.setTranslateX(-250);
+        Kostka2.setTranslateY(200);
+        Kostka2.setRotate(25);
+
+
+
 
 
 
@@ -620,7 +723,9 @@ public class MenuShower {
         root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
                 Wm1, Wm2, Szansa1, Wm3, Wiezienie, Wch1, Wch2, ZatokaSportu, Wch3, ParkingB, Wtmiwt1, Wtmiwt2, Kasastudencka2,
                 Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
-                Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2);
+                Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2,SaldoNiebieski,
+                SaldoCzerwony, SaldoZolty, SaldoZielony, Gracz1, Gracz2, Gracz3, Gracz4, Saldo1, Saldo2, Saldo3, Saldo4,
+                Kostka1, Kostka2);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
@@ -630,5 +735,114 @@ public class MenuShower {
 
 
 
+    }
+
+    public static void showNickAndPawn()
+    {
+        // Tworzenie obiektu MenuPowitlane
+        ImageView MenuPowitalne = new ImageView();
+
+        // Wczytywanie obrazu
+        Image MenuPowitlaneImage = new Image("file:../../assets/MenuPowitalne.png");
+
+        // Ustawianie wczytanego obrazu z MenuPowitalne
+        MenuPowitalne.setImage(MenuPowitlaneImage);
+        MenuPowitalne.setFitWidth(ScreenSettings.screenWidth);
+        MenuPowitalne.setFitHeight(ScreenSettings.screenHeight);
+
+        //Podaj swój nick
+        Button button5 = new Button("PODAJ SWÓJ NICK");
+        button5.getStyleClass().add("tekst");
+        button5.setTranslateX(30);
+        button5.setTranslateY(-80);
+
+        //Okienko do wpisywania
+        TextField textField = new TextField();
+        textField.setPromptText("Twoj nick");
+        textField.getStyleClass().add("text_field");
+        textField.setMaxWidth(400);
+        textField.setTranslateX(30);
+        textField.setTranslateY(0);
+
+        //Wybierz swój pionek
+        Button button6 = new Button("WYBIERZ SWÓJ PIONEK");
+        button6.getStyleClass().add("tekst");
+        button6.setTranslateX(30);
+        button6.setTranslateY(140);
+
+        //Pionek1
+        ImageView Pionek1 = new ImageView();
+        Image Pionek1Image = new Image("file:../../assets/PIONEK1.png");
+        Pionek1.setImage(Pionek1Image);
+        Pionek1.setTranslateY(284);
+        Pionek1.setTranslateX(-220);
+
+        //Przycisk do pionka 1
+
+        Button button1 = new Button("");
+        button1.getStyleClass().add("pionki");
+        button1.setTranslateY(284);
+        button1.setTranslateX(-220);
+        button1.setOnAction(event -> {MenuController.onPawnButtonClick();});
+
+
+        //Pionek2
+        ImageView Pionek2 = new ImageView();
+        Image Pionek2Image = new Image("file:../../assets/PIONEK2.png");
+        Pionek2.setImage(Pionek2Image);
+        Pionek2.setTranslateY(284);
+        Pionek2.setTranslateX(-50);
+
+        //Przycisk do pionka 2
+
+        Button button2 = new Button("");
+        button2.getStyleClass().add("pionki");
+        button2.setTranslateY(284);
+        button2.setTranslateX(-50);
+        button2.setOnAction(event -> {MenuController.onPawnButtonClick();});
+
+        //Pionek3
+        ImageView Pionek3 = new ImageView();
+        Image Pionek3Image = new Image("file:../../assets/PIONEK3.png");
+        Pionek3.setImage(Pionek3Image);
+        Pionek3.setTranslateY(284);
+        Pionek3.setTranslateX(120);
+
+        //Przycisk do pionka 3
+
+        Button button3 = new Button("");
+        button3.getStyleClass().add("pionki");
+        button3.setTranslateY(284);
+        button3.setTranslateX(120);
+        button3.setOnAction(event -> {MenuController.onPawnButtonClick();});
+
+        //Pionek4
+        ImageView Pionek4 = new ImageView();
+        Image Pionek4Image = new Image("file:../../assets/PIONEK4.png");
+        Pionek4.setImage(Pionek4Image);
+        Pionek4.setTranslateY(284);
+        Pionek4.setTranslateX(290);
+
+        //Przycisk do pionka 4
+
+        Button button4 = new Button("");
+        button4.getStyleClass().add("pionki");
+        button4.setTranslateY(284);
+        button4.setTranslateX(290);
+        button4.setOnAction(event -> {MenuController.onPawnButtonClick();});
+
+
+
+        // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
+        StackPane root = new StackPane();
+        root.getChildren().addAll(MenuPowitalne, textField, button5, button6, Pionek1, Pionek2, Pionek3, Pionek4, button1, button2,
+                button3, button4);
+
+        // Tworzenie sceny i ustawianie jej w Stage
+        Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+
+        ScreenSettings.primaryStage.setScene(scene);
+        ScreenSettings.primaryStage.show();
     }
 }
