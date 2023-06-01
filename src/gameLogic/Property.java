@@ -11,6 +11,7 @@ public class Property extends Square {
         return mortgaged;
     }
 
+    // TODO: gra aktualnie obsługuje sprzedawanie pól a nie ich zastawianie. jak starczy czasu należy to zmienić
     public void setMortgaged(boolean mortgaged) {
         this.mortgaged = mortgaged;
         calculateNewFee();
@@ -76,30 +77,33 @@ public class Property extends Square {
 
     public int valueOfProperty()
     {
-        // TODO: Zrobic wyliczenie wartosci pola (zliczyc wartosci aul i sal)
-        return 0;
+        // TODO: upewnić się jak ma działać funkcja. aktualnie uwzględnia 50% wartość terenu+ulepszeń
+        int sum=(upgradePrice*upgrades+price)/2;
+        return sum;
     }
 
     public int sellProperty()
     {
-        // TODO: Przywrocic oobiekt do wartosci poczatkowych
+        fee=0;
+        ownerIndex = NO_ONE;
+        upgrades=0;
+        mortgaged=false;
         return valueOfProperty();
     }
 
     public boolean hasAuditorium()
     {
-        // TODO: sprawdzanie czy property posiada aule
-        return true;
+        if(upgrades==5)
+            return true;
+        return false;
     }
 
     public void destroyAuditorium()
     {
-        // TODO: niszczenie auli
-    }
-    public int howManyRooms()
-    {
-        // TODO: zwracanie ilosci sal
-        return 0;
+        if(upgrades==5)
+        {
+            upgrades=4;
+        }
     }
 
 

@@ -25,7 +25,6 @@ public class Board {
     {
         this.players=players;
         initSquares();
-        // TODO: dodać mieszanie kart na obu stosach
     }
     public void run()
     {
