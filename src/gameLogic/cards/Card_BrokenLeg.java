@@ -7,6 +7,6 @@ public class Card_BrokenLeg implements Card
     // Gracz podczas kolejnego ruchu rzuca tylko jedna koscia
     public void takeAction(Player player)
     {
-        player.setThrowTwoDices(false);
+        player.setHowManyDicesToThrow(ONE_DICE);
     }
 }
