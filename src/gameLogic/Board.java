@@ -135,11 +135,7 @@ public class Board {
         {
             Card card=studentCash.drawCard();
             card.takeAction(players[playerIndex]);
-            if(players[playerIndex].hasRecentlyGetCardChance())
-            {
-                players[playerIndex].setRecentlyGetCardChance(false);
-            }
-            else
+            if(!(card instanceof Card_FreeFromDante))
             {
                 studentCash.returnCard(card);
             }
