@@ -67,5 +67,9 @@ public class Game {
         // TODO: funkcja pobiera od gracza wartosc od -3 do 3
         return 0;
     }
+    public static void offerPlayerBuyingOrAuction()
+    {
+        // TODO: zaoferować kupno posiadłości lub licytacje
+    }
 }
 

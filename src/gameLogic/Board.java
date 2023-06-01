@@ -40,6 +40,14 @@ public class Board {
             }
         }
     }
+    private void offerUpgrade()
+    {
+        // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
+        //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
+        //      -w jednym ruchu student może dobudować tylko 1 sale lub aule na jedno pole
+        //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
+        //      -aula może być postawiona tylko wtedy, kiedy student posiada już 4 sale na danym polu, wtedy 4 sale są zamieniane na 1 aule
+    }
     private void playerRound(int playerIndex)
     {
         if(players[playerIndex].isBankrupt()) return;
@@ -48,19 +56,15 @@ public class Board {
         boolean endedRound=false;
         int doubles=0;
         while(!endedRound) {
-            // TODO: zaoferować ulepszenie budynków o ile jakiś ma i da się ulepszyć i/lub usunięcie zastawienia
-            //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
-            //      -w jednym ruchu student może dobudować tylko 1 sale lub aule na jedno pole
-            //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
-            //      -aula może być postawiona tylko wtedy, kiedy student posiada już 4 sale na danym polu, wtedy 4 sale są zamieniane na 1 aule
-            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i...
+            offerUpgrade();
             if(players[playerIndex].getInDante()>0) {
                 // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
-
             }
+
             int[] dices=rollDices(players[playerIndex].getDices());
-            // TODO: (gameLogic) zmniejszyć graczowi czas nietypowej liczby kostek (nie mniej niż 0) i obsłużyć przywrócenie 2 kostek
-            // TODO: (gameLogic) sprawdzić czy gracz ma ustawione robienie dante i jeśli nie ma doubla if(!isDouble(dices)) break;
+            players[playerIndex].setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
+            if(players[playerIndex].getInDante()>0 && !isDouble(dices)) break;
+
             doMove(playerIndex,howFar(dices));
             int position=players[playerIndex].getPosition();
             doAction(playerIndex);
@@ -89,15 +93,16 @@ public class Board {
             time = randomGenerator.nextInt(4);
             // TODO: wysłać i wyświetlić na co idzie gracz - 0-SO,1-PP1,2-PP2,3-SO2
         }
-        // TODO: (gameLogic) sprawdzić czy gracz ma kartę wyjścia z dante
+        if(players[playerIndex].isCardChance())
         {
             time=0;
             // TODO: wysłać i wyświetlić użycie karty wyjścia z dante
-            // TODO: (gameLogic) usunąć graczowi kartę wyjścia z dante
+            players[playerIndex].setCardChance(false);
+
             // TODO: dodać kartę wyjścia z dante na spód talii
         }
         players[playerIndex].setPosition(10);
-        // TODO: (gameLogic) ustawić graczowi time kolejek w dante
+        players[playerIndex].setInDante(time);
     }
     private boolean isDouble(int[] dices)
     {
@@ -111,13 +116,25 @@ public class Board {
         }
         return isDouble;
     }
+    private void handleCards(int playerIndex,TypesOfSqueres type)
+    {
+        if(type==STUDENT_CASH)
+        {
+
+        }
+        else if(type==CHANCE)
+        {
+
+        }
+        // TODO: (gameLogic - puźniej) dobrać karte i ją obsłużyć
+        // TODO: wysłać i wyświetlić kartę
+    }
     private void doAction(int playerIndex)
     {
         int position=players[playerIndex].getPosition();
         Square square=squares.get(position);
         if(square.isCards()) {
-            // TODO: (gameLogic - puźniej) dobrać karte i ją obsłużyć
-            // TODO: wysłać i wyświetlić kartę
+            handleCards(playerIndex,square.getType());
         } else if (square.isSpecial()) {
             handleSpecial(square,playerIndex);
         } else if (square.isProperty()) {
@@ -132,10 +149,10 @@ public class Board {
         switch (square.getType())
         {
             case DANTE:
-                // TODO: obsługa wyświetlenia gracza na polu odwiedzający
+                // TODO: obsługa (odpowiednie wyświetlenie) gracza na polu odwiedzający
                 break;
             case LIBRARY:
-                // TODO: (gameLogic) obsługa pola - zmiana graczowi ilość kostek na 3 i czasu nietypowej ilości kostek na 1
+                players[playerIndex].setHowManyDicesToThrow(3);
                 // TODO: wysłanie i wyświetlenie darmowej herbaty
                 break;
             case DANTE_AGAIN:
@@ -152,7 +169,7 @@ public class Board {
         Property property= square;
         int ownerIndex=property.getOwnerIndex();
         if (ownerIndex==NO_ONE) {
-            // TODO: zaoferować kupno posiadłości lub licytacje
+            Game.offerPlayerBuyingOrAuction();
         } else if (playerIndex!=ownerIndex){
             pay(playerIndex,ownerIndex,square.getFee());
         }
