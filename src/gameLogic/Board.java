@@ -20,34 +20,40 @@ public class Board {
     public static final int BANK = NO_ONE;
     public static final int RANDOMISE = -1;
 
+    private static int playerIndex=0;
+    private static Player player;
+
     private static Random randomGenerator = new Random();
 
     private ArrayList<Square> squares=new ArrayList<Square>();
     private StackOfCards chance=new StackOfCards();
     private StackOfCards studentCash=new StackOfCards();
-    private Player[] players;
+    private static Player[] players;
     public Board(Player[] players)
     {
         this.players=players;
+        player=players[0];
         initSquares();
         chance.initStackOfCardsChance();
         studentCash.initStackOfCardsStudentCash();
     }
+    private static void nextPlayer()
+    {
+        playerIndex++;
+        if(playerIndex==players.length)
+        {
+            playerIndex=0;
+        }
+        player=player;
+    }
     public void run()
     {
         boolean isRunning=true;
-        int playerIndex=0;
-        while(isRunning) {
-            playerRound(playerIndex);
+        executePlayerRound();
+        nextPlayer();
 
-            playerIndex++;
-            if(playerIndex==players.length)
-            {
-                playerIndex=0;
-            }
-        }
     }
-    private void offerUpgrade(int playerIndex)
+    private void checkIfUpgradePossibleAndOfferUpgrading()
     {
         ArrayList<Property> upgradeable=new ArrayList<Property>();
         for (Square square : squares) {
@@ -62,26 +68,26 @@ public class Board {
         }
         Game.offerUpgrading(upgradeable);
     }
-    private void playerRound(int playerIndex)
+    private void executePlayerRound()
     {
-        if(players[playerIndex].isBankrupt()) return;
+        if(player.isBankrupt()) return;
 
         // TODO: wysłać i wyświetlić kogo jest kolej
         boolean endedRound=false;
         int doubles=0;
         while(!endedRound) {
-            offerUpgrade(playerIndex);
-            if(players[playerIndex].getInDante()>0) {
-                Game.offerPlayerPayingForECTS(players[playerIndex].getInDante());
+            checkIfUpgradePossibleAndOfferUpgrading();
+            if(player.getInDante()>0) {
+                Game.offerPlayerPayingForECTS(player.getInDante());
             }
 
-            int[] dices=rollDices(players[playerIndex].getDices());
-            players[playerIndex].setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
-            if(players[playerIndex].getInDante()>0 && !isDouble(dices)) break;
+            int[] dices=rollDices(player.getDices());
+            player.setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
+            if(player.getInDante()>0 && !isDouble(dices)) break;
 
-            doMove(playerIndex,howFar(dices));
-            int position=players[playerIndex].getPosition();
-            doAction(playerIndex);
+            doMove(howFar(dices));
+            int position=player.getPosition();
+            handleSquareAction();
             if(isDouble(dices))
             {
                 if(doubles>=2) {
@@ -95,7 +101,7 @@ public class Board {
             else{
                 endedRound=true;
             }
-            if(position!=players[playerIndex].getPosition())
+            if(position!=player.getPosition())
             {
                 // TODO: ponownie wysłać i wyświetlić pozycję, gdyż uległa zmianie
             }
@@ -107,15 +113,15 @@ public class Board {
             time = randomGenerator.nextInt(4);
             // TODO: wysłać i wyświetlić na co idzie gracz - 0-SO,1-PP1,2-PP2,3-SO2
         }
-        if(players[playerIndex].isCardChance())
+        if(player.hasCardChance())
         {
             time=0;
             // TODO: wysłać i wyświetlić użycie karty wyjścia z dante
-            players[playerIndex].setCardChance(false);
+            player.setCardChanceStatus(false);
             studentCash.returnCard(new Card_FreeFromDante());
         }
-        players[playerIndex].setPosition(10);
-        players[playerIndex].setInDante(time);
+        player.setPosition(10);
+        player.setDanteDuration(time);
     }
     private boolean isDouble(int[] dices)
     {
@@ -129,12 +135,12 @@ public class Board {
         }
         return isDouble;
     }
-    private void handleCards(int playerIndex,TypesOfSqueres type)
+    private void handleCardDrawing(TypesOfSqueres type)
     {
         if(type==STUDENT_CASH)
         {
             Card card=studentCash.drawCard();
-            card.takeAction(players[playerIndex]);
+            card.takeAction(player);
             if(!(card instanceof Card_FreeFromDante))
             {
                 studentCash.returnCard(card);
@@ -143,27 +149,27 @@ public class Board {
         else if(type==CHANCE)
         {
             Card card=chance.drawCard();
-            card.takeAction(players[playerIndex]);
+            card.takeAction(player);
             chance.returnCard(card);
         }
         // TODO: wysłać i wyświetlić kartę
     }
-    private void doAction(int playerIndex)
+    private void handleSquareAction()
     {
-        int position=players[playerIndex].getPosition();
+        int position=player.getPosition();
         Square square=squares.get(position);
         if(square.isCards()) {
-            handleCards(playerIndex,square.getType());
+            handleCardDrawing(square.getType());
         } else if (square.isSpecial()) {
-            handleSpecial(square,playerIndex);
+            handleSpecialSquareAction(square);
         } else if (square.isProperty()) {
-            handleProperty(playerIndex, (Property) square);
+            handleProperty((Property) square);
         } else {
             pay(playerIndex,BANK,square.getFee());
         }
     }
 
-    private void handleSpecial(Square square,int playerIndex)
+    private void handleSpecialSquareAction(Square square)
     {
         switch (square.getType())
         {
@@ -171,7 +177,7 @@ public class Board {
                 // TODO: obsługa (odpowiednie wyświetlenie) gracza na polu odwiedzający
                 break;
             case LIBRARY:
-                players[playerIndex].setHowManyDicesToThrow(3);
+                player.setHowManyDicesToThrow(3);
                 // TODO: wysłanie i wyświetlenie darmowej herbaty
                 break;
             case DANTE_AGAIN:
@@ -180,7 +186,7 @@ public class Board {
         }
     }
 
-    private void handleProperty(int playerIndex, Property square)
+    private void handleProperty(Property square)
     {
         if(square.isMortgaged()){
             return;
@@ -207,9 +213,9 @@ public class Board {
         }
         // TODO: wysłać i wyświetlić nowy stan gotówki
     }
-    private void removePlayer(int playerIndex)
+    private void removePlayerAndCleanProperties()
     {
-        players[playerIndex].setInBankrupt();
+        player.setBankruptStatus();
         for(int i=0;i<squares.size();i++)
         {
             Square square=squares.get(i);
@@ -218,7 +224,7 @@ public class Board {
                 Property property=(Property)square;
                 if(property.getOwnerIndex()==playerIndex)
                 {
-                    property.setOwnerIndex(NO_ONE);
+                    property.cleanProperty();
                 }
             }
         }
@@ -241,15 +247,15 @@ public class Board {
         // TODO: wysłać i wyświetlić wyrzucone kostki
         return dices;
     }
-    public void doMove(int playerIndex,int move)
+    public void doMove(int move)
     {
-        int position=players[playerIndex].getPosition();
+        int position=player.getPosition();
         position+=move;
         if(position>squares.size()) {
             position-=squares.size();
             pay(BANK,playerIndex,200);
         }
-        players[playerIndex].setPosition(position);
+        player.setPosition(position);
         // TODO: wysłać i wyświetlić przesunięcie gracza
     }
     private void initSquares() {

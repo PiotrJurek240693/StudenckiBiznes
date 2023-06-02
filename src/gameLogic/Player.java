@@ -9,8 +9,8 @@ public class Player {
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
     private boolean isBankrupt = false;
-    private boolean isCardChance = false;
-    private boolean hasErasmus = false;
+    private boolean hasCardChance = false;
+    private boolean isOnErasmus = false;
     private boolean hasElectricDeficiency = false;
     private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
 
@@ -54,7 +54,7 @@ public class Player {
         {
             for(Property property : ownedProperties())
                 property.sellProperty();
-            setInBankrupt();
+            setBankruptStatus();
             return moneyAmount;
         }
 
@@ -105,44 +105,44 @@ public class Player {
         return isBankrupt;
     }
 
-    public void setInDante(int numberOfRounds)
+    public void setDanteDuration(int numberOfRounds)
     {
         pawn.getToSquare(GameInfo.DANTE_SQUARE_INDEX);
         inDante += numberOfRounds;
     }
 
-    public void setInBankrupt(){isBankrupt = true;}
+    public void setBankruptStatus(){isBankrupt = true;}
 
     public void giveMoney(int amount)
     {
         moneyAmount += amount;
     }
 
-    public boolean isCardChance()
+    public boolean hasCardChance()
     {
-        return isCardChance;
+        return hasCardChance;
     }
 
-    public void setCardChance(boolean cardChance)
+    public void setCardChanceStatus(boolean hasCardChance)
     {
-        isCardChance = cardChance;
+        this.hasCardChance = hasCardChance;
     }
-    public boolean isHasErasmus()
+    public boolean isOnErasmus()
     {
-        return hasErasmus;
-    }
-
-    public void setHasErasmus(boolean hasErasmus)
-    {
-        this.hasErasmus = hasErasmus;
+        return isOnErasmus;
     }
 
-    public boolean isHasElectricDeficiency()
+    public void setOnErasmus(boolean onErasmus)
+    {
+        this.isOnErasmus = onErasmus;
+    }
+
+    public boolean hasElectricDeficiency()
     {
         return hasElectricDeficiency;
     }
 
-    public void setHasElectricDeficiency(boolean hasElectricDeficiency)
+    public void setElectricDeficiencyStatus(boolean hasElectricDeficiency)
     {
         this.hasElectricDeficiency = hasElectricDeficiency;
     }

@@ -2,6 +2,7 @@ package gameLogic;
 
 public class Property extends Square {
     public static final int NO_ONE = -1;
+    public static final int MAX_UPGRADE = 5;
     private int price;
     private int upgradePrice;
     private int ownerIndex;
@@ -92,25 +93,30 @@ public class Property extends Square {
         return sum;
     }
 
-    public int sellProperty()
+    public void cleanProperty()
     {
         fee=0;
         ownerIndex = NO_ONE;
         upgrades=0;
         mortgaged=false;
-        return valueOfProperty();
+    }
+    public int sellProperty()
+    {
+        int value=valueOfProperty();
+        cleanProperty();
+        return value;
     }
 
     public boolean hasAuditorium()
     {
-        if(upgrades==5)
+        if(upgrades== MAX_UPGRADE)
             return true;
         return false;
     }
 
     public void destroyAuditorium()
     {
-        if(upgrades==5)
+        if(upgrades==MAX_UPGRADE)
         {
             upgrades=4;
         }

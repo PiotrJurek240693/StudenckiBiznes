@@ -17,6 +17,6 @@ public class Card_Busted implements Card
             if(current!=player)
                 toChooseFrom.add(current);
         sendToDante = Game.choosePlayer(toChooseFrom);
-        sendToDante.setInDante(BUSTED_ROUNDS);
+        sendToDante.setDanteDuration(BUSTED_ROUNDS);
     }
 }
