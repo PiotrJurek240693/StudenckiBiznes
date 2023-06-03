@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
-    static private ArrayList<Player> players=new ArrayList<Player>();
-
     static private Board board;
 
     private Server server;
@@ -51,20 +49,16 @@ public class Game {
     {
         return board;
     }
-    public static ArrayList<Player> getPlayers()
-    {
-        return players;
-    }
     public static void pay(int from,int to,int amount)
     {
         int moneyPaid=amount;
         if(from!=Board.BANK)
         {
-            moneyPaid=players.get(from).takeMoney(amount);
+            moneyPaid=Board.getPlayers().get(from).takeMoney(amount);
         }
         if(to!=Board.BANK)
         {
-            players.get(to).giveMoney(moneyPaid);
+            Board.getPlayers().get(to).giveMoney(moneyPaid);
         }
         // TODO: wysłać i wyświetlić nowy stan gotówki
     }

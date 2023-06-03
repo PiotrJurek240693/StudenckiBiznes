@@ -29,6 +29,10 @@ public class Board {
     private StackOfCards chance=new StackOfCards();
     private StackOfCards studentCash=new StackOfCards();
     private static ArrayList<Player> players=new ArrayList<Player>();
+    public static ArrayList<Player> getPlayers()
+    {
+        return players;
+    }
     public Board(ArrayList<Player> players)
     {
         this.players=players;

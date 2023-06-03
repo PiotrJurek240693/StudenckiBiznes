@@ -3,7 +3,7 @@ package gameLogic;
 import java.util.ArrayList;
 
 public class Player {
-    private final int playerIndex = Game.getPlayers().size();
+    private final int playerIndex = Board.getPlayers().size();
     private final Pawn pawn = new Pawn();
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
@@ -17,7 +17,7 @@ public class Player {
 
 
 
-    public int valueOfProperties(List<Property> properties)
+    public int valueOfProperties(ArrayList<Property> properties)
     {
         int suma = GameInfo.NONE;
         for(Property temp : properties)

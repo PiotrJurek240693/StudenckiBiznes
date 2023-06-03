@@ -1,11 +1,9 @@
 package gameLogic.cards;
 
-import gameLogic.Game;
+import gameLogic.Board;
 import gameLogic.GameInfo;
 import gameLogic.Player;
 
-import java.lang.reflect.Array;
-import java.util.List;
 
 public class Card_Birthday implements Card
 {
@@ -14,7 +12,7 @@ public class Card_Birthday implements Card
     public void takeAction(Player player)
     {
         int money = GameInfo.NONE;
-        for(Player current : Game.getPlayers())
+        for(Player current : Board.getPlayers())
         {
             current.unconditionalMove(LIBRARY_TEA_SQUARE);
             if(current!=player)

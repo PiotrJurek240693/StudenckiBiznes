@@ -8,6 +8,5 @@ public class Card_FreeFromDante implements Card
     public void takeAction(Player player)
     {
         player.setCardChanceStatus(true);
-        player.setRecentlyGetCardChance(true);
     }
 }

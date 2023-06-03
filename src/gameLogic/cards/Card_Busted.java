@@ -1,5 +1,6 @@
 package gameLogic.cards;
 
+import gameLogic.Board;
 import gameLogic.Game;
 import gameLogic.Player;
 
@@ -12,7 +13,7 @@ public class Card_Busted implements Card
     {
         Player sendToDante;
         ArrayList<Player> toChooseFrom = new ArrayList<>();
-        for(Player current : Game.getPlayers())
+        for(Player current : Board.getPlayers())
             if(current!=player)
                 toChooseFrom.add(current);
         sendToDante = Game.choosePlayer(toChooseFrom);
