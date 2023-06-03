@@ -11,3 +11,371 @@
     -fx-min-width: 400px;
     -fx-min-height: 80px;
 }
+
+.przyciski_losowania {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-width: 10px;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 35px;
+    -fx-font-family: "Showcard Gothic";
+    -fx-min-width: 20px;
+    -fx-min-height: 10px;
+}
+
+.przyciski_niewidzialne
+{
+    -fx-min-width: 900px;
+    -fx-min-height: 140px;
+    -fx-background-color: transparent;
+}
+.tekst
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-font-family: "Showcard Gothic";
+    -fx-min-width: 400px;
+    -fx-min-height: 80px;
+}
+
+.text_field
+{
+    -fx-text-fill: #750000;
+    -fx-background-color: white;
+    -fx-border-color: #CB3939;
+    -fx-border-width: 15px;
+    -fx-font-size: 25px;
+    -fx-font-family: "Showcard Gothic";
+}
+
+.pionki
+{
+    -fx-min-width: 145px;
+    -fx-min-height: 145px;
+    -fx-background-color: transparent;
+}
+
+.label
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 60px;
+}
+
+.saldo_blue
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #004AAD;
+    -fx-font-size: 60px;
+}
+
+.saldo_red
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #AD1818;
+    -fx-font-size: 60px;
+}
+
+.saldo_green
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #0F6410;
+    -fx-font-size: 60px;
+}
+
+.saldo_yellow
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #E1DA1E;
+    -fx-font-size: 60px;
+}
+
+
+.test
+{
+    -fx-min-width: 500px;
+    -fx-min-height: 800px;
+    -fx-background-color: black;
+}
+
+.karta
+{
+    -fx-fill: white;
+}
+
+.nazwa
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+}
+
+
+/*Styl kart WOiZ*/
+.pasek_WOiZ
+{
+    -fx-fill: #2AA6AB;
+}
+
+.cena_WOiZ
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #2AA6AB;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_WOiZ
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #2AA6AB;
+    -fx-font-size: 30px;
+}
+
+.tresc_WOiZ
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #2AA6AB;
+    -fx-font-size: 21px;
+}
+/*Styl kart WOiZ*/
+
+
+/*Styl kart WM*/
+.pasek_WM
+{
+    -fx-fill: #A6A6A6;
+}
+
+.cena_WM
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #A6A6A6;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_WM
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #A6A6A6;
+    -fx-font-size: 30px;
+}
+
+.tresc_WM
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #A6A6A6;
+    -fx-font-size: 21px;
+}
+/*Styl kart WM*/
+
+
+/*Styl kart WCH*/
+.pasek_WCH
+{
+    -fx-fill: #044B07;
+}
+
+.cena_WCH
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #044B07;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_WCH
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #044B07;
+    -fx-font-size: 30px;
+}
+
+.tresc_WCH
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #044B07;
+    -fx-font-size: 21px;
+}
+/*Styl kart WCH*/
+
+
+/*Styl kart WTMiWT*/
+.pasek_WTMiWT
+{
+    -fx-fill: #AB0404;
+}
+
+.cena_WTMiWT
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #AB0404;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_WTMiWT
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #AB0404;
+    -fx-font-size: 30px;
+}
+
+.tresc_WTMiWT
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #AB0404;
+    -fx-font-size: 21px;
+}
+/*Styl kart WTMiWT*/
+
+
+/*Styl kart BAiS*/
+.pasek_BAiS
+{
+    -fx-fill: #C6A004;
+}
+
+.cena_BAiS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #C6A004;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_BAiS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #C6A004;
+    -fx-font-size: 30px;
+}
+
+.tresc_BAiS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #C6A004;
+    -fx-font-size: 21px;
+}
+/*Styl kart BAiS*/
+
+
+/*Styl kart IPiOS*/
+.pasek_IPiOS
+{
+    -fx-fill: #BB6211;
+}
+
+.cena_IPiOS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #BB6211;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_IPiOS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #BB6211;
+    -fx-font-size: 30px;
+}
+
+.tresc_IPiOS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #BB6211;
+    -fx-font-size: 21px;
+}
+/*Styl kart IPiOS*/
+
+
+/*Styl kart FTIMS*/
+.pasek_FTIMS
+{
+    -fx-fill: #7B166B;
+}
+
+.cena_FTIMS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #7B166B;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_FTIMS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #7B166B;
+    -fx-font-size: 30px;
+}
+
+.tresc_FTIMS
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #7B166B;
+    -fx-font-size: 21px;
+}
+/*Styl kart FTIMS*/
+
+
+/*Styl kart WEEIA*/
+.pasek_WEEIA
+{
+    -fx-fill: #0A4799;
+}
+
+.cena_WEEIA
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #0A4799;
+    -fx-font-size: 60px;
+}
+
+.tytul_wlasnosci_WEEIA
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #0A4799;
+    -fx-font-size: 30px;
+}
+
+.tresc_WEEIA
+{
+    -fx-background-color: transparent;
+    -fx-font-family: "Showcard Gothic";
+    -fx-text-fill: #0A4799;
+    -fx-font-size: 21px;
+}
+/*Styl kart WEEIA*/
+
