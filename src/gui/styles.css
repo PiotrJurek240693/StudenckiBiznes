@@ -16,12 +16,12 @@
     -fx-background-color: transparent;
     -fx-border-color: white;
     -fx-border-radius: 10px;
-    -fx-border-width: 10px;
+    -fx-border-width: 15px;
 
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 35px;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-size: 42px;
+    -fx-font-family: "Bauhaus 93";
     -fx-min-width: 20px;
     -fx-min-height: 10px;
 }
@@ -65,7 +65,7 @@
 .label
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-family: "Bauhaus 93";
     -fx-text-fill: #ffffff;
     -fx-font-size: 60px;
 }
@@ -73,7 +73,7 @@
 .saldo_blue
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-family: "Bauhaus 93";
     -fx-text-fill: #004AAD;
     -fx-font-size: 60px;
 }
@@ -81,7 +81,7 @@
 .saldo_red
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-family: "Bauhaus 93";
     -fx-text-fill: #AD1818;
     -fx-font-size: 60px;
 }
@@ -89,7 +89,7 @@
 .saldo_green
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-family: "Bauhaus 93";
     -fx-text-fill: #0F6410;
     -fx-font-size: 60px;
 }
@@ -97,7 +97,7 @@
 .saldo_yellow
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
+    -fx-font-family: "Bauhaus 93";
     -fx-text-fill: #E1DA1E;
     -fx-font-size: 60px;
 }
@@ -133,24 +133,24 @@
 .cena_WOiZ
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #2AA6AB;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_WOiZ
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #2AA6AB;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_WOiZ
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #2AA6AB;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart WOiZ*/
@@ -165,24 +165,24 @@
 .cena_WM
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #A6A6A6;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_WM
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #A6A6A6;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_WM
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #A6A6A6;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart WM*/
@@ -197,24 +197,24 @@
 .cena_WCH
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #044B07;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_WCH
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #044B07;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_WCH
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #044B07;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart WCH*/
@@ -229,24 +229,24 @@
 .cena_WTMiWT
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #AB0404;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_WTMiWT
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #AB0404;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_WTMiWT
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #AB0404;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart WTMiWT*/
@@ -261,24 +261,24 @@
 .cena_BAiS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #C6A004;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_BAiS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #C6A004;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_BAiS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #C6A004;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart BAiS*/
@@ -293,24 +293,24 @@
 .cena_IPiOS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #BB6211;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_IPiOS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #BB6211;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_IPiOS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #BB6211;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart IPiOS*/
@@ -325,24 +325,24 @@
 .cena_FTIMS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #7B166B;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_FTIMS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #7B166B;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_FTIMS
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #7B166B;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart FTIMS*/
@@ -357,24 +357,24 @@
 .cena_WEEIA
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #0A4799;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 60px;
 }
 
 .tytul_wlasnosci_WEEIA
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #0A4799;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 30px;
 }
 
 .tresc_WEEIA
 {
     -fx-background-color: transparent;
-    -fx-font-family: "Showcard Gothic";
-    -fx-text-fill: #0A4799;
+    -fx-font-family: "Bauhaus 93";
+    -fx-text-fill: #750000;
     -fx-font-size: 21px;
 }
 /*Styl kart WEEIA*/
