@@ -25,7 +25,7 @@ public class Board {
 
     private static Random randomGenerator = new Random();
 
-    private ArrayList<Square> squares=new ArrayList<Square>();
+    private static ArrayList<Square> squares=new ArrayList<Square>();
     private StackOfCards chance=new StackOfCards();
     private StackOfCards studentCash=new StackOfCards();
     private static Player[] players;
@@ -46,13 +46,6 @@ public class Board {
         }
         player=player;
     }
-    public void run()
-    {
-        boolean isRunning=true;
-        executePlayerRound();
-        nextPlayer();
-
-    }
     private void checkIfUpgradePossibleAndOfferUpgrading()
     {
         ArrayList<Property> upgradeable=new ArrayList<Property>();
@@ -68,7 +61,7 @@ public class Board {
         }
         Game.offerUpgrading(upgradeable);
     }
-    private void executePlayerRound()
+    public void executePlayerRound()
     {
         if(player.isBankrupt()) return;
 
@@ -106,6 +99,7 @@ public class Board {
                 // TODO: ponownie wysłać i wyświetlić pozycję, gdyż uległa zmianie
             }
         }
+        nextPlayer();
     }
     private void goToDante(int playerIndex,int time)
     {
@@ -165,7 +159,7 @@ public class Board {
         } else if (square.isProperty()) {
             handleProperty((Property) square);
         } else {
-            pay(playerIndex,BANK,square.getFee());
+            Game.pay(playerIndex,BANK,square.getFee());
         }
     }
 
@@ -174,7 +168,7 @@ public class Board {
         switch (square.getType())
         {
             case DANTE:
-                // TODO: obsługa (odpowiednie wyświetlenie) gracza na polu odwiedzający
+                // TODO: jeśli getInDante()==0 to należy wyświetlić na polu dla odwiedzających
                 break;
             case LIBRARY:
                 player.setHowManyDicesToThrow(3);
@@ -196,24 +190,12 @@ public class Board {
         if (ownerIndex==NO_ONE) {
             Game.offerPlayerBuyingOrAuction();
         } else if (playerIndex!=ownerIndex){
-            pay(playerIndex,ownerIndex,square.getFee());
+            Game.pay(playerIndex,ownerIndex,square.getFee());
         }
     }
 
-    private void pay(int from,int to,int amount)
-    {
-        int moneyPaid=amount;
-        if(from!=BANK)
-        {
-            moneyPaid=players[from].takeMoney(amount);
-        }
-        if(to!=BANK)
-        {
-            players[to].giveMoney(moneyPaid);
-        }
-        // TODO: wysłać i wyświetlić nowy stan gotówki
-    }
-    private void removePlayerAndCleanProperties()
+
+    public static void removePlayerAndCleanProperties()
     {
         player.setBankruptStatus();
         for(int i=0;i<squares.size();i++)
@@ -253,7 +235,7 @@ public class Board {
         position+=move;
         if(position>squares.size()) {
             position-=squares.size();
-            pay(BANK,playerIndex,200);
+            Game.pay(BANK,playerIndex,200);
         }
         player.setPosition(position);
         // TODO: wysłać i wyświetlić przesunięcie gracza

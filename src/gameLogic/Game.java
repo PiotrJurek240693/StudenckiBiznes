@@ -50,6 +50,19 @@ public class Game {
     {
         return players;
     }
+    public static void pay(int from,int to,int amount)
+    {
+        int moneyPaid=amount;
+        if(from!=Board.BANK)
+        {
+            moneyPaid=players.get(from).takeMoney(amount);
+        }
+        if(to!=Board.BANK)
+        {
+            players.get(to).giveMoney(moneyPaid);
+        }
+        // TODO: wysłać i wyświetlić nowy stan gotówki
+    }
 
     public static Player choosePlayer(List<Player> availablePlayers)
     {

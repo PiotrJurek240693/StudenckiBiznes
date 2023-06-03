@@ -55,6 +55,7 @@ public class Player {
             for(Property property : ownedProperties())
                 property.sellProperty();
             setBankruptStatus();
+            Board.removePlayerAndCleanProperties();
             return moneyAmount;
         }
 
