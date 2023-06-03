@@ -8,17 +8,14 @@ public class Property extends Square {
     private int ownerIndex;
     private boolean mortgaged;
     private int upgrades;
-    private boolean hasRecentlyGetUpgrade=false;
     public boolean isMortgaged() {
         return mortgaged;
     }
 
+    private int faculty;
 
-    public boolean hasRecentlyGetUpgrade() {
-        return hasRecentlyGetUpgrade;
-    }
-    public void clearRecentlyGetUpgrade() {
-        hasRecentlyGetUpgrade=false;
+    public int getFaculty() {
+        return faculty;
     }
 
     // TODO: gra aktualnie obsługuje sprzedawanie pól a nie ich zastawianie. jak starczy czasu należy to zmienić
@@ -42,7 +39,6 @@ public class Property extends Square {
 
     public void upgrade() {
         upgrades++;
-        hasRecentlyGetUpgrade=true;
         calculateNewFee();
     }
 
@@ -63,7 +59,7 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    public Property(String name,TypesOfSqueres type, int price, int upgradePrice)
+    public Property(String name,TypesOfSqueres type, int price, int upgradePrice,int faculty)
     {
         super(name, type, 0);
         this.price=price;
@@ -71,6 +67,7 @@ public class Property extends Square {
         ownerIndex = NO_ONE;
         upgrades=0;
         mortgaged=false;
+        this.faculty=faculty;
     }
     private void calculateNewFee()
     {

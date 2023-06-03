@@ -91,11 +91,16 @@ public class Game {
 
     public static void offerUpgrading(ArrayList<Property> upgradeable)
     {
+        //metoda przyjmuje liste posiadanych ulepszalnych pól gracza (tylko jeśli ma cały wydział)
+        //UWAGA ta metoda musi zweryfikować pole przy pomocy checkIfUpgradingIsCorrect(upgradeable,toUpgrade)
         // TODO: zapytać gracza co (czy) chce upelszyć z jego posiadłości - upgradeable
+    }
+    private static boolean checkIfUpgradingIsCorrect(ArrayList<Property> upgradeable,Property toUpgrade)
+    {
+        // TODO:
         //      -w jednym ruchu student może zrobić tylko 1 ulepszenie na jedno pole
-        //              gotowe metody do wykorzystania: upgrade() i hasRecentlyGetUpgrade() i clearRecentlyGetUpgrade();
-        //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
         //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
+        return true;
     }
 }
 

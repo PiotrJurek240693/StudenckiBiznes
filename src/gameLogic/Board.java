@@ -57,6 +57,25 @@ public class Board {
         }
         player=players.get(playerIndex);
     }
+    private boolean checkIfPlayerOwnsFaculty(int faculty)
+    {
+        boolean owns=true;
+        for (Square square : squares) {
+            if(square.isProperty())
+            {
+                Property property=(Property)square;
+                if(property.getFaculty()==faculty)
+                {
+                    if(property.getOwnerIndex()!=playerIndex)
+                    {
+                        owns=false;
+                        break;
+                    }
+                }
+            }
+        }
+        return owns;
+    }
     private void checkIfUpgradePossibleAndOfferUpgrading()
     {
         ArrayList<Property> upgradeable=new ArrayList<Property>();
@@ -66,7 +85,9 @@ public class Board {
                 Property property=(Property)square;
                 if(property.getUpgradePrice()!=UNUPGRADABLE && property.getOwnerIndex()==playerIndex)
                 {
-                    upgradeable.add(property);
+                    if(checkIfPlayerOwnsFaculty(property.getFaculty())) {
+                        upgradeable.add(property);
+                    }
                 }
             }
         }
@@ -253,45 +274,45 @@ public class Board {
     }
     private void initSquares() {
         squares.add(new Square("START", START,0));
-        squares.add(new Property("INSTYTUT ZARZĄDZANIA", INSTITUTE,60,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT ZARZĄDZANIA", INSTITUTE,60,UPGRADE_PRICE_ROW_1,1));
         squares.add(new Square("KASA STUDENCKA", STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT MARKETINGU I ZRÓWNOWAŻONEGO ROZWOJU", INSTITUTE,60,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT MARKETINGU I ZRÓWNOWAŻONEGO ROZWOJU", INSTITUTE,60,UPGRADE_PRICE_ROW_1,1));
         squares.add(new Square("LEGITYMACJA",STUDENT_CARD,200));
-        squares.add(new Property("PARKING KAMPUS A", PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA POJAZDÓW I PODSTAW BUDOWY MASZYN", CATHEDRAL,100,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("PARKING KAMPUS A", PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA POJAZDÓW I PODSTAW BUDOWY MASZYN", CATHEDRAL,100,UPGRADE_PRICE_ROW_1,2));
         squares.add(new Square("SZANSA", CHANCE,0));
-        squares.add(new Property("INSTYTUT INŻYNIERII MATERIAŁOWEJ", INSTITUTE,100,UPGRADE_PRICE_ROW_1));
-        squares.add(new Property("KATEDRA DYNAMIKI MASZYN",CATHEDRAL,120,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT INŻYNIERII MATERIAŁOWEJ", INSTITUTE,100,UPGRADE_PRICE_ROW_1,2));
+        squares.add(new Property("KATEDRA DYNAMIKI MASZYN",CATHEDRAL,120,UPGRADE_PRICE_ROW_1,2));
         squares.add(new Square("DANTE",DANTE,0));
-        squares.add(new Property("INSTYTUT TECHNOLOGII POLIMERÓW I BARWNIKÓW", INSTITUTE,140, UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("ZATOKA SPORTU", SPORT_VANUE,150,UNUPGRADABLE));
-        squares.add(new Property("INSTYTUT CHEMII OGÓLNEJ I EKOLOGICZNEJ", INSTITUTE,140,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TECHNIKI RADIACYJNEJ", INSTITUTE,160,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("PARKING KAMPUS B",PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("INSTYTUT MATERIAŁOZNAWSTWA TEKSTYLIÓW I KOMPOZYTÓW POLIMEROWYCH", INSTITUTE,180,UPGRADE_PRICE_ROW_2));
+        squares.add(new Property("INSTYTUT TECHNOLOGII POLIMERÓW I BARWNIKÓW", INSTITUTE,140, UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("ZATOKA SPORTU", SPORT_VANUE,150,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT CHEMII OGÓLNEJ I EKOLOGICZNEJ", INSTITUTE,140,UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TECHNIKI RADIACYJNEJ", INSTITUTE,160,UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("PARKING KAMPUS B",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT MATERIAŁOZNAWSTWA TEKSTYLIÓW I KOMPOZYTÓW POLIMEROWYCH", INSTITUTE,180,UPGRADE_PRICE_ROW_2,4));
         squares.add(new Square("KASA STUDENCKA",STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT ARCHITEKTURY TEKSTYLIÓW", INSTITUTE,180,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("KATEDRA TECHNOLOGII DZIEWIARSKICH I MASZYN WŁÓKIENNICZYCH",CATHEDRAL,200,UPGRADE_PRICE_ROW_2));
+        squares.add(new Property("INSTYTUT ARCHITEKTURY TEKSTYLIÓW", INSTITUTE,180,UPGRADE_PRICE_ROW_2,4));
+        squares.add(new Property("KATEDRA TECHNOLOGII DZIEWIARSKICH I MASZYN WŁÓKIENNICZYCH",CATHEDRAL,200,UPGRADE_PRICE_ROW_2,4));
         squares.add(new Square("BIBLIOTEKA", LIBRARY,0));
-        squares.add(new Property("INSTYTUT ARCHITEKTURY I URBANISTYKI", INSTITUTE,220,UPGRADE_PRICE_ROW_3));
+        squares.add(new Property("INSTYTUT ARCHITEKTURY I URBANISTYKI", INSTITUTE,220,UPGRADE_PRICE_ROW_3,5));
         squares.add(new Square("SZANSA",CHANCE,0));
-        squares.add(new Property("KATEDRA BUDOWNICTWA BETONOWEGO",CATHEDRAL,220,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("KATEDRA MECHANIKI KONSTRUKCJI",CATHEDRAL,240,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("PARKING KAMPUS C",PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA INŻYNIERII BIOPROCESOWEJ",CATHEDRAL,260,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("KATEDRA INŻYNIERII BEZPIECZEŃSTWA PRACY",CATHEDRAL,260,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("CANTRUM SPORTU",SPORT_VANUE,150,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA INŻYNIERII MOLEKULARNEJ",CATHEDRAL,280,UPGRADE_PRICE_ROW_3));
+        squares.add(new Property("KATEDRA BUDOWNICTWA BETONOWEGO",CATHEDRAL,220,UPGRADE_PRICE_ROW_3,5));
+        squares.add(new Property("KATEDRA MECHANIKI KONSTRUKCJI",CATHEDRAL,240,UPGRADE_PRICE_ROW_3,5));
+        squares.add(new Property("PARKING KAMPUS C",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA INŻYNIERII BIOPROCESOWEJ",CATHEDRAL,260,UPGRADE_PRICE_ROW_3,6));
+        squares.add(new Property("KATEDRA INŻYNIERII BEZPIECZEŃSTWA PRACY",CATHEDRAL,260,UPGRADE_PRICE_ROW_3,6));
+        squares.add(new Property("CANTRUM SPORTU",SPORT_VANUE,150,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA INŻYNIERII MOLEKULARNEJ",CATHEDRAL,280,UPGRADE_PRICE_ROW_3,6));
         squares.add(new Square("PORA NA DANTE", DANTE_AGAIN,0));
-        squares.add(new Property("INSTYTUT FIZYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4));
-        squares.add(new Property("INSTYTUT INFORMATYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("INSTYTUT FIZYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4,7));
+        squares.add(new Property("INSTYTUT INFORMATYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4,7));
         squares.add(new Square("KASA STUDENCKA",STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT MATEMATYKI", INSTITUTE,320,UPGRADE_PRICE_ROW_4));
-        squares.add(new Property("PARKING REKTORA",PARKING,200,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT MATEMATYKI", INSTITUTE,320,UPGRADE_PRICE_ROW_4,7));
+        squares.add(new Property("PARKING REKTORA",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
         squares.add(new Square("SZANSA",CHANCE,0));
-        squares.add(new Property("INSTYTUT MECHATRONIKI SYSTEMÓW INFORMATYCZNYCH", INSTITUTE,350,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("INSTYTUT MECHATRONIKI SYSTEMÓW INFORMATYCZNYCH", INSTITUTE,350,UPGRADE_PRICE_ROW_4,8));
         squares.add(new Square("WARUNEK", FAILED_SUBIECT_FEE,100));
-        squares.add(new Property("KATEDRA MIKROELEKTRONIKI I TECHNIK INFORMATYCZNYCH",CATHEDRAL,400,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("KATEDRA MIKROELEKTRONIKI I TECHNIK INFORMATYCZNYCH",CATHEDRAL,400,UPGRADE_PRICE_ROW_4,8));
     }
     public ArrayList<Square> getSquares()
     {
