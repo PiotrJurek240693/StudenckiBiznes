@@ -33,9 +33,16 @@ public class Board {
     {
         return players;
     }
-    public Board(ArrayList<Player> players)
+    public Board(int howManyPlayers)
     {
-        this.players=players;
+        for(int i=0;i<howManyPlayers;i++)
+        {
+            players.add(new Player());
+        }
+        for(int i=howManyPlayers;i<4;i++)
+        {
+            players.add(new Bot());
+        }
         player=players.get(0);
         initSquares();
         chance.initStackOfCardsChance();

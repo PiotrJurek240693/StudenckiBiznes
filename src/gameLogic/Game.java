@@ -11,12 +11,12 @@ public class Game {
 
     private Server server;
     private Client client;
-    private void init()
+    private void init(int howManyPlayers)
     {
-
+        board=new Board(howManyPlayers);
     }
     public Game(GameType gameType, String serverIP) throws IOException {
-        init();
+        init(4);
         if(gameType == GameType.MultiplayerClient){
             client = new Client(serverIP, 8888);
         }
@@ -27,7 +27,7 @@ public class Game {
 
     public Game(GameType gameType) throws IOException
     {
-        init();
+        init(4);
         if(gameType == GameType.MultiplayerClient){
             throw new IllegalArgumentException();
         }

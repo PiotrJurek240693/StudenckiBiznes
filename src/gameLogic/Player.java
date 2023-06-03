@@ -1,6 +1,7 @@
 package gameLogic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
     private final int playerIndex = Board.getPlayers().size();
@@ -12,8 +13,28 @@ public class Player {
     private boolean isOnErasmus = false;
     private boolean hasElectricDeficiency = false;
     private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
+    private static Random randomGenerator = new Random();
+    private String nick;
 
-
+    public String generateNick()
+    {
+        String tempNick="Student ";
+        int random=randomGenerator.nextInt(9000)+1000;
+        tempNick+=random;
+        return tempNick;
+    }
+    public Player()
+    {
+        nick=generateNick();
+    }
+    public Player(String nick)
+    {
+        this.nick=nick;
+    }
+    public String getNick()
+    {
+        return nick;
+    }
 
 
 
