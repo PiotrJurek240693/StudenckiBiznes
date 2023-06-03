@@ -2,22 +2,20 @@ package gameLogic;
 
 public class Property extends Square {
     public static final int NO_ONE = -1;
+    public static final int MAX_UPGRADE = 5;
     private int price;
     private int upgradePrice;
     private int ownerIndex;
     private boolean mortgaged;
     private int upgrades;
-    private boolean hasRecentlyGetUpgrade=false;
     public boolean isMortgaged() {
         return mortgaged;
     }
 
+    private int faculty;
 
-    public boolean hasRecentlyGetUpgrade() {
-        return hasRecentlyGetUpgrade;
-    }
-    public void clearRecentlyGetUpgrade() {
-        hasRecentlyGetUpgrade=false;
+    public int getFaculty() {
+        return faculty;
     }
 
     // TODO: gra aktualnie obsługuje sprzedawanie pól a nie ich zastawianie. jak starczy czasu należy to zmienić
@@ -41,7 +39,6 @@ public class Property extends Square {
 
     public void upgrade() {
         upgrades++;
-        hasRecentlyGetUpgrade=true;
         calculateNewFee();
     }
 
@@ -62,7 +59,7 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    public Property(String name,TypesOfSqueres type, int price, int upgradePrice)
+    public Property(String name,TypesOfSqueres type, int price, int upgradePrice,int faculty)
     {
         super(name, type, 0);
         this.price=price;
@@ -70,6 +67,7 @@ public class Property extends Square {
         ownerIndex = NO_ONE;
         upgrades=0;
         mortgaged=false;
+        this.faculty=faculty;
     }
     private void calculateNewFee()
     {
@@ -92,25 +90,30 @@ public class Property extends Square {
         return sum;
     }
 
-    public int sellProperty()
+    public void cleanProperty()
     {
         fee=0;
         ownerIndex = NO_ONE;
         upgrades=0;
         mortgaged=false;
-        return valueOfProperty();
+    }
+    public int sellProperty()
+    {
+        int value=valueOfProperty();
+        cleanProperty();
+        return value;
     }
 
     public boolean hasAuditorium()
     {
-        if(upgrades==5)
+        if(upgrades== MAX_UPGRADE)
             return true;
         return false;
     }
 
     public void destroyAuditorium()
     {
-        if(upgrades==5)
+        if(upgrades==MAX_UPGRADE)
         {
             upgrades=4;
         }

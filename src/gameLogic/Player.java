@@ -1,24 +1,44 @@
 package gameLogic;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class Player {
-    private final int playerIndex = Game.getPlayers().size();
+    private final int playerIndex = Board.getPlayers().size();
     private final Pawn pawn = new Pawn();
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
     private boolean isBankrupt = false;
-    private boolean isCardChance = false;
-    private boolean hasErasmus = false;
+    private boolean hasCardChance = false;
+    private boolean isOnErasmus = false;
     private boolean hasElectricDeficiency = false;
     private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
+    private static Random randomGenerator = new Random();
+    private String nick;
+
+    public String generateNick()
+    {
+        String tempNick="Student ";
+        int random=randomGenerator.nextInt(9000)+1000;
+        tempNick+=random;
+        return tempNick;
+    }
+    public Player()
+    {
+        nick=generateNick();
+    }
+    public Player(String nick)
+    {
+        this.nick=nick;
+    }
+    public String getNick()
+    {
+        return nick;
+    }
 
 
 
-
-
-    public int valueOfProperties(List<Property> properties)
+    public int valueOfProperties(ArrayList<Property> properties)
     {
         int suma = GameInfo.NONE;
         for(Property temp : properties)
@@ -28,9 +48,9 @@ public class Player {
     }
 
 
-    public List<Property> ownedProperties()
+    public ArrayList<Property> ownedProperties()
     {
-        List<Property> tempList = new ArrayList<>();
+        ArrayList<Property> tempList = new ArrayList<>();
         for(Square square : Game.getBoard().getSquares())
             if(square instanceof Property temp && temp.getOwnerIndex()==playerIndex)
                 tempList.add(temp);
@@ -54,7 +74,8 @@ public class Player {
         {
             for(Property property : ownedProperties())
                 property.sellProperty();
-            setInBankrupt();
+            setBankruptStatus();
+            Board.removePlayerAndCleanProperties();
             return moneyAmount;
         }
 
@@ -105,44 +126,44 @@ public class Player {
         return isBankrupt;
     }
 
-    public void setInDante(int numberOfRounds)
+    public void setDanteDuration(int numberOfRounds)
     {
         pawn.getToSquare(GameInfo.DANTE_SQUARE_INDEX);
         inDante += numberOfRounds;
     }
 
-    public void setInBankrupt(){isBankrupt = true;}
+    public void setBankruptStatus(){isBankrupt = true;}
 
     public void giveMoney(int amount)
     {
         moneyAmount += amount;
     }
 
-    public boolean isCardChance()
+    public boolean hasCardChance()
     {
-        return isCardChance;
+        return hasCardChance;
     }
 
-    public void setCardChance(boolean cardChance)
+    public void setCardChanceStatus(boolean hasCardChance)
     {
-        isCardChance = cardChance;
+        this.hasCardChance = hasCardChance;
     }
-    public boolean isHasErasmus()
+    public boolean isOnErasmus()
     {
-        return hasErasmus;
-    }
-
-    public void setHasErasmus(boolean hasErasmus)
-    {
-        this.hasErasmus = hasErasmus;
+        return isOnErasmus;
     }
 
-    public boolean isHasElectricDeficiency()
+    public void setOnErasmus(boolean onErasmus)
+    {
+        this.isOnErasmus = onErasmus;
+    }
+
+    public boolean hasElectricDeficiency()
     {
         return hasElectricDeficiency;
     }
 
-    public void setHasElectricDeficiency(boolean hasElectricDeficiency)
+    public void setElectricDeficiencyStatus(boolean hasElectricDeficiency)
     {
         this.hasElectricDeficiency = hasElectricDeficiency;
     }

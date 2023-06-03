@@ -5,16 +5,18 @@ import connection.server.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
-    static private List<Player> players;
-
     static private Board board;
 
     private Server server;
     private Client client;
+    private void init(int howManyPlayers)
+    {
+        board=new Board(howManyPlayers);
+    }
     public Game(GameType gameType, String serverIP) throws IOException {
+        init(4);
         if(gameType == GameType.MultiplayerClient){
             client = new Client(serverIP, 8888);
         }
@@ -25,6 +27,7 @@ public class Game {
 
     public Game(GameType gameType) throws IOException
     {
+        init(4);
         if(gameType == GameType.MultiplayerClient){
             throw new IllegalArgumentException();
         }
@@ -46,18 +49,27 @@ public class Game {
     {
         return board;
     }
-    public static List<Player> getPlayers()
+    public static void pay(int from,int to,int amount)
     {
-        return players;
+        int moneyPaid=amount;
+        if(from!=Board.BANK)
+        {
+            moneyPaid=Board.getPlayers().get(from).takeMoney(amount);
+        }
+        if(to!=Board.BANK)
+        {
+            Board.getPlayers().get(to).giveMoney(moneyPaid);
+        }
+        // TODO: wysłać i wyświetlić nowy stan gotówki
     }
 
-    public static Player choosePlayer(List<Player> availablePlayers)
+    public static Player choosePlayer(ArrayList<Player> availablePlayers)
     {
         // TODO: funkcja przekazuje graczy, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
         // Gracza wybierajacego nie ma wsrod availablePlayers
         return availablePlayers.get(0);
     }
-    public static Property chooseProperty(List<Property> availableProperties, int amountToGet)
+    public static Property chooseProperty(ArrayList<Property> availableProperties, int amountToGet)
     {
         // TODO: funkcja przekazuje Property gracza, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
         // do funkcji przekazuje rowniez sume, ktora jest potrzebna do wyplacenia (dla podgladu dla gracza)
@@ -79,11 +91,16 @@ public class Game {
 
     public static void offerUpgrading(ArrayList<Property> upgradeable)
     {
+        //metoda przyjmuje liste posiadanych ulepszalnych pól gracza (tylko jeśli ma cały wydział)
+        //UWAGA ta metoda musi zweryfikować pole przy pomocy checkIfUpgradingIsCorrect(upgradeable,toUpgrade)
         // TODO: zapytać gracza co (czy) chce upelszyć z jego posiadłości - upgradeable
+    }
+    private static boolean checkIfUpgradingIsCorrect(ArrayList<Property> upgradeable,Property toUpgrade)
+    {
+        // TODO:
         //      -w jednym ruchu student może zrobić tylko 1 ulepszenie na jedno pole
-        //              gotowe metody do wykorzystania: upgrade() i hasRecentlyGetUpgrade() i clearRecentlyGetUpgrade();
-        //      -aby móc dobudować, ulepszać student musi posiadać cały wydział
         //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
+        return true;
     }
 }
 

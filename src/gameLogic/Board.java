@@ -20,34 +20,63 @@ public class Board {
     public static final int BANK = NO_ONE;
     public static final int RANDOMISE = -1;
 
+    private static int playerIndex=0;
+    private static Player player;
+
     private static Random randomGenerator = new Random();
 
-    private ArrayList<Square> squares=new ArrayList<Square>();
+    private static ArrayList<Square> squares=new ArrayList<Square>();
     private StackOfCards chance=new StackOfCards();
     private StackOfCards studentCash=new StackOfCards();
-    private Player[] players;
-    public Board(Player[] players)
+    private static ArrayList<Player> players=new ArrayList<Player>();
+    public static ArrayList<Player> getPlayers()
     {
-        this.players=players;
+        return players;
+    }
+    public Board(int howManyPlayers)
+    {
+        for(int i=0;i<howManyPlayers;i++)
+        {
+            players.add(new Player());
+        }
+        for(int i=howManyPlayers;i<4;i++)
+        {
+            players.add(new Bot());
+        }
+        player=players.get(0);
         initSquares();
         chance.initStackOfCardsChance();
         studentCash.initStackOfCardsStudentCash();
     }
-    public void run()
+    private static void nextPlayer()
     {
-        boolean isRunning=true;
-        int playerIndex=0;
-        while(isRunning) {
-            playerRound(playerIndex);
-
-            playerIndex++;
-            if(playerIndex==players.length)
+        playerIndex++;
+        if(playerIndex>=players.size())
+        {
+            playerIndex=0;
+        }
+        player=players.get(playerIndex);
+    }
+    private boolean checkIfPlayerOwnsFaculty(int faculty)
+    {
+        boolean owns=true;
+        for (Square square : squares) {
+            if(square.isProperty())
             {
-                playerIndex=0;
+                Property property=(Property)square;
+                if(property.getFaculty()==faculty)
+                {
+                    if(property.getOwnerIndex()!=playerIndex)
+                    {
+                        owns=false;
+                        break;
+                    }
+                }
             }
         }
+        return owns;
     }
-    private void offerUpgrade(int playerIndex)
+    private void checkIfUpgradePossibleAndOfferUpgrading()
     {
         ArrayList<Property> upgradeable=new ArrayList<Property>();
         for (Square square : squares) {
@@ -56,32 +85,34 @@ public class Board {
                 Property property=(Property)square;
                 if(property.getUpgradePrice()!=UNUPGRADABLE && property.getOwnerIndex()==playerIndex)
                 {
-                    upgradeable.add(property);
+                    if(checkIfPlayerOwnsFaculty(property.getFaculty())) {
+                        upgradeable.add(property);
+                    }
                 }
             }
         }
         Game.offerUpgrading(upgradeable);
     }
-    private void playerRound(int playerIndex)
+    public void executePlayerRound()
     {
-        if(players[playerIndex].isBankrupt()) return;
+        if(player.isBankrupt()) return;
 
         // TODO: wysłać i wyświetlić kogo jest kolej
         boolean endedRound=false;
         int doubles=0;
         while(!endedRound) {
-            offerUpgrade(playerIndex);
-            if(players[playerIndex].getInDante()>0) {
-                Game.offerPlayerPayingForECTS(players[playerIndex].getInDante());
+            checkIfUpgradePossibleAndOfferUpgrading();
+            if(player.getInDante()>0) {
+                Game.offerPlayerPayingForECTS(player.getInDante());
             }
 
-            int[] dices=rollDices(players[playerIndex].getDices());
-            players[playerIndex].setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
-            if(players[playerIndex].getInDante()>0 && !isDouble(dices)) break;
+            int[] dices=rollDices(player.getDices());
+            player.setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
+            if(player.getInDante()>0 && !isDouble(dices)) break;
 
-            doMove(playerIndex,howFar(dices));
-            int position=players[playerIndex].getPosition();
-            doAction(playerIndex);
+            doMove(howFar(dices));
+            int position=player.getPosition();
+            handleSquareAction();
             if(isDouble(dices))
             {
                 if(doubles>=2) {
@@ -95,11 +126,12 @@ public class Board {
             else{
                 endedRound=true;
             }
-            if(position!=players[playerIndex].getPosition())
+            if(position!=player.getPosition())
             {
                 // TODO: ponownie wysłać i wyświetlić pozycję, gdyż uległa zmianie
             }
         }
+        nextPlayer();
     }
     private void goToDante(int playerIndex,int time)
     {
@@ -107,15 +139,15 @@ public class Board {
             time = randomGenerator.nextInt(4);
             // TODO: wysłać i wyświetlić na co idzie gracz - 0-SO,1-PP1,2-PP2,3-SO2
         }
-        if(players[playerIndex].isCardChance())
+        if(player.hasCardChance())
         {
             time=0;
             // TODO: wysłać i wyświetlić użycie karty wyjścia z dante
-            players[playerIndex].setCardChance(false);
+            player.setCardChanceStatus(false);
             studentCash.returnCard(new Card_FreeFromDante());
         }
-        players[playerIndex].setPosition(10);
-        players[playerIndex].setInDante(time);
+        player.setPosition(10);
+        player.setDanteDuration(time);
     }
     private boolean isDouble(int[] dices)
     {
@@ -129,12 +161,12 @@ public class Board {
         }
         return isDouble;
     }
-    private void handleCards(int playerIndex,TypesOfSqueres type)
+    private void handleCardDrawing(TypesOfSqueres type)
     {
         if(type==STUDENT_CASH)
         {
             Card card=studentCash.drawCard();
-            card.takeAction(players[playerIndex]);
+            card.takeAction(player);
             if(!(card instanceof Card_FreeFromDante))
             {
                 studentCash.returnCard(card);
@@ -143,35 +175,35 @@ public class Board {
         else if(type==CHANCE)
         {
             Card card=chance.drawCard();
-            card.takeAction(players[playerIndex]);
+            card.takeAction(player);
             chance.returnCard(card);
         }
         // TODO: wysłać i wyświetlić kartę
     }
-    private void doAction(int playerIndex)
+    private void handleSquareAction()
     {
-        int position=players[playerIndex].getPosition();
+        int position=player.getPosition();
         Square square=squares.get(position);
         if(square.isCards()) {
-            handleCards(playerIndex,square.getType());
+            handleCardDrawing(square.getType());
         } else if (square.isSpecial()) {
-            handleSpecial(square,playerIndex);
+            handleSpecialSquareAction(square);
         } else if (square.isProperty()) {
-            handleProperty(playerIndex, (Property) square);
+            handleProperty((Property) square);
         } else {
-            pay(playerIndex,BANK,square.getFee());
+            Game.pay(playerIndex,BANK,square.getFee());
         }
     }
 
-    private void handleSpecial(Square square,int playerIndex)
+    private void handleSpecialSquareAction(Square square)
     {
         switch (square.getType())
         {
             case DANTE:
-                // TODO: obsługa (odpowiednie wyświetlenie) gracza na polu odwiedzający
+                // TODO: jeśli getInDante()==0 to należy wyświetlić na polu dla odwiedzających
                 break;
             case LIBRARY:
-                players[playerIndex].setHowManyDicesToThrow(3);
+                player.setHowManyDicesToThrow(3);
                 // TODO: wysłanie i wyświetlenie darmowej herbaty
                 break;
             case DANTE_AGAIN:
@@ -180,7 +212,7 @@ public class Board {
         }
     }
 
-    private void handleProperty(int playerIndex, Property square)
+    private void handleProperty(Property square)
     {
         if(square.isMortgaged()){
             return;
@@ -190,26 +222,14 @@ public class Board {
         if (ownerIndex==NO_ONE) {
             Game.offerPlayerBuyingOrAuction();
         } else if (playerIndex!=ownerIndex){
-            pay(playerIndex,ownerIndex,square.getFee());
+            Game.pay(playerIndex,ownerIndex,square.getFee());
         }
     }
 
-    private void pay(int from,int to,int amount)
+
+    public static void removePlayerAndCleanProperties()
     {
-        int moneyPaid=amount;
-        if(from!=BANK)
-        {
-            moneyPaid=players[from].takeMoney(amount);
-        }
-        if(to!=BANK)
-        {
-            players[to].giveMoney(moneyPaid);
-        }
-        // TODO: wysłać i wyświetlić nowy stan gotówki
-    }
-    private void removePlayer(int playerIndex)
-    {
-        players[playerIndex].setInBankrupt();
+        player.setBankruptStatus();
         for(int i=0;i<squares.size();i++)
         {
             Square square=squares.get(i);
@@ -218,7 +238,7 @@ public class Board {
                 Property property=(Property)square;
                 if(property.getOwnerIndex()==playerIndex)
                 {
-                    property.setOwnerIndex(NO_ONE);
+                    property.cleanProperty();
                 }
             }
         }
@@ -241,58 +261,58 @@ public class Board {
         // TODO: wysłać i wyświetlić wyrzucone kostki
         return dices;
     }
-    public void doMove(int playerIndex,int move)
+    public void doMove(int move)
     {
-        int position=players[playerIndex].getPosition();
+        int position=player.getPosition();
         position+=move;
         if(position>squares.size()) {
             position-=squares.size();
-            pay(BANK,playerIndex,200);
+            Game.pay(BANK,playerIndex,200);
         }
-        players[playerIndex].setPosition(position);
+        player.setPosition(position);
         // TODO: wysłać i wyświetlić przesunięcie gracza
     }
     private void initSquares() {
         squares.add(new Square("START", START,0));
-        squares.add(new Property("INSTYTUT ZARZĄDZANIA", INSTITUTE,60,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT ZARZĄDZANIA", INSTITUTE,60,UPGRADE_PRICE_ROW_1,1));
         squares.add(new Square("KASA STUDENCKA", STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT MARKETINGU I ZRÓWNOWAŻONEGO ROZWOJU", INSTITUTE,60,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT MARKETINGU I ZRÓWNOWAŻONEGO ROZWOJU", INSTITUTE,60,UPGRADE_PRICE_ROW_1,1));
         squares.add(new Square("LEGITYMACJA",STUDENT_CARD,200));
-        squares.add(new Property("PARKING KAMPUS A", PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA POJAZDÓW I PODSTAW BUDOWY MASZYN", CATHEDRAL,100,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("PARKING KAMPUS A", PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA POJAZDÓW I PODSTAW BUDOWY MASZYN", CATHEDRAL,100,UPGRADE_PRICE_ROW_1,2));
         squares.add(new Square("SZANSA", CHANCE,0));
-        squares.add(new Property("INSTYTUT INŻYNIERII MATERIAŁOWEJ", INSTITUTE,100,UPGRADE_PRICE_ROW_1));
-        squares.add(new Property("KATEDRA DYNAMIKI MASZYN",CATHEDRAL,120,UPGRADE_PRICE_ROW_1));
+        squares.add(new Property("INSTYTUT INŻYNIERII MATERIAŁOWEJ", INSTITUTE,100,UPGRADE_PRICE_ROW_1,2));
+        squares.add(new Property("KATEDRA DYNAMIKI MASZYN",CATHEDRAL,120,UPGRADE_PRICE_ROW_1,2));
         squares.add(new Square("DANTE",DANTE,0));
-        squares.add(new Property("INSTYTUT TECHNOLOGII POLIMERÓW I BARWNIKÓW", INSTITUTE,140, UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("ZATOKA SPORTU", SPORT_VANUE,150,UNUPGRADABLE));
-        squares.add(new Property("INSTYTUT CHEMII OGÓLNEJ I EKOLOGICZNEJ", INSTITUTE,140,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TECHNIKI RADIACYJNEJ", INSTITUTE,160,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("PARKING KAMPUS B",PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("INSTYTUT MATERIAŁOZNAWSTWA TEKSTYLIÓW I KOMPOZYTÓW POLIMEROWYCH", INSTITUTE,180,UPGRADE_PRICE_ROW_2));
+        squares.add(new Property("INSTYTUT TECHNOLOGII POLIMERÓW I BARWNIKÓW", INSTITUTE,140, UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("ZATOKA SPORTU", SPORT_VANUE,150,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT CHEMII OGÓLNEJ I EKOLOGICZNEJ", INSTITUTE,140,UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("MIĘDZYRESORTOWY INSTYTUT TECHNIKI RADIACYJNEJ", INSTITUTE,160,UPGRADE_PRICE_ROW_2,3));
+        squares.add(new Property("PARKING KAMPUS B",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT MATERIAŁOZNAWSTWA TEKSTYLIÓW I KOMPOZYTÓW POLIMEROWYCH", INSTITUTE,180,UPGRADE_PRICE_ROW_2,4));
         squares.add(new Square("KASA STUDENCKA",STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT ARCHITEKTURY TEKSTYLIÓW", INSTITUTE,180,UPGRADE_PRICE_ROW_2));
-        squares.add(new Property("KATEDRA TECHNOLOGII DZIEWIARSKICH I MASZYN WŁÓKIENNICZYCH",CATHEDRAL,200,UPGRADE_PRICE_ROW_2));
+        squares.add(new Property("INSTYTUT ARCHITEKTURY TEKSTYLIÓW", INSTITUTE,180,UPGRADE_PRICE_ROW_2,4));
+        squares.add(new Property("KATEDRA TECHNOLOGII DZIEWIARSKICH I MASZYN WŁÓKIENNICZYCH",CATHEDRAL,200,UPGRADE_PRICE_ROW_2,4));
         squares.add(new Square("BIBLIOTEKA", LIBRARY,0));
-        squares.add(new Property("INSTYTUT ARCHITEKTURY I URBANISTYKI", INSTITUTE,220,UPGRADE_PRICE_ROW_3));
+        squares.add(new Property("INSTYTUT ARCHITEKTURY I URBANISTYKI", INSTITUTE,220,UPGRADE_PRICE_ROW_3,5));
         squares.add(new Square("SZANSA",CHANCE,0));
-        squares.add(new Property("KATEDRA BUDOWNICTWA BETONOWEGO",CATHEDRAL,220,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("KATEDRA MECHANIKI KONSTRUKCJI",CATHEDRAL,240,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("PARKING KAMPUS C",PARKING,200,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA INŻYNIERII BIOPROCESOWEJ",CATHEDRAL,260,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("KATEDRA INŻYNIERII BEZPIECZEŃSTWA PRACY",CATHEDRAL,260,UPGRADE_PRICE_ROW_3));
-        squares.add(new Property("CANTRUM SPORTU",SPORT_VANUE,150,UNUPGRADABLE));
-        squares.add(new Property("KATEDRA INŻYNIERII MOLEKULARNEJ",CATHEDRAL,280,UPGRADE_PRICE_ROW_3));
+        squares.add(new Property("KATEDRA BUDOWNICTWA BETONOWEGO",CATHEDRAL,220,UPGRADE_PRICE_ROW_3,5));
+        squares.add(new Property("KATEDRA MECHANIKI KONSTRUKCJI",CATHEDRAL,240,UPGRADE_PRICE_ROW_3,5));
+        squares.add(new Property("PARKING KAMPUS C",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA INŻYNIERII BIOPROCESOWEJ",CATHEDRAL,260,UPGRADE_PRICE_ROW_3,6));
+        squares.add(new Property("KATEDRA INŻYNIERII BEZPIECZEŃSTWA PRACY",CATHEDRAL,260,UPGRADE_PRICE_ROW_3,6));
+        squares.add(new Property("CANTRUM SPORTU",SPORT_VANUE,150,UNUPGRADABLE,UNUPGRADABLE));
+        squares.add(new Property("KATEDRA INŻYNIERII MOLEKULARNEJ",CATHEDRAL,280,UPGRADE_PRICE_ROW_3,6));
         squares.add(new Square("PORA NA DANTE", DANTE_AGAIN,0));
-        squares.add(new Property("INSTYTUT FIZYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4));
-        squares.add(new Property("INSTYTUT INFORMATYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("INSTYTUT FIZYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4,7));
+        squares.add(new Property("INSTYTUT INFORMATYKI", INSTITUTE,300,UPGRADE_PRICE_ROW_4,7));
         squares.add(new Square("KASA STUDENCKA",STUDENT_CASH,0));
-        squares.add(new Property("INSTYTUT MATEMATYKI", INSTITUTE,320,UPGRADE_PRICE_ROW_4));
-        squares.add(new Property("PARKING REKTORA",PARKING,200,UNUPGRADABLE));
+        squares.add(new Property("INSTYTUT MATEMATYKI", INSTITUTE,320,UPGRADE_PRICE_ROW_4,7));
+        squares.add(new Property("PARKING REKTORA",PARKING,200,UNUPGRADABLE,UNUPGRADABLE));
         squares.add(new Square("SZANSA",CHANCE,0));
-        squares.add(new Property("INSTYTUT MECHATRONIKI SYSTEMÓW INFORMATYCZNYCH", INSTITUTE,350,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("INSTYTUT MECHATRONIKI SYSTEMÓW INFORMATYCZNYCH", INSTITUTE,350,UPGRADE_PRICE_ROW_4,8));
         squares.add(new Square("WARUNEK", FAILED_SUBIECT_FEE,100));
-        squares.add(new Property("KATEDRA MIKROELEKTRONIKI I TECHNIK INFORMATYCZNYCH",CATHEDRAL,400,UPGRADE_PRICE_ROW_4));
+        squares.add(new Property("KATEDRA MIKROELEKTRONIKI I TECHNIK INFORMATYCZNYCH",CATHEDRAL,400,UPGRADE_PRICE_ROW_4,8));
     }
     public ArrayList<Square> getSquares()
     {

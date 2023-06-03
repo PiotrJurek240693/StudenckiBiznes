@@ -1,10 +1,10 @@
 package gameLogic.cards;
 
+import gameLogic.Board;
 import gameLogic.Game;
 import gameLogic.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Card_Busted implements Card
 {
@@ -12,11 +12,11 @@ public class Card_Busted implements Card
     public void takeAction(Player player)
     {
         Player sendToDante;
-        List<Player> toChooseFrom = new ArrayList<>();
-        for(Player current : Game.getPlayers())
+        ArrayList<Player> toChooseFrom = new ArrayList<>();
+        for(Player current : Board.getPlayers())
             if(current!=player)
                 toChooseFrom.add(current);
         sendToDante = Game.choosePlayer(toChooseFrom);
-        sendToDante.setInDante(BUSTED_ROUNDS);
+        sendToDante.setDanteDuration(BUSTED_ROUNDS);
     }
 }
