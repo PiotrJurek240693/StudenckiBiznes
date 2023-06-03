@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
-    private final int playerIndex = Board.getPlayers().size();
     private final Pawn pawn = new Pawn();
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
@@ -52,7 +51,7 @@ public class Player {
     {
         ArrayList<Property> tempList = new ArrayList<>();
         for(Square square : Game.getBoard().getSquares())
-            if(square instanceof Property temp && temp.getOwnerIndex()==playerIndex)
+            if(square instanceof Property temp && temp.getOwner()==this)
                 tempList.add(temp);
 
         return tempList;
@@ -75,7 +74,7 @@ public class Player {
             for(Property property : ownedProperties())
                 property.sellProperty();
             setBankruptStatus();
-            Board.removePlayerAndCleanProperties();
+            Game.removePlayerAndCleanProperties();
             return moneyAmount;
         }
 
@@ -83,8 +82,8 @@ public class Player {
 
         while(amount>moneyAmount)
         {
-            property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
-            moneyAmount += property.sellProperty();
+           // property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
+           // moneyAmount += property.sellProperty();
         }
 
         moneyAmount -= amount;
@@ -97,12 +96,6 @@ public class Player {
     public void unconditionalMove(int squareNumber)
     {
         pawn.getToSquare(squareNumber);
-    }
-
-
-    public int getPlayerIndex()
-    {
-        return playerIndex;
     }
 
     public boolean checkIfCanTakeMoney(int amount)

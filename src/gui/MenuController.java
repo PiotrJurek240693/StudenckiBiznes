@@ -1,6 +1,12 @@
 package gui;
 
+import gameLogic.Game;
+import gameLogic.GameType;
 import javafx.application.Platform;
+
+import java.io.IOException;
+
+import static gameLogic.GameType.*;
 
 public class MenuController {
     public static void onExitButtonClick() {
@@ -20,7 +26,7 @@ public class MenuController {
     }
 
     public static void onSingleplayerButtonClick() {
-        MenuShower.showQuantity();
+        MenuShower.showQuantity(Singleplayer);
     }
     public static void onReturnToMultiOrSingleMenuButtonClick() {
         MenuShower.showMultiOrSingleMenu();
@@ -33,11 +39,30 @@ public class MenuController {
     public static void onJoinButtonClick() { MenuShower.showJoinMenu(); }
 
     public static void onHostButtonClick() {
-        MenuShower.showQuantity();
-        //TODO: Dodac uruchamianie serwera.
+        MenuShower.showQuantity(MultiplayerHost);
     }
 
     public static void onJoinToSessionButtonClick(String ip) {
-        //TODO: Dodac polaczenie z serwerem gry.
+        System.out.println("Laczenie...");
+        try{
+            Game.init(ip);
+        } catch (IOException e) {
+            //TODO: Okno z errorem
+            throw new RuntimeException(e);
+        }
+        MenuShower.showBoard();
+        System.out.println("Polaczono");
+    }
+
+    public static void onChooseNumberOfPlayersButtonClick(GameType gameType, int numberOfPlayers) {
+        System.out.println("Uruchamianie...");
+        try{
+            Game.init(gameType, numberOfPlayers);
+        } catch (IOException e) {
+            //TODO: Okno z errorem
+            throw new RuntimeException(e);
+        }
+        MenuShower.showBoard();
+        System.out.println("Uruchomoino");
     }
 }

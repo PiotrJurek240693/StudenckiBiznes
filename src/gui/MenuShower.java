@@ -1,5 +1,6 @@
 package gui;
 
+import gameLogic.GameType;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +28,9 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(20);
         button1.setTranslateY(110);
-        button1.setOnAction(event -> {MenuController.onPlayButtonClick();});
+        button1.setOnAction(event -> {
+            MenuController.onPlayButtonClick();
+        });
 
         // Tworzenie przycisku 2
         Button button2 = new Button("Ustawienia");
@@ -40,7 +43,9 @@ public class MenuShower {
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
-        button3.setOnAction(event -> {MenuController.onExitButtonClick();});
+        button3.setOnAction(event -> {
+            MenuController.onExitButtonClick();
+        });
 
         // Tworzenie kontenera VBox i ustawianie przycisków na środku
         VBox buttonContainer = new VBox(10, button1, button2, button3);
@@ -75,21 +80,27 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(20);
         button1.setTranslateY(110);
-        button1.setOnAction(event -> {MenuController.onSingleplayerButtonClick();});
+        button1.setOnAction(event -> {
+            MenuController.onSingleplayerButtonClick();
+        });
 
         // Tworzenie przycisku 2
         Button button2 = new Button("Muliplayer");
         button2.getStyleClass().add("przyciski_menu_powitalne");
         button2.setTranslateX(20);
         button2.setTranslateY(130);
-        button2.setOnAction(event -> {MenuController.onMultiplayerButtonClick();});
+        button2.setOnAction(event -> {
+            MenuController.onMultiplayerButtonClick();
+        });
 
         // Tworzenie przycisku 3
         Button button3 = new Button("Powrót");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
-        button3.setOnAction(event -> {MenuController.onReturnToMainMenuButtonClick();});
+        button3.setOnAction(event -> {
+            MenuController.onReturnToMainMenuButtonClick();
+        });
 
         // Tworzenie kontenera VBox i ustawianie przycisków na środku
         VBox buttonContainer = new VBox(10, button1, button2, button3);
@@ -124,21 +135,27 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(20);
         button1.setTranslateY(110);
-        button1.setOnAction(event -> {MenuController.onHostButtonClick();});
+        button1.setOnAction(event -> {
+            MenuController.onHostButtonClick();
+        });
 
         // Tworzenie przycisku 2
         Button button2 = new Button("Dołącz");
         button2.getStyleClass().add("przyciski_menu_powitalne");
         button2.setTranslateX(20);
         button2.setTranslateY(130);
-        button2.setOnAction(event -> {MenuController.onJoinButtonClick();});
+        button2.setOnAction(event -> {
+            MenuController.onJoinButtonClick();
+        });
 
         // Tworzenie przycisku 3
         Button button3 = new Button("Powrót");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
-        button3.setOnAction(event -> {MenuController.onReturnToMultiOrSingleMenuButtonClick();});
+        button3.setOnAction(event -> {
+            MenuController.onReturnToMultiOrSingleMenuButtonClick();
+        });
 
         // Tworzenie kontenera VBox i ustawianie przycisków na środku
         VBox buttonContainer = new VBox(10, button1, button2, button3);
@@ -179,14 +196,18 @@ public class MenuShower {
         button2.getStyleClass().add("przyciski_menu_powitalne");
         button2.setTranslateX(20);
         button2.setTranslateY(130);
-        button2.setOnAction(event -> {MenuController.onJoinToSessionButtonClick(textField.getText());});
+        button2.setOnAction(event -> {
+            MenuController.onJoinToSessionButtonClick(textField.getText());
+        });
 
         // Tworzenie przycisku 3
         Button button3 = new Button("Powrót");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
-        button3.setOnAction(event -> {MenuController.onReturnToHostOrJoinMenuButtonClick();});
+        button3.setOnAction(event -> {
+            MenuController.onReturnToHostOrJoinMenuButtonClick();
+        });
 
         // Tworzenie kontenera VBox i ustawianie przycisków na środku
         VBox buttonContainer = new VBox(10, textField, button2, button3);
@@ -204,8 +225,7 @@ public class MenuShower {
         ScreenSettings.primaryStage.show();
     }
 
-    public static void showQuantity()
-    {
+    public static void showQuantity(GameType gameType) {
         ImageView Quantity = new ImageView();
         Image QuantityImage = new Image("file:../../assets/WyborIlosciGraczy.png");
 
@@ -219,7 +239,9 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(0);
         button1.setTranslateY(300);
-        button1.setOnAction(event -> {MenuController.onReturnToMultiOrSingleMenuButtonClick();});
+        button1.setOnAction(event -> {
+            MenuController.onReturnToMultiOrSingleMenuButtonClick();
+        });
 
         // Tworzenie przycisku 3
         Button button3 = new Button("");
@@ -227,7 +249,9 @@ public class MenuShower {
         button3.setTranslateX(0);
         button3.setTranslateY(-340);
         button3.setVisible(false);
-
+        button1.setOnAction(event -> {
+            MenuController.onChooseNumberOfPlayersButtonClick(gameType, 2);
+        });
 
         // Tworzenie przycisku 4
         Button button4 = new Button("");
@@ -235,6 +259,9 @@ public class MenuShower {
         button4.setTranslateX(0);
         button4.setTranslateY(-120);
         button4.setVisible(false);
+        button1.setOnAction(event -> {
+            MenuController.onChooseNumberOfPlayersButtonClick(gameType, 3);
+        });
 
         // Tworzenie przycisku 5
         Button button5 = new Button("");
@@ -242,8 +269,9 @@ public class MenuShower {
         button5.setTranslateX(0);
         button5.setTranslateY(100);
         button5.setVisible(false);
-
-
+        button1.setOnAction(event -> {
+            MenuController.onChooseNumberOfPlayersButtonClick(gameType, 4);
+        });
 
         // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
         StackPane root = new StackPane();
@@ -259,8 +287,7 @@ public class MenuShower {
 
     }
 
-    public static void showBoard()
-    {
+    public static void showBoard() {
         ImageView Background = new ImageView();
         Image BackgroundImage = new Image("file:../../assets/Tlo.png");
 
@@ -612,10 +639,6 @@ public class MenuShower {
         Ftims1.setRotate(-90);
 
 
-
-
-
-
         StackPane root = new StackPane();
         root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
                 Wm1, Wm2, Szansa1, Wm3, Wiezienie, Wch1, Wch2, ZatokaSportu, Wch3, ParkingB, Wtmiwt1, Wtmiwt2, Kasastudencka2,
@@ -627,7 +650,6 @@ public class MenuShower {
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
-
 
 
     }
