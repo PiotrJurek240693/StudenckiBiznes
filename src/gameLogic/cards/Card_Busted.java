@@ -4,7 +4,6 @@ import gameLogic.Game;
 import gameLogic.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Card_Busted implements Card
 {
@@ -12,7 +11,7 @@ public class Card_Busted implements Card
     public void takeAction(Player player)
     {
         Player sendToDante;
-        List<Player> toChooseFrom = new ArrayList<>();
+        ArrayList<Player> toChooseFrom = new ArrayList<>();
         for(Player current : Game.getPlayers())
             if(current!=player)
                 toChooseFrom.add(current);

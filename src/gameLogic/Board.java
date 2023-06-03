@@ -28,11 +28,11 @@ public class Board {
     private static ArrayList<Square> squares=new ArrayList<Square>();
     private StackOfCards chance=new StackOfCards();
     private StackOfCards studentCash=new StackOfCards();
-    private static Player[] players;
-    public Board(Player[] players)
+    private static ArrayList<Player> players=new ArrayList<Player>();
+    public Board(ArrayList<Player> players)
     {
         this.players=players;
-        player=players[0];
+        player=players.get(0);
         initSquares();
         chance.initStackOfCardsChance();
         studentCash.initStackOfCardsStudentCash();
@@ -40,11 +40,11 @@ public class Board {
     private static void nextPlayer()
     {
         playerIndex++;
-        if(playerIndex==players.length)
+        if(playerIndex>=players.size())
         {
             playerIndex=0;
         }
-        player=player;
+        player=players.get(playerIndex);
     }
     private void checkIfUpgradePossibleAndOfferUpgrading()
     {

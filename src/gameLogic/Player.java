@@ -1,7 +1,6 @@
 package gameLogic;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player {
     private final int playerIndex = Game.getPlayers().size();
@@ -28,9 +27,9 @@ public class Player {
     }
 
 
-    public List<Property> ownedProperties()
+    public ArrayList<Property> ownedProperties()
     {
-        List<Property> tempList = new ArrayList<>();
+        ArrayList<Property> tempList = new ArrayList<>();
         for(Square square : Game.getBoard().getSquares())
             if(square instanceof Property temp && temp.getOwnerIndex()==playerIndex)
                 tempList.add(temp);

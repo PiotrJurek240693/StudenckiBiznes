@@ -5,16 +5,20 @@ import connection.server.Server;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
-    static private List<Player> players;
+    static private ArrayList<Player> players=new ArrayList<Player>();
 
     static private Board board;
 
     private Server server;
     private Client client;
+    private void init()
+    {
+
+    }
     public Game(GameType gameType, String serverIP) throws IOException {
+        init();
         if(gameType == GameType.MultiplayerClient){
             client = new Client(serverIP, 8888);
         }
@@ -25,6 +29,7 @@ public class Game {
 
     public Game(GameType gameType) throws IOException
     {
+        init();
         if(gameType == GameType.MultiplayerClient){
             throw new IllegalArgumentException();
         }
@@ -46,7 +51,7 @@ public class Game {
     {
         return board;
     }
-    public static List<Player> getPlayers()
+    public static ArrayList<Player> getPlayers()
     {
         return players;
     }
@@ -64,13 +69,13 @@ public class Game {
         // TODO: wysłać i wyświetlić nowy stan gotówki
     }
 
-    public static Player choosePlayer(List<Player> availablePlayers)
+    public static Player choosePlayer(ArrayList<Player> availablePlayers)
     {
         // TODO: funkcja przekazuje graczy, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
         // Gracza wybierajacego nie ma wsrod availablePlayers
         return availablePlayers.get(0);
     }
-    public static Property chooseProperty(List<Property> availableProperties, int amountToGet)
+    public static Property chooseProperty(ArrayList<Property> availableProperties, int amountToGet)
     {
         // TODO: funkcja przekazuje Property gracza, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
         // do funkcji przekazuje rowniez sume, ktora jest potrzebna do wyplacenia (dla podgladu dla gracza)
