@@ -2,6 +2,7 @@ package gui;
 
 import gameLogic.Game;
 import gameLogic.GameType;
+import gameLogic.Player;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -12,10 +13,6 @@ public class MenuController {
     public static void onExitButtonClick() {
         Platform.exit();
     }
-
-    public static void onQuantityButtonClick() {MenuShower.showNickAndPawn();}
-
-    public static void onPawnButtonClick() { MenuShower.showBoard(); }
     public static void onPlayButtonClick() {
         MenuShower.showMultiOrSingleMenu();
     }
@@ -53,11 +50,11 @@ public class MenuController {
             //TODO: Okno z errorem
             throw new RuntimeException(e);
         }
-        MenuShower.showBoard();
+        MenuShower.showNickAndPawn();
         System.out.println("Polaczono");
     }
 
-    public static void onChooseNumberOfPlayersButtonClick(GameType gameType, int numberOfPlayers) {
+    public static void onQuantityButtonClick(GameType gameType, int numberOfPlayers) {
         System.out.println("Uruchamianie...");
         try{
             Game.init(gameType, numberOfPlayers);
@@ -65,10 +62,15 @@ public class MenuController {
             //TODO: Okno z errorem
             throw new RuntimeException(e);
         }
-        MenuShower.showBoard();
+        MenuShower.showNickAndPawn();
         System.out.println("Uruchomoino");
 
         //TODO: Dodac polaczenie z serwerem gry.
         //Piotrek, nie zapomnij dodac wyboru okienka z nickiem i pionkami :)
+    }
+
+    public static void onPawnButtonClick(String nick) {
+        Game.addPlayer(new Player(nick));
+        MenuShower.showBoard();
     }
 }

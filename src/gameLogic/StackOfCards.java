@@ -1,9 +1,10 @@
 package gameLogic;
+import java.io.Serializable;
 import java.util.*;
 
 import gameLogic.cards.*;
 
-public class StackOfCards
+public class StackOfCards implements Serializable
 {
     private List<Card> deck;
     private List<Card> usedCards;

@@ -1,6 +1,8 @@
 package gameLogic;
 
-public class Pawn
+import java.io.Serializable;
+
+public class Pawn implements Serializable
 {
     private int position = 0;
 

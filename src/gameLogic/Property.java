@@ -1,6 +1,8 @@
 package gameLogic;
 
-public class Property extends Square {
+import java.io.Serializable;
+
+public class Property extends Square implements Serializable {
     public static final int MAX_UPGRADE = 5;
     private int price;
     private int upgradePrice;

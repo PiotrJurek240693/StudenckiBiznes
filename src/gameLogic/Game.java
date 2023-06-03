@@ -4,9 +4,11 @@ import connection.client.Client;
 import connection.server.Server;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable {
+
     private static Board board;
     private static int maxPlayers;
     private static int activePlayerIndex;
@@ -29,14 +31,23 @@ public class Game {
 
     private static void initHelper(int howManyPlayers) {
         maxPlayers = howManyPlayers;
-        players = new ArrayList<Player>();
-        players.add(new Player());
+        players = new ArrayList<>();
         activePlayerIndex = 0;
         board = new Board();
     }
 
+    public static void addPlayer(Player player) {
+        if (players.size() < maxPlayers) {
+            players.add(player);
+        }
+    }
+
     public static ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public static int getNumberOfPlayers() {
+        return players.size();
     }
 
     public static void nextRound() {
@@ -72,12 +83,36 @@ public class Game {
         return players.get(playerIndex);
     }
 
+    public static int getMaxPlayers() {
+        return maxPlayers;
+    }
+
     public static Player getActivePlayer() {
         return players.get(activePlayerIndex);
     }
 
     public static int getActivePlayerIndex() {
         return activePlayerIndex;
+    }
+
+    public static Server getServer() {
+        return server;
+    }
+
+    public static void setBoard(Board board) {
+        Game.board = board;
+    }
+
+    public static void setMaxPlayers(int maxPlayers) {
+        Game.maxPlayers = maxPlayers;
+    }
+
+    public static void setActivePlayerIndex(int activePlayerIndex) {
+        Game.activePlayerIndex = activePlayerIndex;
+    }
+
+    public static void setPlayers(ArrayList<Player> players) {
+        Game.players = players;
     }
 }
 

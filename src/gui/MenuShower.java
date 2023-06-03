@@ -1,5 +1,6 @@
 package gui;
 
+import gameLogic.Game;
 import gameLogic.GameType;
 import gameLogic.Property;
 import javafx.geometry.Pos;
@@ -254,8 +255,7 @@ public class MenuShower {
         button3.getStyleClass().add("przyciski_niewidzialne");
         button3.setTranslateX(0);
         button3.setTranslateY(-340);
-        button3.setVisible(false);
-        button3.setOnAction(event -> {MenuController.onQuantityButtonClick();});
+        button3.setOnAction(event -> {MenuController.onQuantityButtonClick(gameType, 2);});
 
 
         // Tworzenie przycisku 4
@@ -263,16 +263,14 @@ public class MenuShower {
         button4.getStyleClass().add("przyciski_niewidzialne");
         button4.setTranslateX(0);
         button4.setTranslateY(-120);
-        button4.setVisible(false);
-        button4.setOnAction(event -> {MenuController.onQuantityButtonClick();});
+        button4.setOnAction(event -> {MenuController.onQuantityButtonClick(gameType, 3);});
 
         // Tworzenie przycisku 5
         Button button5 = new Button("");
         button5.getStyleClass().add("przyciski_niewidzialne");
         button5.setTranslateX(0);
         button5.setTranslateY(100);
-        button5.setVisible(false);
-        button5.setOnAction(event -> {MenuController.onQuantityButtonClick();});
+        button5.setOnAction(event -> {MenuController.onQuantityButtonClick(gameType, 4);});
 
         // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
         StackPane root = new StackPane();
@@ -289,6 +287,7 @@ public class MenuShower {
     }
 
     public static void showBoard() {
+        StackPane root = new StackPane();
         ImageView Background = new ImageView();
         Image BackgroundImage = new Image("file:../../assets/Tlo.png");
 
@@ -639,92 +638,106 @@ public class MenuShower {
         Ftims1.setTranslateX(750);
         Ftims1.setRotate(-90);
 
-        //Saldo gracz niebieski
-        ImageView SaldoNiebieski = new ImageView();
-        Image SaldoNiebieskiImage = new Image("file:../../assets/SALDONIEBIESKI.png");
-        SaldoNiebieski.setImage(SaldoNiebieskiImage);
-        SaldoNiebieski.setTranslateX(-626);
-        SaldoNiebieski.setTranslateY(-376);
+        root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
+                Wm1, Wm2, Szansa1, Wm3, Wiezienie, Wch1, Wch2, ZatokaSportu, Wch3, ParkingB, Wtmiwt1, Wtmiwt2, Kasastudencka2,
+                Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
+                Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2);
 
-        //Label dla gracza 1
-        Label Gracz1 = new Label("GRACZ 1");
-        Gracz1.getStyleClass().add("label");
-        Gracz1.setTranslateX(-626);
-        Gracz1.setTranslateY(-425);
+        if(Game.getNumberOfPlayers() >= 1){
+            //Saldo gracz niebieski
+            ImageView SaldoNiebieski = new ImageView();
+            Image SaldoNiebieskiImage = new Image("file:../../assets/SALDONIEBIESKI.png");
+            SaldoNiebieski.setImage(SaldoNiebieskiImage);
+            SaldoNiebieski.setTranslateX(-626);
+            SaldoNiebieski.setTranslateY(-376);
 
-        //Label_saldo dla gracza niebiskiego
-        Label Saldo1 = new Label("2000M$");
-        Saldo1.getStyleClass().add("saldo_blue");
-        Saldo1.setTranslateX(-626);
-        Saldo1.setTranslateY(-330);
+            //Label dla gracza 1
+            Label Gracz1 = new Label(Game.getPlayer(0).getNick());
+            Gracz1.getStyleClass().add("label");
+            Gracz1.setTranslateX(-626);
+            Gracz1.setTranslateY(-425);
 
+            //Label_saldo dla gracza niebiskiego
+            Label Saldo1 = new Label(Game.getPlayer(0).getMoneyAmount() + "M$");
+            Saldo1.getStyleClass().add("saldo_blue");
+            Saldo1.setTranslateX(-626);
+            Saldo1.setTranslateY(-330);
 
-
-
-        //Saldo gracz czerwony
-        ImageView SaldoCzerwony = new ImageView();
-        Image SaldoCzerwonyImage = new Image("file:../../assets/SALDOCZERWONY.png");
-        SaldoCzerwony.setImage(SaldoCzerwonyImage);
-        SaldoCzerwony.setTranslateX(-278);
-        SaldoCzerwony.setTranslateY(-376);
-
-        //Label dla gracza 2
-        Label Gracz2 = new Label("GRACZ 2");
-        Gracz2.getStyleClass().add("label");
-        Gracz2.setTranslateX(-278);
-        Gracz2.setTranslateY(-425);
-
-        //Label_saldo dla gracza czerwonego
-        Label Saldo2 = new Label("2000M$");
-        Saldo2.getStyleClass().add("saldo_red");
-        Saldo2.setTranslateX(-278);
-        Saldo2.setTranslateY(-330);
+            root.getChildren().addAll(SaldoNiebieski, Gracz1, Saldo1);
+        }
 
 
 
+        if(Game.getNumberOfPlayers() >= 2){
+            //Saldo gracz czerwony
+            ImageView SaldoCzerwony = new ImageView();
+            Image SaldoCzerwonyImage = new Image("file:../../assets/SALDOCZERWONY.png");
+            SaldoCzerwony.setImage(SaldoCzerwonyImage);
+            SaldoCzerwony.setTranslateX(-278);
+            SaldoCzerwony.setTranslateY(-376);
 
-        //Saldo gracz zolty
-        ImageView SaldoZolty = new ImageView();
-        Image SaldoZoltyImage = new Image("file:../../assets/SALDOZOLTY.png");
-        SaldoZolty.setImage(SaldoZoltyImage);
-        SaldoZolty.setTranslateX(-278);
-        SaldoZolty.setTranslateY(-176);
+            //Label dla gracza 2
+            Label Gracz2 = new Label("GRACZ 2");
+            Gracz2.getStyleClass().add("label");
+            Gracz2.setTranslateX(-278);
+            Gracz2.setTranslateY(-425);
 
-        //Label dla gracza 3
-        Label Gracz3 = new Label("GRACZ 3");
-        Gracz3.getStyleClass().add("label");
-        Gracz3.setTranslateX(-626);
-        Gracz3.setTranslateY(-225);
+            //Label_saldo dla gracza czerwonego
+            Label Saldo2 = new Label(Game.getPlayer(1).getMoneyAmount() + "M$");
+            Saldo2.getStyleClass().add("saldo_red");
+            Saldo2.setTranslateX(-278);
+            Saldo2.setTranslateY(-330);
 
-        //Label_saldo dla gracza zoltego
-        Label Saldo3 = new Label("2000M$");
-        Saldo3.getStyleClass().add("saldo_yellow");
-        Saldo3.setTranslateX(-278);
-        Saldo3.setTranslateY(-130);
+            root.getChildren().addAll(SaldoCzerwony, Gracz2, Saldo2);
+        }
+
+        if(Game.getNumberOfPlayers() >= 3) {
+            //Saldo gracz zolty
+            ImageView SaldoZolty = new ImageView();
+            Image SaldoZoltyImage = new Image("file:../../assets/SALDOZOLTY.png");
+            SaldoZolty.setImage(SaldoZoltyImage);
+            SaldoZolty.setTranslateX(-278);
+            SaldoZolty.setTranslateY(-176);
+
+            //Label dla gracza 3
+            Label Gracz3 = new Label("GRACZ 3");
+            Gracz3.getStyleClass().add("label");
+            Gracz3.setTranslateX(-626);
+            Gracz3.setTranslateY(-225);
+
+            //Label_saldo dla gracza zoltego
+            Label Saldo3 = new Label(Game.getPlayer(2).getMoneyAmount() + "M$");
+            Saldo3.getStyleClass().add("saldo_yellow");
+            Saldo3.setTranslateX(-278);
+            Saldo3.setTranslateY(-130);
+
+            root.getChildren().addAll(SaldoZolty, Gracz3, Saldo3);
+        }
 
 
+        if(Game.getNumberOfPlayers() >= 4) {
+            //Saldo gracz zielony
+            ImageView SaldoZielony = new ImageView();
+            Image SaldoZielonyImage = new Image("file:../../assets/SALDOZIELONY.png");
+            SaldoZielony.setImage(SaldoZielonyImage);
+            SaldoZielony.setTranslateX(-626);
+            SaldoZielony.setTranslateY(-176);
+
+            //Label dla gracza 4
+            Label Gracz4 = new Label("GRACZ 4");
+            Gracz4.getStyleClass().add("label");
+            Gracz4.setTranslateX(-278);
+            Gracz4.setTranslateY(-225);
 
 
-        //Saldo gracz zielony
-        ImageView SaldoZielony = new ImageView();
-        Image SaldoZielonyImage = new Image("file:../../assets/SALDOZIELONY.png");
-        SaldoZielony.setImage(SaldoZielonyImage);
-        SaldoZielony.setTranslateX(-626);
-        SaldoZielony.setTranslateY(-176);
+            //Label_saldo dla gracza zielonego
+            Label Saldo4 = new Label(Game.getPlayer(3).getMoneyAmount() + "M$");
+            Saldo4.getStyleClass().add("saldo_green");
+            Saldo4.setTranslateX(-626);
+            Saldo4.setTranslateY(-130);
 
-        //Label dla gracza 4
-        Label Gracz4 = new Label("GRACZ 4");
-        Gracz4.getStyleClass().add("label");
-        Gracz4.setTranslateX(-278);
-        Gracz4.setTranslateY(-225);
-
-
-        //Label_saldo dla gracza zielonego
-        Label Saldo4 = new Label("2000M$");
-        Saldo4.getStyleClass().add("saldo_green");
-        Saldo4.setTranslateX(-626);
-        Saldo4.setTranslateY(-130);
-
+            root.getChildren().addAll(SaldoZielony, Gracz4, Saldo4);
+        }
 
 
         ImageView Kostka1 = new ImageView();
@@ -748,14 +761,7 @@ public class MenuShower {
         button1.setTranslateX(-350);
         button1.setTranslateY(0);
 
-        StackPane root = new StackPane();
-        root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
-                Wm1, Wm2, Szansa1, Wm3, Wiezienie, Wch1, Wch2, ZatokaSportu, Wch3, ParkingB, Wtmiwt1, Wtmiwt2, Kasastudencka2,
-                Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
-                Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2,SaldoNiebieski,
-                SaldoCzerwony, SaldoZolty, SaldoZielony, Gracz1, Gracz2, Gracz3, Gracz4, Saldo1, Saldo2, Saldo3, Saldo4,
-                Kostka1, Kostka2, button1)
-        ;
+        root.getChildren().addAll(Kostka1, Kostka2, button1);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
@@ -812,7 +818,7 @@ public class MenuShower {
         button1.getStyleClass().add("pionki");
         button1.setTranslateY(284);
         button1.setTranslateX(-220);
-        button1.setOnAction(event -> {MenuController.onPawnButtonClick();});
+        button1.setOnAction(event -> {MenuController.onPawnButtonClick(textField.getText());});
 
 
         //Pionek2
@@ -828,7 +834,7 @@ public class MenuShower {
         button2.getStyleClass().add("pionki");
         button2.setTranslateY(284);
         button2.setTranslateX(-50);
-        button2.setOnAction(event -> {MenuController.onPawnButtonClick();});
+        button2.setOnAction(event -> {MenuController.onPawnButtonClick(textField.getText());});
 
         //Pionek3
         ImageView Pionek3 = new ImageView();
@@ -843,7 +849,7 @@ public class MenuShower {
         button3.getStyleClass().add("pionki");
         button3.setTranslateY(284);
         button3.setTranslateX(120);
-        button3.setOnAction(event -> {MenuController.onPawnButtonClick();});
+        button3.setOnAction(event -> {MenuController.onPawnButtonClick(textField.getText());});
 
         //Pionek4
         ImageView Pionek4 = new ImageView();
@@ -858,7 +864,7 @@ public class MenuShower {
         button4.getStyleClass().add("pionki");
         button4.setTranslateY(284);
         button4.setTranslateX(290);
-        button4.setOnAction(event -> {MenuController.onPawnButtonClick();});
+        button4.setOnAction(event -> {MenuController.onPawnButtonClick(textField.getText());});
 
 
 

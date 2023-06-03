@@ -3,14 +3,14 @@ package gameLogic;
 import gameLogic.cards.Card;
 import gameLogic.cards.Card_FreeFromDante;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import java.util.ArrayList;
 
-import static gameLogic.Game.*;
 import static gameLogic.TypesOfSqueres.*;
 
-public class Board {
+public class Board implements Serializable {
     public static final int UNUPGRADABLE = -1;
     public static final int UPGRADE_PRICE_ROW_1 = 100;
     public static final int UPGRADE_PRICE_ROW_2 = 200;

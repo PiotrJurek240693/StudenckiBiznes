@@ -1,5 +1,7 @@
 package gameLogic;
 
-public class Bot extends Player {
+import java.io.Serializable;
+
+public class Bot extends Player implements Serializable {
 
 }

@@ -1,23 +1,27 @@
 package connection.client;
 
 import connection.server.ClientHandler;
+import gameLogic.Board;
+import gameLogic.Game;
+import gameLogic.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import static connection.Decryptor.decryptMessage;
+import static gui.MenuShower.showBoard;
 
 public class Client extends Thread {
     private final Socket socket;
-    private final BufferedReader input;
-    private final PrintWriter output;
+    private final ObjectOutputStream objectOutput;
+    private final ObjectInputStream objectInput;
     private boolean working;
 
     public Client(String serverIP, int port) throws IOException {
         socket = new Socket(serverIP, port);
-        input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        output = new PrintWriter(socket.getOutputStream(), true);
+        objectOutput = new ObjectOutputStream(socket.getOutputStream());
+        objectInput = new ObjectInputStream(socket.getInputStream());
         working = true;
         this.start();
         System.out.println("Połączono z serwerem.");
@@ -26,11 +30,13 @@ public class Client extends Thread {
     @Override
     public void run() {
         try {
+            getGameInfo();
             while (working) {
-                String notificationContent = input.readLine();
+                String notificationContent = objectInput.readLine();
                 if (notificationContent == null) {
                     break;
                 }
+                decryptMessage(notificationContent);
                 System.out.println("Otrzymano wiadomość: " + notificationContent);
                 // TODO: Napisać funkcję interpretującą otrzymane wiadomości
             }
@@ -47,8 +53,8 @@ public class Client extends Thread {
         System.out.println("Rozłączono z serwerem!");
     }
 
-    public void sendMessage(String message) {
-        output.println(message);
+    public void sendMessage(Object message) throws IOException {
+        objectOutput.writeObject(message);
     }
 
     public void close() {
@@ -59,5 +65,18 @@ public class Client extends Thread {
             System.out.println("Bład podczas zamykania gniazda!");
         }
         this.interrupt();
+    }
+
+    private void getGameInfo() throws IOException {
+        try{
+            Game.setMaxPlayers(objectInput.readInt());
+            System.out.println(Game.getMaxPlayers());
+            Game.setActivePlayerIndex(objectInput.readInt());
+            System.out.println(Game.getActivePlayerIndex());
+            Game.setBoard((Board)objectInput.readObject());
+            Game.setPlayers((ArrayList<Player>)objectInput.readObject());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

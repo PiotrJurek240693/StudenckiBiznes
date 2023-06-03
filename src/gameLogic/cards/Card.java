@@ -2,7 +2,9 @@ package gameLogic.cards;
 
 import gameLogic.Player;
 
-public interface Card
+import java.io.Serializable;
+
+public interface Card extends Serializable
 {
     int DANTE_ROUNDS = 2;
     int SCHOLARSHIP_VALUE = 200;
