@@ -13,6 +13,9 @@ public class MenuController {
         Platform.exit();
     }
 
+    public static void onQuantityButtonClick() {MenuShower.showNickAndPawn();}
+
+    public static void onPawnButtonClick() { MenuShower.showBoard(); }
     public static void onPlayButtonClick() {
         MenuShower.showMultiOrSingleMenu();
     }
@@ -64,5 +67,8 @@ public class MenuController {
         }
         MenuShower.showBoard();
         System.out.println("Uruchomoino");
+
+        //TODO: Dodac polaczenie z serwerem gry.
+        //Piotrek, nie zapomnij dodac wyboru okienka z nickiem i pionkami :)
     }
 }
