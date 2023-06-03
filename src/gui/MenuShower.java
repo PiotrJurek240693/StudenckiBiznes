@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+
 public class MenuShower {
     public static void showMainMenu() {
         // Tworzenie obiektu MenuPowitlane
@@ -694,11 +695,14 @@ public class MenuShower {
         Gracz4.setTranslateX(-278);
         Gracz4.setTranslateY(-225);
 
+
         //Label_saldo dla gracza zielonego
         Label Saldo4 = new Label("2000M$");
         Saldo4.getStyleClass().add("saldo_green");
         Saldo4.setTranslateX(-626);
         Saldo4.setTranslateY(-130);
+
+
 
         ImageView Kostka1 = new ImageView();
         Image Kostka1Image = new Image("file:../../assets/Kostka4.png");
@@ -707,15 +711,19 @@ public class MenuShower {
         Kostka1.setTranslateY(250);
         Kostka1.setRotate(40);
 
+
         ImageView Kostka2 = new ImageView();
-        Image Kostka2Image = new Image("file:../../assets/Kostka2.png");
+        Image Kostka2Image = new Image("file:../../assets/Kostka1.png");
         Kostka2.setImage(Kostka2Image);
         Kostka2.setTranslateX(-250);
         Kostka2.setTranslateY(200);
         Kostka2.setRotate(25);
 
-
-
+        //Przycisk do losowania
+        Button button1 = new Button("Rzuć kośćmi");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setTranslateX(-350);
+        button1.setTranslateY(0);
 
 
 
@@ -725,7 +733,8 @@ public class MenuShower {
                 Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
                 Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2,SaldoNiebieski,
                 SaldoCzerwony, SaldoZolty, SaldoZielony, Gracz1, Gracz2, Gracz3, Gracz4, Saldo1, Saldo2, Saldo3, Saldo4,
-                Kostka1, Kostka2);
+                Kostka1, Kostka2, button1)
+        ;
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
