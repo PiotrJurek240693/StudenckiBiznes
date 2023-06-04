@@ -73,6 +73,10 @@ public class MenuController {
 
     public static void onPawnButtonClick(String nick, PawnColor color) {
         Game.addPlayer(new Player(nick, color));
+        if(Game.getNumberOfPlayers() < Game.getMaxPlayers()){
+            MenuShower.showNickAndPawnMenu();
+            return;
+        }
         GameShower.showGame();
     }
 
@@ -80,7 +84,7 @@ public class MenuController {
         Game.start();
         PlayersInfoShower.showPlayersInfo();
         DecisionButtonsShower.showRoundStartDecisionButtons();
-       // PawnsShower.showPawnsOnStart();
+        PawnsShower.showPawns();
     }
 
     public static void onSquareClick(Property property) {
@@ -93,12 +97,10 @@ public class MenuController {
 
     public static void onDicesButtonClick() {
         Player player = Game.getActivePlayer();
-        ArrayList<Integer> dices = player.rollDices();
-        Dices.showDices(dices);
-        int sum = 0;
-        for(Integer dice : dices){
-            sum += dice;
-        }
-        //PawnsShower.animatePawnMove(Game.getActivePlayerIndex(), sum);
+        player.rollDices();
+        player.conditionalMove();
+        //Dices.showDices(dices);
+        PawnsShower.showPawns();
+        PlayersInfoShower.showPlayersInfo();
     }
 }

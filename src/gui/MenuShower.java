@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class MenuShower {
 
     public static void showMainMenu() {
@@ -319,80 +321,96 @@ public class MenuShower {
         button6.setTranslateX(30);
         button6.setTranslateY(140);
 
-        //Pionek1
-        ImageView Pionek1 = new ImageView();
-        Image Pionek1Image = new Image("file:../../assets/PIONEK1.png");
-        Pionek1.setImage(Pionek1Image);
-        Pionek1.setTranslateY(284);
-        Pionek1.setTranslateX(-220);
-
-        //Przycisk do pionka 1
-
-        Button button1 = new Button("");
-        button1.getStyleClass().add("pionki");
-        button1.setTranslateY(284);
-        button1.setTranslateX(-220);
-        button1.setOnAction(event -> {
-            MenuController.onPawnButtonClick(textField.getText(), PawnColor.blue);
-        });
-
-
-        //Pionek2
-        ImageView Pionek2 = new ImageView();
-        Image Pionek2Image = new Image("file:../../assets/PIONEK2.png");
-        Pionek2.setImage(Pionek2Image);
-        Pionek2.setTranslateY(284);
-        Pionek2.setTranslateX(-50);
-
-        //Przycisk do pionka 2
-
-        Button button2 = new Button("");
-        button2.getStyleClass().add("pionki");
-        button2.setTranslateY(284);
-        button2.setTranslateX(-50);
-        button2.setOnAction(event -> {
-            MenuController.onPawnButtonClick(textField.getText(), PawnColor.yellow);
-        });
-
-        //Pionek3
-        ImageView Pionek3 = new ImageView();
-        Image Pionek3Image = new Image("file:../../assets/PIONEK3.png");
-        Pionek3.setImage(Pionek3Image);
-        Pionek3.setTranslateY(284);
-        Pionek3.setTranslateX(120);
-
-        //Przycisk do pionka 3
-
-        Button button3 = new Button("");
-        button3.getStyleClass().add("pionki");
-        button3.setTranslateY(284);
-        button3.setTranslateX(120);
-        button3.setOnAction(event -> {
-            MenuController.onPawnButtonClick(textField.getText(), PawnColor.green);
-        });
-
-        //Pionek4
-        ImageView Pionek4 = new ImageView();
-        Image Pionek4Image = new Image("file:../../assets/PIONEK4.png");
-        Pionek4.setImage(Pionek4Image);
-        Pionek4.setTranslateY(284);
-        Pionek4.setTranslateX(290);
-
-        //Przycisk do pionka 4
-
-        Button button4 = new Button("");
-        button4.getStyleClass().add("pionki");
-        button4.setTranslateY(284);
-        button4.setTranslateX(290);
-        button4.setOnAction(event -> {
-            MenuController.onPawnButtonClick(textField.getText(), PawnColor.red);
-        });
-
-
         // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
         StackPane root = new StackPane();
-        root.getChildren().addAll(MenuPowitalne, textField, button5, button6, Pionek1, Pionek2, Pionek3, Pionek4, button1, button2,
-                button3, button4);
+        root.getChildren().addAll(MenuPowitalne, textField, button5, button6);
+
+        ArrayList<PawnColor> colors = Game.availableColors();
+
+        if(colors.contains(PawnColor.blue)){
+            //Pionek1
+            ImageView Pionek1 = new ImageView();
+            Image Pionek1Image = new Image("file:../../assets/PIONEK1.png");
+            Pionek1.setImage(Pionek1Image);
+            Pionek1.setTranslateY(284);
+            Pionek1.setTranslateX(-220);
+
+            //Przycisk do pionka 1
+
+            Button button1 = new Button("");
+            button1.getStyleClass().add("pionki");
+            button1.setTranslateY(284);
+            button1.setTranslateX(-220);
+            button1.setOnAction(event -> {
+                MenuController.onPawnButtonClick(textField.getText(), PawnColor.blue);
+            });
+
+            root.getChildren().addAll(Pionek1, button1);
+        }
+
+
+        if(colors.contains(PawnColor.yellow)) {
+            //Pionek2
+            ImageView Pionek2 = new ImageView();
+            Image Pionek2Image = new Image("file:../../assets/PIONEK2.png");
+            Pionek2.setImage(Pionek2Image);
+            Pionek2.setTranslateY(284);
+            Pionek2.setTranslateX(-50);
+
+            //Przycisk do pionka 2
+
+            Button button2 = new Button("");
+            button2.getStyleClass().add("pionki");
+            button2.setTranslateY(284);
+            button2.setTranslateX(-50);
+            button2.setOnAction(event -> {
+                MenuController.onPawnButtonClick(textField.getText(), PawnColor.yellow);
+            });
+
+            root.getChildren().addAll(Pionek2, button2);
+        }
+
+        if(colors.contains(PawnColor.green)) {
+            //Pionek3
+            ImageView Pionek3 = new ImageView();
+            Image Pionek3Image = new Image("file:../../assets/PIONEK3.png");
+            Pionek3.setImage(Pionek3Image);
+            Pionek3.setTranslateY(284);
+            Pionek3.setTranslateX(120);
+
+            //Przycisk do pionka 3
+
+            Button button3 = new Button("");
+            button3.getStyleClass().add("pionki");
+            button3.setTranslateY(284);
+            button3.setTranslateX(120);
+            button3.setOnAction(event -> {
+                MenuController.onPawnButtonClick(textField.getText(), PawnColor.green);
+            });
+
+            root.getChildren().addAll(Pionek3, button3);
+        }
+
+        if(colors.contains(PawnColor.red)) {
+            //Pionek4
+            ImageView Pionek4 = new ImageView();
+            Image Pionek4Image = new Image("file:../../assets/PIONEK4.png");
+            Pionek4.setImage(Pionek4Image);
+            Pionek4.setTranslateY(284);
+            Pionek4.setTranslateX(290);
+
+            //Przycisk do pionka 4
+
+            Button button4 = new Button("");
+            button4.getStyleClass().add("pionki");
+            button4.setTranslateY(284);
+            button4.setTranslateX(290);
+            button4.setOnAction(event -> {
+                MenuController.onPawnButtonClick(textField.getText(), PawnColor.red);
+            });
+
+            root.getChildren().addAll(Pionek4, button4);
+        }
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());

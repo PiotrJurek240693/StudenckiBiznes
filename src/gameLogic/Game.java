@@ -120,6 +120,17 @@ public class Game implements Serializable {
         Game.players = players;
     }
 
+    public static ArrayList<PawnColor> availableColors(){
+        ArrayList<PawnColor> output = new ArrayList<>();
+        output.add(PawnColor.yellow);
+        output.add(PawnColor.red);
+        output.add(PawnColor.green);
+        output.add(PawnColor.blue);
+        for (Player player : players) {
+            output.remove(player.getPawn().getColor());
+        }
+        return output;
+    }
 
     public static boolean isStarted() {
         return started;

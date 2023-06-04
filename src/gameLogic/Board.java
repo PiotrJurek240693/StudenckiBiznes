@@ -63,18 +63,6 @@ public class Board implements Serializable {
         }
     }
 
-    private boolean isDouble(int[] dices) {
-        boolean isDouble = false;
-        for (int i = 0; i < dices.length - 1; i++) {
-            for (int j = i + 1; j < dices.length; j++) {
-                if (dices[i] == dices[j]) {
-                    isDouble = true;
-                }
-            }
-        }
-        return isDouble;
-    }
-
     private void handleCardDrawing(TypesOfSqueres type) {
         if (type == STUDENT_CASH) {
             Card card = studentCash.drawCard();

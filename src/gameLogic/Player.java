@@ -1,7 +1,10 @@
 package gameLogic;
 
+import gui.DecisionButtonsShower;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Player implements Serializable {
@@ -13,7 +16,7 @@ public class Player implements Serializable {
     private boolean isOnErasmus = false;
     private boolean hasElectricDeficiency = false;
 
-    private ArrayList<Integer> dices = new ArrayList<Integer>(GameInfo.INITIAL_NUMBER_OF_DICES);
+    private ArrayList<Integer> dices;
     private int numberOfDoublets = 0;
     private static Random randomGenerator = new Random();
     private String nick;
@@ -24,6 +27,10 @@ public class Player implements Serializable {
         }
         this.nick = nick;
         pawn = new Pawn(color);
+        dices = new ArrayList<>();
+        for(int i = 0; i < GameInfo.INITIAL_NUMBER_OF_DICES; i++){
+            dices.add(0);
+        }
     }
 
     public String generateNick() {
@@ -82,8 +89,8 @@ public class Player implements Serializable {
     }
 
     public  ArrayList<Integer> rollDices(){
-        for(Integer dice : dices){
-            dice = randomGenerator.nextInt() / 6 + 1;
+        for(int i = 0; i < dices.size(); i++){
+            dices.set(i, randomGenerator.nextInt(6) + 1);
         }
         if(checkDoubles()) {
             numberOfDoublets++;
@@ -96,7 +103,7 @@ public class Player implements Serializable {
 
     private boolean checkDoubles() {
         for(int i = 1; i < dices.size(); i++) {
-            if(dices.get(i) != dices.get(i - 1)) {
+            if(!Objects.equals(dices.get(i), dices.get(i - 1))) {
                 return false;
             }
         }
@@ -104,10 +111,7 @@ public class Player implements Serializable {
     }
 
     private boolean checkTooMuchDoubles() {
-        if(numberOfDoublets >= 3){
-            return true;
-        }
-        return false;
+        return numberOfDoublets >= 3;
     }
 
     private void goToDante(int time) {
@@ -119,8 +123,61 @@ public class Player implements Serializable {
         pawn.getToSquare(squareNumber);
     }
 
+    public void conditionalMove(int shift) {
+        int startPosition = pawn.getPosition();
+        pawn.move(shift);
+        if(startPosition > pawn.getPosition()){
+            giveMoney(GameInfo.START_SQUARE_ADDITION);
+        }
+    }
+
+    public void conditionalMove() {
+        int shift = 0;
+        for (int dice : dices) {
+            shift += dice;
+            System.out.println(dice);
+        }
+
+        System.out.println("Shift: " + shift);
+        int startPosition = pawn.getPosition();
+        pawn.move(shift);
+        if(startPosition > pawn.getPosition()){
+            giveMoney(GameInfo.START_SQUARE_ADDITION);
+        }
+    }
+
     public boolean checkIfCanTakeMoney(int amount) {
         return valueOfProperties(ownedProperties()) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
+    }
+
+    public void makeDecision(DecisionType type){
+     /*   switch(type){
+            case RoundStart:
+                if(inDante > 0){
+                    if(hasCardChance){
+                        DecisionButtonsShower.showInDanteDecisionButtons(true);
+                    }
+                    else{
+                        DecisionButtonsShower.showInDanteDecisionButtons(false);
+                    }
+                }
+                else{
+                    DecisionButtonsShower.showRoundStartDecisionButtons();
+                }
+                break;
+            case DrawCard:
+                DecisionButtonsShower.showBuyDecisionButtons();
+                break;
+            case Buy:
+                DecisionButtonsShower.showBuyDecisionButtons();
+                break;
+            case Pay:
+                DecisionButtonsShower.showPayDecisionButtons();
+                break;
+            case EndRound:
+                DecisionButtonsShower.showEndRoundDecisionButtons();
+                break;
+        }*/
     }
 
     public int getPosition() {
