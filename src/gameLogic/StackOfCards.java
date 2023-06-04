@@ -1,15 +1,17 @@
 package gameLogic;
+import java.io.Serializable;
 import java.util.*;
 
 import gameLogic.cards.*;
 
-public class StackOfCards
+public class StackOfCards implements Serializable
 {
     private List<Card> deck;
     private List<Card> usedCards;
 
     public void initStackOfCardsChance()
     {
+        deck = new ArrayList<>();
         deck.add(new Card_PP2());
         deck.add(new Card_Condition());
         deck.add(new Card_ElectricDeficiency());
@@ -23,6 +25,7 @@ public class StackOfCards
 
     public void initStackOfCardsStudentCash()
     {
+        deck = new ArrayList<>();
         deck.add(new Card_Birthday());
         deck.add(new Card_Busted());
         deck.add(new Card_Connections());

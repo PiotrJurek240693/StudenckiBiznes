@@ -1,8 +1,10 @@
 package gameLogic;
 
+import java.io.Serializable;
+
 import static gameLogic.TypesOfSqueres.*;
 
-public class Square {
+public class Square implements Serializable {
 
     private TypesOfSqueres type;
     private String name;

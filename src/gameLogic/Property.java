@@ -1,13 +1,18 @@
 package gameLogic;
 
-public class Property extends Square {
-    public static final int NO_ONE = -1;
+import java.io.Serializable;
+
+public class Property extends Square implements Serializable {
     public static final int MAX_UPGRADE = 5;
+
     private int price;
     private int upgradePrice;
-    private int ownerIndex;
+    private Player owner;
     private boolean mortgaged;
     private int upgrades;
+
+    private int stopPrices[];
+
     public boolean isMortgaged() {
         return mortgaged;
     }
@@ -24,12 +29,11 @@ public class Property extends Square {
         calculateNewFee();
     }
 
-    public int mortgagePrice()
-    {
+    public int mortgagePrice() {
         return (int) (0.5 * price);
     }
-    public int mortgageFee()
-    {
+
+    public int mortgageFee() {
         return (int) (0.55 * price);
     }
 
@@ -46,79 +50,79 @@ public class Property extends Square {
         return upgradePrice;
     }
 
-    public int getOwnerIndex() {
-        return ownerIndex;
+    public Player getOwner() {
+        return owner;
     }
 
-    public void setOwnerIndex(int ownerIndex) {
-        this.ownerIndex = ownerIndex;
-        if(ownerIndex==NO_ONE) {
-            upgrades=0;
-            mortgaged =false;
+    public void setOwner(Player player) {
+        owner = player;
+        if (owner == null) {
+            upgrades = 0;
+            mortgaged = false;
         }
         calculateNewFee();
     }
 
-    public Property(String name,TypesOfSqueres type, int price, int upgradePrice,int faculty)
-    {
+    public Property(String name, TypesOfSqueres type, int price, int upgradePrice, int faculty, int stopPrices[]) {
         super(name, type, 0);
-        this.price=price;
-        this.upgradePrice=upgradePrice;
-        ownerIndex = NO_ONE;
-        upgrades=0;
-        mortgaged=false;
-        this.faculty=faculty;
+        this.price = price;
+        this.upgradePrice = upgradePrice;
+        owner = null;
+        upgrades = 0;
+        mortgaged = false;
+        this.faculty = faculty;
+        this.stopPrices = stopPrices;
     }
-    private void calculateNewFee()
-    {
-        if(mortgaged) {
-            fee=0;
-        } else if (ownerIndex==NO_ONE) {
-            fee=0;
-        } else if (upgrades==0) {
-            fee=(int) (0.1 * price);
+
+    private void calculateNewFee() {
+        if (mortgaged) {
+            fee = 0;
+        } else if (owner == null) {
+            fee = 0;
+        } else if (upgrades == 0) {
+            fee = (int) (0.1 * price);
         } else {
-            fee=upgrades*price;
+            fee = upgrades * price;
         }
 
     }
 
-    public int valueOfProperty()
-    {
+    public int valueOfProperty() {
         // TODO: upewnić się jak ma działać funkcja. aktualnie uwzględnia 50% wartość terenu+ulepszeń
-        int sum=(upgradePrice*upgrades+price)/2;
+        int sum = (upgradePrice * upgrades + price) / 2;
         return sum;
     }
 
-    public void cleanProperty()
-    {
-        fee=0;
-        ownerIndex = NO_ONE;
-        upgrades=0;
-        mortgaged=false;
+    public void cleanProperty() {
+        fee = 0;
+        owner = null;
+        upgrades = 0;
+        mortgaged = false;
     }
-    public int sellProperty()
-    {
-        int value=valueOfProperty();
+
+    public int sellProperty() {
+        int value = valueOfProperty();
         cleanProperty();
         return value;
     }
 
-    public boolean hasAuditorium()
-    {
-        if(upgrades== MAX_UPGRADE)
+    public boolean hasAuditorium() {
+        if (upgrades == MAX_UPGRADE)
             return true;
         return false;
     }
 
-    public void destroyAuditorium()
-    {
-        if(upgrades==MAX_UPGRADE)
-        {
-            upgrades=4;
+    public void destroyAuditorium() {
+        if (upgrades == MAX_UPGRADE) {
+            upgrades = 4;
         }
     }
 
+    public int[] getStopPrices() {
+        return stopPrices;
+    }
 
-
+    public int getPrice() {
+        return price;
+    }
 }

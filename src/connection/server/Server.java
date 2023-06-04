@@ -38,9 +38,17 @@ public class Server extends Thread {
         System.out.println("Serwer zakończył działanie.");
     }
 
-    public void sendMessage(String message) {
+    public void sendMessage(Object message) throws IOException {
         for (ClientHandler ch : clientHandlers) {
             ch.sendMessage(message);
+        }
+    }
+
+    public void forwardMessage(Object message, ClientHandler sender) throws IOException {
+        for (ClientHandler ch : clientHandlers) {
+            if(ch != sender){
+                ch.sendMessage(message);
+            }
         }
     }
 

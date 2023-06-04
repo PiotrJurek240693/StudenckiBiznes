@@ -4,103 +4,155 @@ import connection.client.Client;
 import connection.server.Server;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
-    static private Board board;
+public class Game implements Serializable {
 
-    private Server server;
-    private Client client;
-    private void init(int howManyPlayers)
-    {
-        board=new Board(howManyPlayers);
-    }
-    public Game(GameType gameType, String serverIP) throws IOException {
-        init(4);
-        if(gameType == GameType.MultiplayerClient){
-            client = new Client(serverIP, 8888);
-        }
-        else if(gameType == GameType.MultiplayerHost){
-            server = new Server();
-        }
+    private static Board board;
+    private static int maxPlayers;
+    private static int activePlayerIndex;
+    private static ArrayList<Player> players;
+    private static Server server;
+    private static Client client;
+    private static boolean started;
+    private static GameType gameType;
+
+    public static void init(String serverIP) throws IOException {
+        client = new Client(serverIP, 8888);
+        Game.gameType = GameType.MultiplayerClient;
     }
 
-    public Game(GameType gameType) throws IOException
-    {
-        init(4);
-        if(gameType == GameType.MultiplayerClient){
+    public static void init(GameType gameType, int howManyPlayers) throws IOException {
+        initHelper(howManyPlayers);
+        if (gameType == GameType.MultiplayerClient) {
             throw new IllegalArgumentException();
-        }
-        else if(gameType == GameType.MultiplayerHost){
+        } else if (gameType == GameType.MultiplayerHost) {
             server = new Server();
+        }
+        Game.gameType = gameType;
+    }
+
+    private static void initHelper(int howManyPlayers) {
+        maxPlayers = howManyPlayers;
+        players = new ArrayList<>();
+        activePlayerIndex = 0;
+        board = new Board();
+        started = false;
+    }
+
+    public static void addPlayer(Player player) {
+        if (players.size() < maxPlayers) {
+            players.add(player);
         }
     }
 
-    public void closeGame(){
-        if(server != null){
+    public static ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public static int getNumberOfPlayers() {
+        return players.size();
+    }
+
+    public static void nextRound() {
+        activePlayerIndex++;
+        if (activePlayerIndex >= players.size()) {
+            activePlayerIndex = 0;
+        }
+        for(Player player : players){
+            player.setNumberOfDoublets(0);
+        }
+    }
+
+    public static void removePlayerAndCleanProperties() {
+        // TODO: wysłać i wyświetlić pola z powrotem do kupienia, gracz wyszarzony
+    }
+
+    public static void closeGame() {
+        if (server != null) {
             server.close();
         }
-        if(client != null){
+        if (client != null) {
             client.close();
         }
     }
 
-    public static Board getBoard()
-    {
+    public static Board getBoard() {
         return board;
     }
-    public static void pay(int from,int to,int amount)
-    {
-        int moneyPaid=amount;
-        if(from!=Board.BANK)
-        {
-            moneyPaid=Board.getPlayers().get(from).takeMoney(amount);
-        }
-        if(to!=Board.BANK)
-        {
-            Board.getPlayers().get(to).giveMoney(moneyPaid);
-        }
-        // TODO: wysłać i wyświetlić nowy stan gotówki
+
+    public static void pay(Player from, Player to, int amount) {
+        players.get(activePlayerIndex).takeMoney(amount);
+        players.get(activePlayerIndex).giveMoney(amount);
     }
 
-    public static Player choosePlayer(ArrayList<Player> availablePlayers)
-    {
-        // TODO: funkcja przekazuje graczy, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
-        // Gracza wybierajacego nie ma wsrod availablePlayers
-        return availablePlayers.get(0);
-    }
-    public static Property chooseProperty(ArrayList<Property> availableProperties, int amountToGet)
-    {
-        // TODO: funkcja przekazuje Property gracza, sposrod ktorych ma zostac wybrany jeden. Wyboru dokonuje gracz, ktory ma obecnie ture
-        // do funkcji przekazuje rowniez sume, ktora jest potrzebna do wyplacenia (dla podgladu dla gracza)
-        return null;
-    }
-    public static int chooseNumber()
-    {
-        // TODO: funkcja pobiera od gracza wartosc od -3 do 3
-        return 0;
-    }
-    public static void offerPlayerBuyingOrAuction()
-    {
-        // TODO: zaoferować kupno posiadłości lub licytacje
-    }
-    public static void offerPlayerPayingForECTS(int time)
-    {
-        // TODO: wyświetlić graczowi propozycje opłacenia ECTS w zależności od pozostałego czasu
+    public static Player getPlayer(int playerIndex) {
+        return players.get(playerIndex);
     }
 
-    public static void offerUpgrading(ArrayList<Property> upgradeable)
-    {
-        //metoda przyjmuje liste posiadanych ulepszalnych pól gracza (tylko jeśli ma cały wydział)
-        //UWAGA ta metoda musi zweryfikować pole przy pomocy checkIfUpgradingIsCorrect(upgradeable,toUpgrade)
-        // TODO: zapytać gracza co (czy) chce upelszyć z jego posiadłości - upgradeable
+    public static int getMaxPlayers() {
+        return maxPlayers;
     }
-    private static boolean checkIfUpgradingIsCorrect(ArrayList<Property> upgradeable,Property toUpgrade)
-    {
-        // TODO:
-        //      -w jednym ruchu student może zrobić tylko 1 ulepszenie na jedno pole
-        //      -wszystkie instytuty i katedry w danym wydziale mogą mieć różnice ilości sali maksymalnie o 1 między sobą
-        return true;
+
+    public static Player getActivePlayer() {
+        return players.get(activePlayerIndex);
     }
+
+    public static int getActivePlayerIndex() {
+        return activePlayerIndex;
+    }
+
+    public static Server getServer() {
+        return server;
+    }
+
+    public static void setBoard(Board board) {
+        Game.board = board;
+    }
+
+    public static void setMaxPlayers(int maxPlayers) {
+        Game.maxPlayers = maxPlayers;
+    }
+
+    public static void setActivePlayerIndex(int activePlayerIndex) {
+        Game.activePlayerIndex = activePlayerIndex;
+    }
+
+    public static void setPlayers(ArrayList<Player> players) {
+        Game.players = players;
+    }
+
+    public static ArrayList<PawnColor> availableColors(){
+        ArrayList<PawnColor> output = new ArrayList<>();
+        output.add(PawnColor.yellow);
+        output.add(PawnColor.red);
+        output.add(PawnColor.green);
+        output.add(PawnColor.blue);
+        for (Player player : players) {
+            output.remove(player.getPawn().getColor());
+        }
+        return output;
+    }
+
+    public static boolean isStarted() {
+        return started;
+    }
+
+    public static void start() {
+        for(int i = players.size(); i < maxPlayers; i++){
+            players.add(new Bot("", PawnColor.yellow));
+        }
+        Game.started = true;
+    }
+
+    public static GameType getGameType() {
+        return gameType;
+    }
+
+    public static void setGameType(GameType gameType) {
+        Game.gameType = gameType;
+    }
+
 }
 
