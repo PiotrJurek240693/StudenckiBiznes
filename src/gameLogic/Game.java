@@ -60,6 +60,9 @@ public class Game implements Serializable {
         if (activePlayerIndex >= players.size()) {
             activePlayerIndex = 0;
         }
+        for(Player player : players){
+            player.setNumberOfDoublets(0);
+        }
     }
 
     public static void removePlayerAndCleanProperties() {

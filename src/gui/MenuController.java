@@ -97,10 +97,17 @@ public class MenuController {
 
     public static void onDicesButtonClick() {
         Player player = Game.getActivePlayer();
+        while(player.getInDante() > 0){
+            Game.nextRound();
+            player = Game.getActivePlayer();
+        }
         player.rollDices();
         player.conditionalMove();
         //Dices.showDices(dices);
         PawnsShower.showPawns();
         PlayersInfoShower.showPlayersInfo();
+        if(!player.checkDoubles() || player.getInDante() > 0) {
+            Game.nextRound();
+        }
     }
 }

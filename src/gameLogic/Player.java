@@ -17,6 +17,7 @@ public class Player implements Serializable {
     private boolean hasElectricDeficiency = false;
 
     private ArrayList<Integer> dices;
+
     private int numberOfDoublets = 0;
     private static Random randomGenerator = new Random();
     private String nick;
@@ -101,7 +102,7 @@ public class Player implements Serializable {
         return dices;
     }
 
-    private boolean checkDoubles() {
+    public boolean checkDoubles() {
         for(int i = 1; i < dices.size(); i++) {
             if(!Objects.equals(dices.get(i), dices.get(i - 1))) {
                 return false;
@@ -259,5 +260,9 @@ public class Player implements Serializable {
 
     public ArrayList<Integer> getDices() {
         return dices;
+    }
+
+    public void setNumberOfDoublets(int numberOfDoublets) {
+        this.numberOfDoublets = numberOfDoublets;
     }
 }
