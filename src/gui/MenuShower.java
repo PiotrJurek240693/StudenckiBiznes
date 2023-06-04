@@ -637,9 +637,6 @@ public class MenuShower {
         Saldo1.setTranslateX(-626);
         Saldo1.setTranslateY(-330);
 
-
-
-
         //Saldo gracz czerwony
         ImageView SaldoCzerwony = new ImageView();
         Image SaldoCzerwonyImage = new Image("file:../../assets/SALDOCZERWONY.png");
@@ -658,9 +655,6 @@ public class MenuShower {
         Saldo2.getStyleClass().add("saldo_red");
         Saldo2.setTranslateX(-278);
         Saldo2.setTranslateY(-330);
-
-
-
 
         //Saldo gracz zolty
         ImageView SaldoZolty = new ImageView();
@@ -726,175 +720,6 @@ public class MenuShower {
         button1.getStyleClass().add("przyciski_losowania");
         button1.setTranslateX(-600);
         button1.setTranslateY(70);
-//
-////        ImageView Szansa = new ImageView();
-////        Image SzansaImage = new Image("file:../../assets/Karta_szansa.png");
-////        Szansa.setImage(SzansaImage);
-////        Szansa.setFitHeight(500);
-////        Szansa.setFitWidth(800);
-////        Szansa.setTranslateY(-30);
-////        Szansa.setTranslateX(30);
-//
-//        //void drawCard(Property property)
-//        //{
-//            //Karta
-//            Rectangle karta = new Rectangle(500,800);
-//            karta.getStyleClass().add("karta");
-//            karta.setTranslateX(30);
-//            karta.setTranslateY(-30);
-//
-//            //Pasek do karty
-//            Rectangle pasek = new Rectangle(500,200);
-//            pasek.getStyleClass().add("pasek");
-//            pasek.setTranslateX(30);
-//            pasek.setTranslateY(-330);
-//
-//
-//            //Nazwa
-//            Label Nazwa = new Label("Katedra Pojazdów");
-//            Nazwa.getStyleClass().add("nazwa");
-//            Nazwa.setTranslateX(30);
-//            Nazwa.setTranslateY(-380);
-//
-//            //Tytuł właśności
-//            Label TytulWlasnosci = new Label("TYTUL WLASNOSCI");
-//            TytulWlasnosci.getStyleClass().add("tytul_wlasnosci_WEEIA");
-//            TytulWlasnosci.setTranslateX(35);
-//            TytulWlasnosci.setTranslateY(-200);
-//
-//            //CZYNSZ
-//            Label Czynsz = new Label("CZYNSZ - teren niezabudowany");
-//            Czynsz.getStyleClass().add("tresc_WEEIA");
-//            Czynsz.setTranslateX(-32);
-//            Czynsz.setTranslateY(-150);
-//
-//            //CZYNSZ - Cena
-//            Label CzynszCena = new Label("350k$");
-//            CzynszCena.getStyleClass().add("tresc_WEEIA");
-//            CzynszCena.setTranslateX(240);
-//            CzynszCena.setTranslateY(-150);
-//
-//            //Z jednym akademikiem
-//            Label Jeden_akademik = new Label("Z jednym akademikiem");
-//            Jeden_akademik.getStyleClass().add("tresc_WEEIA");
-//            Jeden_akademik.setTranslateX(-35);
-//            Jeden_akademik.setTranslateY(-110);
-//
-//            //Z jednym akademikiem - cena
-//            Label JedenAkademikCena = new Label("1,75M$");
-//            JedenAkademikCena.getStyleClass().add("tresc_WEEIA");
-//            JedenAkademikCena.setTranslateX(240);
-//            JedenAkademikCena.setTranslateY(-110);
-//
-//            //Z dwoma akademikami
-//            Label Dwa_akademiki = new Label("Z dwoma akademikami");
-//            Dwa_akademiki.getStyleClass().add("tresc_WEEIA");
-//            Dwa_akademiki.setTranslateX(-34);
-//            Dwa_akademiki.setTranslateY(-70);
-//
-//            //Z dwoma akademikami cena
-//            Label DwaAkademikiCena = new Label("5M$");
-//            DwaAkademikiCena.getStyleClass().add("tresc_WEEIA");
-//            DwaAkademikiCena.setTranslateX(240);
-//            DwaAkademikiCena.setTranslateY(-70);
-//
-//            //Z trzema akademikami
-//            Label TrzyAkademiki = new Label("Z trzema akademikami");
-//            TrzyAkademiki.getStyleClass().add("tresc_WEEIA");
-//            TrzyAkademiki.setTranslateX(-34);
-//            TrzyAkademiki.setTranslateY(-30);
-//
-//            //Z trzema akademikami cena
-//            Label TrzyAkademikiCena = new Label("11M$");
-//            TrzyAkademikiCena.getStyleClass().add("tresc_WEEIA");
-//            TrzyAkademikiCena.setTranslateX(240);
-//            TrzyAkademikiCena.setTranslateY(-30);
-//
-//            //Z czterema akademikami
-//            Label CzteryAkademiki = new Label("Z czterema akademikami");
-//            CzteryAkademiki.getStyleClass().add("tresc_WEEIA");
-//            CzteryAkademiki.setTranslateX(-22);
-//            CzteryAkademiki.setTranslateY(10);
-//
-//            //Z czterema akademikami cena
-//            Label CzteryAkademikamiCena = new Label("13M$");
-//            CzteryAkademikamiCena.getStyleClass().add("tresc_WEEIA");
-//            CzteryAkademikamiCena.setTranslateX(240);
-//            CzteryAkademikamiCena.setTranslateY(10);
-//
-//
-//
-//            //CZYNSZ Z Akademikiem PREMIUM
-//            Label CzynszZAkademikiemPREMIUM = new Label("CZYNSZ Z akademikiem PREMIUM");
-//            CzynszZAkademikiemPREMIUM.getStyleClass().add("tresc_WEEIA");
-//            CzynszZAkademikiemPREMIUM.setTranslateX(-30);
-//            CzynszZAkademikiemPREMIUM.setTranslateY(50);
-//
-//            //CZYNSZ Z Akademikiem PREMIUM Cena
-//            Label CzynszZAkademikiemPREMIUMCena = new Label("15M$");
-//            CzynszZAkademikiemPREMIUMCena.getStyleClass().add("tresc_WEEIA");
-//            CzynszZAkademikiemPREMIUMCena.setTranslateX(240);
-//            CzynszZAkademikiemPREMIUMCena.setTranslateY(50);
-//
-//            Label Linia1 = new Label("-------------------------------------------------------");
-//            Linia1.getStyleClass().add("tresc_WEEIA");
-//            Linia1.setTranslateX(30);
-//            Linia1.setTranslateY(70);
-//
-//            //Formulka
-//            Label Formulka = new Label("Jezeli gracz posiada wszystkie dzialki w\ndanej grupie koloru, za niezabudowane\ndzialki pobiera podwojny czynsz");
-//            Formulka.getStyleClass().add("tresc_WEEIA");
-//            Formulka.setTranslateX(30);
-//            Formulka.setTranslateY(130);
-//
-//            Label Linia2 = new Label("-------------------------------------------------------");
-//            Linia2.getStyleClass().add("tresc_WEEIA");
-//            Linia2.setTranslateX(30);
-//            Linia2.setTranslateY(185);
-//
-//            //Cena akademika
-//            Label Cena_akademika = new Label("Cena akademika");
-//            Cena_akademika.getStyleClass().add("tresc_WEEIA");
-//            Cena_akademika.setTranslateX(-115);
-//            Cena_akademika.setTranslateY(215);
-//
-//            //Cena akademika Cena
-//            Label CenaAkademikaCena = new Label("2M$ za kazdy");
-//            CenaAkademikaCena.getStyleClass().add("tresc_WEEIA");
-//            CenaAkademikaCena.setTranslateX(200);
-//            CenaAkademikaCena.setTranslateY(215);
-//
-//            //Cena akademika PREMIUM
-//            Label CenaAkademikaPREMIUM = new Label("Cena akademikaPREMIUM");
-//            CenaAkademikaPREMIUM.getStyleClass().add("tresc_WEEIA");
-//            CenaAkademikaPREMIUM.setTranslateX(-68);
-//            CenaAkademikaPREMIUM.setTranslateY(250);
-//
-//            //Cena akademika PREMIUM Cena
-//            Label CenaAkademikaPREMIUMCena = new Label("10M$");
-//            CenaAkademikaPREMIUMCena.getStyleClass().add("tresc_WEEIA");
-//            CenaAkademikaPREMIUMCena.setTranslateX(200);
-//            CenaAkademikaPREMIUMCena.setTranslateY(250);
-//
-//            //Wartosc hipoteczna
-//            Label WartoscHipoteczna = new Label("Wartosc hipoteczna dzialki");
-//            WartoscHipoteczna.getStyleClass().add("tresc_WEEIA");
-//            WartoscHipoteczna.setTranslateX(-45);
-//            WartoscHipoteczna.setTranslateY(285);
-//
-//            //Wartosc hipoteczna Cena
-//            Label WartoscHipotecznaCena = new Label("1,75M$");
-//            WartoscHipotecznaCena.getStyleClass().add("tresc_WEEIA");
-//            WartoscHipotecznaCena.setTranslateX(200);
-//            WartoscHipotecznaCena.setTranslateY(285);
-//
-//            //Cena
-//            Label Cena = new Label("260M$");
-//            Cena.getStyleClass().add("cena_WEEIA");
-//            Cena.setTranslateX(30);
-//            Cena.setTranslateY(335);
-        //}
-
 
         StackPane root = new StackPane();
         root.getChildren().addAll(Background, Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
@@ -902,12 +727,7 @@ public class MenuShower {
                 Wtmiwt3, Biblioteka, Bais1, Bais2, Szansa2, ParkingC, Bais3, Ipios1, Ipios2, Ipios3, CentrumSportu, PoraNaDante,
                 Warunek, Weeia1, Szansa3, ParkingRektora, Ftims3, Kasastudencka3, Ftims1, Ftims2,SaldoNiebieski,
                 SaldoCzerwony, SaldoZolty, SaldoZielony, Gracz1, Gracz2, Gracz3, Gracz4, Saldo1, Saldo2, Saldo3, Saldo4,
-                Kostka1, Kostka2, button1)
-//                Cena,WartoscHipotecznaCena,WartoscHipoteczna,CenaAkademikaPREMIUM,CenaAkademikaPREMIUMCena,Cena_akademika,
-//                CenaAkademikaCena,Linia1,Linia1,Formulka,CzynszZAkademikiemPREMIUMCena,CzynszZAkademikiemPREMIUM,
-//                CzteryAkademiki,CzteryAkademikamiCena,TrzyAkademiki,TrzyAkademikiCena,Dwa_akademiki,DwaAkademikiCena,
-//                Jeden_akademik,JedenAkademikCena,Czynsz,CzynszCena,TytulWlasnosci,Nazwa,pasek,karta)
-        ;
+                Kostka1, Kostka2, button1);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
@@ -1013,10 +833,6 @@ public class MenuShower {
         button4.setTranslateX(290);
         button4.setOnAction(event -> {MenuController.onPawnButtonClick();});
 
-
-
-
-
         // Tworzenie kontenera StackPane i dodawanie MenuPowitalne oraz przycisków do niego
         StackPane root = new StackPane();
         root.getChildren().addAll(MenuPowitalne, textField, button5, button6, Pionek1, Pionek2, Pionek3, Pionek4, button1, button2,
@@ -1030,5 +846,162 @@ public class MenuShower {
         ScreenSettings.primaryStage.show();
     }
 
-    
-}
+    void drawCard(Property property)
+    {
+        //Karta
+        Rectangle karta = new Rectangle(500,800);
+        karta.getStyleClass().add("karta");
+        karta.setTranslateX(30);
+        karta.setTranslateY(-30);
+
+        //Pasek do karty
+        Rectangle pasek = new Rectangle(500,200);
+        pasek.getStyleClass().add("pasek");
+        pasek.setTranslateX(30);
+        pasek.setTranslateY(-330);
+
+
+        //Nazwa
+        Label Nazwa = new Label("Katedra Pojazdów");
+        Nazwa.getStyleClass().add("nazwa");
+        Nazwa.setTranslateX(30);
+        Nazwa.setTranslateY(-380);
+
+        //Tytuł właśności
+        Label TytulWlasnosci = new Label("TYTUL WLASNOSCI");
+        TytulWlasnosci.getStyleClass().add("tytul_wlasnosci_WEEIA");
+        TytulWlasnosci.setTranslateX(35);
+        TytulWlasnosci.setTranslateY(-200);
+
+        //CZYNSZ
+        Label Czynsz = new Label("CZYNSZ - teren niezabudowany");
+        Czynsz.getStyleClass().add("tresc_WEEIA");
+        Czynsz.setTranslateX(-32);
+        Czynsz.setTranslateY(-150);
+
+        //CZYNSZ - Cena
+        Label CzynszCena = new Label("350k$");
+        CzynszCena.getStyleClass().add("tresc_WEEIA");
+        CzynszCena.setTranslateX(240);
+        CzynszCena.setTranslateY(-150);
+
+        //Z jednym akademikiem
+        Label Jeden_akademik = new Label("Z jednym akademikiem");
+        Jeden_akademik.getStyleClass().add("tresc_WEEIA");
+        Jeden_akademik.setTranslateX(-35);
+        Jeden_akademik.setTranslateY(-110);
+
+        //Z jednym akademikiem - cena
+        Label JedenAkademikCena = new Label("1,75M$");
+        JedenAkademikCena.getStyleClass().add("tresc_WEEIA");
+        JedenAkademikCena.setTranslateX(240);
+        JedenAkademikCena.setTranslateY(-110);
+
+        //Z dwoma akademikami
+        Label Dwa_akademiki = new Label("Z dwoma akademikami");
+        Dwa_akademiki.getStyleClass().add("tresc_WEEIA");
+        Dwa_akademiki.setTranslateX(-34);
+        Dwa_akademiki.setTranslateY(-70);
+
+        //Z dwoma akademikami cena
+        Label DwaAkademikiCena = new Label("5M$");
+        DwaAkademikiCena.getStyleClass().add("tresc_WEEIA");
+        DwaAkademikiCena.setTranslateX(240);
+        DwaAkademikiCena.setTranslateY(-70);
+
+        //Z trzema akademikami
+        Label TrzyAkademiki = new Label("Z trzema akademikami");
+        TrzyAkademiki.getStyleClass().add("tresc_WEEIA");
+        TrzyAkademiki.setTranslateX(-34);
+        TrzyAkademiki.setTranslateY(-30);
+
+        //Z trzema akademikami cena
+        Label TrzyAkademikiCena = new Label("11M$");
+        TrzyAkademikiCena.getStyleClass().add("tresc_WEEIA");
+        TrzyAkademikiCena.setTranslateX(240);
+        TrzyAkademikiCena.setTranslateY(-30);
+
+        //Z czterema akademikami
+        Label CzteryAkademiki = new Label("Z czterema akademikami");
+        CzteryAkademiki.getStyleClass().add("tresc_WEEIA");
+        CzteryAkademiki.setTranslateX(-22);
+        CzteryAkademiki.setTranslateY(10);
+
+        //Z czterema akademikami cena
+        Label CzteryAkademikamiCena = new Label("13M$");
+        CzteryAkademikamiCena.getStyleClass().add("tresc_WEEIA");
+        CzteryAkademikamiCena.setTranslateX(240);
+        CzteryAkademikamiCena.setTranslateY(10);
+
+
+
+        //CZYNSZ Z Akademikiem PREMIUM
+        Label CzynszZAkademikiemPREMIUM = new Label("CZYNSZ Z akademikiem PREMIUM");
+        CzynszZAkademikiemPREMIUM.getStyleClass().add("tresc_WEEIA");
+        CzynszZAkademikiemPREMIUM.setTranslateX(-30);
+        CzynszZAkademikiemPREMIUM.setTranslateY(50);
+
+        //CZYNSZ Z Akademikiem PREMIUM Cena
+        Label CzynszZAkademikiemPREMIUMCena = new Label("15M$");
+        CzynszZAkademikiemPREMIUMCena.getStyleClass().add("tresc_WEEIA");
+        CzynszZAkademikiemPREMIUMCena.setTranslateX(240);
+        CzynszZAkademikiemPREMIUMCena.setTranslateY(50);
+
+        Label Linia1 = new Label("-------------------------------------------------------");
+        Linia1.getStyleClass().add("tresc_WEEIA");
+        Linia1.setTranslateX(30);
+        Linia1.setTranslateY(70);
+
+        //Formulka
+        Label Formulka = new Label("Jezeli gracz posiada wszystkie dzialki w\ndanej grupie koloru, za niezabudowane\ndzialki pobiera podwojny czynsz");
+        Formulka.getStyleClass().add("tresc_WEEIA");
+        Formulka.setTranslateX(30);
+        Formulka.setTranslateY(130);
+
+        Label Linia2 = new Label("-------------------------------------------------------");
+        Linia2.getStyleClass().add("tresc_WEEIA");
+        Linia2.setTranslateX(30);
+        Linia2.setTranslateY(185);
+
+        //Cena akademika
+        Label Cena_akademika = new Label("Cena akademika");
+        Cena_akademika.getStyleClass().add("tresc_WEEIA");
+        Cena_akademika.setTranslateX(-115);
+        Cena_akademika.setTranslateY(215);
+
+        //Cena akademika Cena
+        Label CenaAkademikaCena = new Label("2M$ za kazdy");
+        CenaAkademikaCena.getStyleClass().add("tresc_WEEIA");
+        CenaAkademikaCena.setTranslateX(200);
+        CenaAkademikaCena.setTranslateY(215);
+
+        //Cena akademika PREMIUM
+        Label CenaAkademikaPREMIUM = new Label("Cena akademikaPREMIUM");
+        CenaAkademikaPREMIUM.getStyleClass().add("tresc_WEEIA");
+        CenaAkademikaPREMIUM.setTranslateX(-68);
+        CenaAkademikaPREMIUM.setTranslateY(250);
+
+        //Cena akademika PREMIUM Cena
+        Label CenaAkademikaPREMIUMCena = new Label("10M$");
+        CenaAkademikaPREMIUMCena.getStyleClass().add("tresc_WEEIA");
+        CenaAkademikaPREMIUMCena.setTranslateX(200);
+        CenaAkademikaPREMIUMCena.setTranslateY(250);
+
+        //Wartosc hipoteczna
+        Label WartoscHipoteczna = new Label("Wartosc hipoteczna dzialki");
+        WartoscHipoteczna.getStyleClass().add("tresc_WEEIA");
+        WartoscHipoteczna.setTranslateX(-45);
+        WartoscHipoteczna.setTranslateY(285);
+
+        //Wartosc hipoteczna Cena
+        Label WartoscHipotecznaCena = new Label("1,75M$");
+        WartoscHipotecznaCena.getStyleClass().add("tresc_WEEIA");
+        WartoscHipotecznaCena.setTranslateX(200);
+        WartoscHipotecznaCena.setTranslateY(285);
+
+        //Cena
+        Label Cena = new Label("260M$");
+        Cena.getStyleClass().add("cena_WEEIA");
+        Cena.setTranslateX(30);
+        Cena.setTranslateY(335);
+    }
