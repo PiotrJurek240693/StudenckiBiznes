@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 public class Property extends Square implements Serializable {
     public static final int MAX_UPGRADE = 5;
+
     private int price;
     private int upgradePrice;
     private Player owner;
     private boolean mortgaged;
     private int upgrades;
+
+    private int stopPrices[];
 
     public boolean isMortgaged() {
         return mortgaged;
@@ -60,7 +63,7 @@ public class Property extends Square implements Serializable {
         calculateNewFee();
     }
 
-    public Property(String name, TypesOfSqueres type, int price, int upgradePrice, int faculty) {
+    public Property(String name, TypesOfSqueres type, int price, int upgradePrice, int faculty, int stopPrices[]) {
         super(name, type, 0);
         this.price = price;
         this.upgradePrice = upgradePrice;
@@ -68,6 +71,7 @@ public class Property extends Square implements Serializable {
         upgrades = 0;
         mortgaged = false;
         this.faculty = faculty;
+        this.stopPrices = stopPrices;
     }
 
     private void calculateNewFee() {
@@ -114,5 +118,11 @@ public class Property extends Square implements Serializable {
         }
     }
 
+    public int[] getStopPrices() {
+        return stopPrices;
+    }
 
+    public int getPrice() {
+        return price;
+    }
 }

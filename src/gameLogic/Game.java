@@ -15,9 +15,12 @@ public class Game implements Serializable {
     private static ArrayList<Player> players;
     private static Server server;
     private static Client client;
+    private static boolean started;
+    private static GameType gameType;
 
     public static void init(String serverIP) throws IOException {
         client = new Client(serverIP, 8888);
+        Game.gameType = GameType.MultiplayerClient;
     }
 
     public static void init(GameType gameType, int howManyPlayers) throws IOException {
@@ -27,6 +30,7 @@ public class Game implements Serializable {
         } else if (gameType == GameType.MultiplayerHost) {
             server = new Server();
         }
+        Game.gameType = gameType;
     }
 
     private static void initHelper(int howManyPlayers) {
@@ -34,6 +38,7 @@ public class Game implements Serializable {
         players = new ArrayList<>();
         activePlayerIndex = 0;
         board = new Board();
+        started = false;
     }
 
     public static void addPlayer(Player player) {
@@ -114,5 +119,26 @@ public class Game implements Serializable {
     public static void setPlayers(ArrayList<Player> players) {
         Game.players = players;
     }
+
+
+    public static boolean isStarted() {
+        return started;
+    }
+
+    public static void start() {
+        for(int i = players.size(); i < maxPlayers; i++){
+            players.add(new Bot("", PawnColor.yellow));
+        }
+        Game.started = true;
+    }
+
+    public static GameType getGameType() {
+        return gameType;
+    }
+
+    public static void setGameType(GameType gameType) {
+        Game.gameType = gameType;
+    }
+
 }
 

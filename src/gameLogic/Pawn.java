@@ -6,6 +6,14 @@ public class Pawn implements Serializable
 {
     private int position = 0;
 
+    int x = 750, y = 374;
+
+    private PawnColor color;
+
+    Pawn(PawnColor color) {
+        this.color = color;
+    }
+
     public int getPosition(){return position;}
     public int move(int shift)
     {
@@ -24,4 +32,23 @@ public class Pawn implements Serializable
         position=squareIndex;
     }
 
+    public PawnColor getColor() {
+        return color;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void changeX(int x) {
+        this.x += x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void changeY(int y) {
+        this.y += y;
+    }
 }

@@ -5,16 +5,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player implements Serializable {
-    private final Pawn pawn = new Pawn();
+    private final Pawn pawn;
     private int moneyAmount = GameInfo.START_VALUE;
     private int inDante = 0;
     private boolean isBankrupt = false;
     private boolean hasCardChance = false;
     private boolean isOnErasmus = false;
     private boolean hasElectricDeficiency = false;
-    private int howManyDicesToThrow = GameInfo.INITIAL_NUMBER_OF_DICES;
+
+    private ArrayList<Integer> dices = new ArrayList<Integer>(GameInfo.INITIAL_NUMBER_OF_DICES);
+    private int numberOfDoublets = 0;
     private static Random randomGenerator = new Random();
     private String nick;
+
+    public Player(String nick, PawnColor color) {
+        if (nick == null || nick.equals("")) {
+            nick = generateNick();
+        }
+        this.nick = nick;
+        pawn = new Pawn(color);
+    }
 
     public String generateNick() {
         String tempNick = "Student ";
@@ -23,21 +33,9 @@ public class Player implements Serializable {
         return tempNick;
     }
 
-    public Player() {
-        nick = generateNick();
-    }
-
-    public Player(String nick) {
-        if (nick == null || nick.equals("")) {
-            nick = generateNick();
-        }
-        this.nick = nick;
-    }
-
     public String getNick() {
         return nick;
     }
-
 
     public int valueOfProperties(ArrayList<Property> properties) {
         int suma = GameInfo.NONE;
@@ -46,7 +44,6 @@ public class Player implements Serializable {
 
         return suma;
     }
-
 
     public ArrayList<Property> ownedProperties() {
         ArrayList<Property> tempList = new ArrayList<>();
@@ -57,13 +54,11 @@ public class Player implements Serializable {
         return tempList;
     }
 
-
     public void setPosition(int shift) {
         int value;
         value = pawn.move(shift);
         moneyAmount += value;
     }
-
 
     public int takeMoney(int amount) {
         if (!checkIfCanTakeMoney(amount)) {
@@ -86,6 +81,39 @@ public class Player implements Serializable {
         return amount;
     }
 
+    public  ArrayList<Integer> rollDices(){
+        for(Integer dice : dices){
+            dice = randomGenerator.nextInt() / 6 + 1;
+        }
+        if(checkDoubles()) {
+            numberOfDoublets++;
+            if(checkTooMuchDoubles()) {
+                goToDante(3);
+            }
+        }
+        return dices;
+    }
+
+    private boolean checkDoubles() {
+        for(int i = 1; i < dices.size(); i++) {
+            if(dices.get(i) != dices.get(i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkTooMuchDoubles() {
+        if(numberOfDoublets >= 3){
+            return true;
+        }
+        return false;
+    }
+
+    private void goToDante(int time) {
+        inDante += time;
+        unconditionalMove(GameInfo.DANTE_SQUARE_INDEX);
+    }
 
     public void unconditionalMove(int squareNumber) {
         pawn.getToSquare(squareNumber);
@@ -93,10 +121,6 @@ public class Player implements Serializable {
 
     public boolean checkIfCanTakeMoney(int amount) {
         return valueOfProperties(ownedProperties()) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
-    }
-
-    public int getDices() {
-        return howManyDicesToThrow;
     }
 
     public int getPosition() {
@@ -149,14 +173,34 @@ public class Player implements Serializable {
     }
 
     public int getHowManyDicesToThrow() {
-        return howManyDicesToThrow;
+        return dices.size();
     }
 
     public void setHowManyDicesToThrow(int howManyDicesToThrow) {
-        this.howManyDicesToThrow = howManyDicesToThrow;
+        this.dices = new ArrayList<>(howManyDicesToThrow);
     }
 
     public int getMoneyAmount() {
         return moneyAmount;
+    }
+
+    public Pawn getPawn() {
+        return pawn;
+    }
+
+    public boolean isHasCardChance() {
+        return hasCardChance;
+    }
+
+    public boolean isHasElectricDeficiency() {
+        return hasElectricDeficiency;
+    }
+
+    public int getNumberOfDoublets() {
+        return numberOfDoublets;
+    }
+
+    public ArrayList<Integer> getDices() {
+        return dices;
     }
 }

@@ -1,6 +1,5 @@
 package connection.client;
 
-import connection.server.ClientHandler;
 import gameLogic.Board;
 import gameLogic.Game;
 import gameLogic.Player;
@@ -10,7 +9,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import static connection.Decryptor.decryptMessage;
-import static gui.MenuShower.showBoard;
 
 public class Client extends Thread {
     private final Socket socket;
