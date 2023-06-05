@@ -22,7 +22,7 @@ public class GameShower {
         root.setBackground(background);
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm());
 
         ScreenSettings.primaryStage.setScene(scene);
 
