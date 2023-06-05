@@ -60,7 +60,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
@@ -115,7 +115,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
@@ -170,7 +170,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
@@ -223,7 +223,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
@@ -282,7 +282,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, QuantityImage.getWidth(), QuantityImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
@@ -414,7 +414,7 @@ public class MenuShower {
 
         // Tworzenie sceny i ustawianie jej w Stage
         Scene scene = new Scene(root, MenuPowitlaneImage.getWidth(), MenuPowitlaneImage.getHeight());
-        scene.getStylesheets().add(MenuShower.class.getResource("../styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
+        scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm()); // Dodanie arkusza stylów CSS
 
         ScreenSettings.primaryStage.setScene(scene);
         ScreenSettings.primaryStage.show();
