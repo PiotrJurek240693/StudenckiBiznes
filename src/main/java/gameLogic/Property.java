@@ -125,4 +125,13 @@ public class Property extends Square implements Serializable {
     public int getPrice() {
         return price;
     }
+
+    public boolean buy(Player activePlayer) {
+        if(activePlayer.getMoneyAmount() >= price){
+            activePlayer.takeMoney(price);
+            owner = activePlayer;
+            return true;
+        }
+        return false;
+    }
 }

@@ -69,7 +69,7 @@ public class Player implements Serializable {
     }
 
     public int takeMoney(int amount) {
-        if (!checkIfCanTakeMoney(amount)) {
+        /*if (!checkIfCanTakeMoney(amount)) {
             for (Property property : ownedProperties())
                 property.sellProperty();
             setBankruptStatus();
@@ -82,7 +82,7 @@ public class Player implements Serializable {
         while (amount > moneyAmount) {
             // property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
             // moneyAmount += property.sellProperty();
-        }
+        }*/
 
         moneyAmount -= amount;
 
@@ -152,14 +152,16 @@ public class Player implements Serializable {
     }
 
     public void makeDecision(DecisionType type){
-     /*   switch(type){
+        switch(type){
             case RoundStart:
                 if(inDante > 0){
                     if(hasCardChance){
-                        DecisionButtonsShower.showInDanteDecisionButtons(true);
+                       // DecisionButtonsShower.showInDanteDecisionButtons(true);
+                        Game.conditionalNextRound();
                     }
                     else{
-                        DecisionButtonsShower.showInDanteDecisionButtons(false);
+                        //DecisionButtonsShower.showInDanteDecisionButtons(false);
+                        Game.conditionalNextRound();
                     }
                 }
                 else{
@@ -167,18 +169,24 @@ public class Player implements Serializable {
                 }
                 break;
             case DrawCard:
-                DecisionButtonsShower.showBuyDecisionButtons();
+                //DecisionButtonsShower.showDrawCardDecisionButtons();
+                Game.conditionalNextRound();
                 break;
             case Buy:
-                DecisionButtonsShower.showBuyDecisionButtons();
+               DecisionButtonsShower.showBuyDecisionButtons();
                 break;
             case Pay:
-                DecisionButtonsShower.showPayDecisionButtons();
+                //DecisionButtonsShower.showPayDecisionButtons();
+                Game.conditionalNextRound();
                 break;
             case EndRound:
-                DecisionButtonsShower.showEndRoundDecisionButtons();
+                //DecisionButtonsShower.showEndRoundDecisionButtons();
+                Game.conditionalNextRound();
                 break;
-        }*/
+            default:
+                Game.conditionalNextRound();
+                break;
+        }
     }
 
     public int getPosition() {

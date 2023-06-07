@@ -16,9 +16,9 @@ public class DecisionButtonsShower {
         decisionButtons = new StackPane();
         decisionButtons.setAlignment(Pos.CENTER);
         decisionButtons.setPrefWidth(696);
-        decisionButtons.setPrefHeight(302);
+        decisionButtons.setPrefHeight(262);
         decisionButtons.setTranslateX(152);
-        decisionButtons.setTranslateY(450);
+        decisionButtons.setTranslateY(490);
         stackPane.getChildren().add(decisionButtons);
     }
 
@@ -44,5 +44,31 @@ public class DecisionButtonsShower {
             DecisionButtonsController.onDicesButtonClick();
         });
         decisionButtons.getChildren().add(button1);
+    }
+
+    public static void showBuyDecisionButtons() {
+        init();
+
+        Button button1;
+        button1 = new Button("Kup");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setTranslateX(-100);
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onBuyButtonClick();
+        });
+        decisionButtons.getChildren().add(button1);
+
+        Button button2;
+        button2 = new Button("Pomin");
+        button2.getStyleClass().add("przyciski_losowania");
+        button2.setTranslateX(100);
+        button2.setOnAction(event -> {
+            DecisionButtonsController.onSkipBuyingButtonClick();
+        });
+        decisionButtons.getChildren().add(button2);
+    }
+
+    public static void showPayDecisionButtons() {
+        init();
     }
 }

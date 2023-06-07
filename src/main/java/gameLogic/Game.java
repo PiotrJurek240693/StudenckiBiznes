@@ -55,7 +55,11 @@ public class Game implements Serializable {
         return players.size();
     }
 
-    public static void nextRound() {
+    public static void conditionalNextRound() {
+        if(getActivePlayer().checkDoubles()){
+            getActivePlayer().makeDecision(DecisionType.RoundStart);
+            return;
+        }
         activePlayerIndex++;
         if (activePlayerIndex >= players.size()) {
             activePlayerIndex = 0;
@@ -63,6 +67,7 @@ public class Game implements Serializable {
         for(Player player : players){
             player.setNumberOfDoublets(0);
         }
+        getActivePlayer().makeDecision(DecisionType.RoundStart);
     }
 
     public static void removePlayerAndCleanProperties() {
@@ -133,6 +138,18 @@ public class Game implements Serializable {
             output.remove(player.getPawn().getColor());
         }
         return output;
+    }
+
+    public static boolean activePlayerBuyProperty() {
+        if(board.getSquares().get(getActivePlayer().getPawn().getPosition()) instanceof Property property) {
+            return property.buy(getActivePlayer());
+        }
+        return false;
+    }
+
+    public static void evaluateActivePlayerPosition() {
+        Player player = getActivePlayer();
+        board.getSquares().get(player.getPawn().getPosition()).standOn(player);
     }
 
     public static boolean isStarted() {

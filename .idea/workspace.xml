@@ -5,25 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f17c3bc7-9fdf-4ed1-a403-3b77fde27963" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/PropertyBlue5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/PropertyIconsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Chooser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Chooser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/ActivePlayerInfoShower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Dices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DicesShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/PawnsShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/PawnsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Chooser$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/Chooser$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Chooser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/Chooser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/Dices.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/MenuController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +52,15 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Users\piotr\IntelliJProjects\StudenckiBiznes\assets" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gui.Main" />
+      <module name="StudenckiBiznes" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -56,4 +56,14 @@ public class Square implements Serializable {
         this.fee=fee;
     }
 
+    public void standOn(Player player) {
+        if(this instanceof Property property){
+            if(property.getOwner() == null){
+                player.makeDecision(DecisionType.Buy);
+            }
+            else{
+                player.makeDecision(DecisionType.Pay);
+            }
+        }
+    }
 }
