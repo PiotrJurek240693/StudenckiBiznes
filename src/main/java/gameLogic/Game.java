@@ -70,6 +70,14 @@ public class Game implements Serializable {
         getActivePlayer().makeDecision(DecisionType.RoundStart);
     }
 
+    public static void conditionalEndRound() {
+        if(getActivePlayer().checkDoubles()){
+            getActivePlayer().makeDecision(DecisionType.RoundStart);
+            return;
+        }
+        getActivePlayer().makeDecision(DecisionType.EndRound);
+    }
+
     public static void removePlayerAndCleanProperties() {
         // TODO: wysłać i wyświetlić pola z powrotem do kupienia, gracz wyszarzony
     }

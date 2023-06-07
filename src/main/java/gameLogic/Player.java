@@ -156,12 +156,11 @@ public class Player implements Serializable {
             case RoundStart:
                 if(inDante > 0){
                     if(hasCardChance){
-                       // DecisionButtonsShower.showInDanteDecisionButtons(true);
+                        DecisionButtonsShower.showInDanteDecisionButtons(true);
                         Game.conditionalNextRound();
                     }
                     else{
-                        //DecisionButtonsShower.showInDanteDecisionButtons(false);
-                        Game.conditionalNextRound();
+                        DecisionButtonsShower.showInDanteDecisionButtons(false);
                     }
                 }
                 else{
@@ -179,9 +178,15 @@ public class Player implements Serializable {
                 //DecisionButtonsShower.showPayDecisionButtons();
                 Game.conditionalNextRound();
                 break;
-            case EndRound:
-                //DecisionButtonsShower.showEndRoundDecisionButtons();
+            case PayToBank:
+                //DecisionButtonsShower.showPayToBankDecisionButtons();
                 Game.conditionalNextRound();
+                break;
+            case GoToDante:
+                DecisionButtonsShower.showGoToDanteDecisionButtons();
+                break;
+            case EndRound:
+                DecisionButtonsShower.showEndRoundDecisionButtons();
                 break;
             default:
                 Game.conditionalNextRound();
@@ -202,8 +207,7 @@ public class Player implements Serializable {
     }
 
     public void setDanteDuration(int numberOfRounds) {
-        pawn.getToSquare(GameInfo.DANTE_SQUARE_INDEX);
-        inDante += numberOfRounds;
+        inDante = numberOfRounds;
     }
 
     public void setBankruptStatus() {

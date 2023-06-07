@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f17c3bc7-9fdf-4ed1-a403-3b77fde27963" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/ActivePlayerInfoShower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/DecisionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/DecisionType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/GameInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Property.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Player$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

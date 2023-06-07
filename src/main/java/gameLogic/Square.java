@@ -60,10 +60,20 @@ public class Square implements Serializable {
         if(this instanceof Property property){
             if(property.getOwner() == null){
                 player.makeDecision(DecisionType.Buy);
+                return;
             }
             else{
-                player.makeDecision(DecisionType.Pay);
+                //player.makeDecision(DecisionType.Pay);
             }
+        }
+        switch (type) {
+            //case CHANCE, STUDENT_CASH -> player.makeDecision(DecisionType.DrawCard);
+            case DANTE_AGAIN -> {
+                player.setDanteDuration(3);
+                player.makeDecision(DecisionType.GoToDante);
+            }
+            //case FAILED_SUBIECT_FEE, STUDENT_CARD -> player.makeDecision(DecisionType.PayToBank);
+            default -> Game.conditionalEndRound();
         }
     }
 }

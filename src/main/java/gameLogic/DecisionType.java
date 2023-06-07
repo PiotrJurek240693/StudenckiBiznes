@@ -5,5 +5,7 @@ public enum DecisionType {
     DrawCard,
     Buy,
     Pay,
-    EndRound
+    PayToBank,
+    EndRound,
+    GoToDante,
 }
