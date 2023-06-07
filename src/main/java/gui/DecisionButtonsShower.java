@@ -9,48 +9,40 @@ import javafx.scene.layout.StackPane;
 public class DecisionButtonsShower {
     private static StackPane decisionButtons = new StackPane();
 
-    public static void showGameStartButton() {
+    private static void init(){
         Scene scene = ScreenSettings.primaryStage.getScene();
         Pane stackPane = (Pane) scene.getRoot();
         stackPane.getChildren().remove(decisionButtons);
         decisionButtons = new StackPane();
         decisionButtons.setAlignment(Pos.CENTER);
         decisionButtons.setPrefWidth(696);
-        decisionButtons.setPrefHeight(502);
+        decisionButtons.setPrefHeight(302);
         decisionButtons.setTranslateX(152);
         decisionButtons.setTranslateY(450);
+        stackPane.getChildren().add(decisionButtons);
+    }
+
+    public static void showGameStartButton() {
+        init();
 
         Button button1;
         button1 = new Button("Rozpocznij gre");
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
-            MenuController.onStartGameButtonClick();
+            DecisionButtonsController.onStartGameButtonClick();
         });
-
         decisionButtons.getChildren().add(button1);
-
-        stackPane.getChildren().add(decisionButtons);
     }
 
     public static void showRoundStartDecisionButtons() {
-        Scene scene = ScreenSettings.primaryStage.getScene();
-        Pane stackPane = (Pane) scene.getRoot();
-        stackPane.getChildren().remove(decisionButtons);
-        decisionButtons = new StackPane();
-        decisionButtons.setAlignment(Pos.CENTER);
-        decisionButtons.setPrefWidth(696);
-        decisionButtons.setPrefHeight(502);
-        decisionButtons.setTranslateX(152);
-        decisionButtons.setTranslateY(450);
+        init();
 
         Button button1;
         button1 = new Button("Rzuć kośćmi");
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
-            MenuController.onDicesButtonClick();
+            DecisionButtonsController.onDicesButtonClick();
         });
         decisionButtons.getChildren().add(button1);
-
-        stackPane.getChildren().add(decisionButtons);
     }
 }

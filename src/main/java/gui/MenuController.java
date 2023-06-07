@@ -4,7 +4,6 @@ import gameLogic.*;
 import javafx.application.Platform;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static gameLogic.GameType.*;
 
@@ -80,34 +79,11 @@ public class MenuController {
         GameShower.showGame();
     }
 
-    public static void onStartGameButtonClick() {
-        Game.start();
-        PlayersInfoShower.showPlayersInfo();
-        DecisionButtonsShower.showRoundStartDecisionButtons();
-        PawnsShower.showPawns();
-    }
-
     public static void onSquareClick(Property property) {
         PropertyInfoBox.showPropertyInfo(property);
     }
 
     public static void onCloseInfoButtonClick() {
         PropertyInfoBox.closePropertyInfo();
-    }
-
-    public static void onDicesButtonClick() {
-        Player player = Game.getActivePlayer();
-        while(player.getInDante() > 0){
-            Game.nextRound();
-            player = Game.getActivePlayer();
-        }
-        player.rollDices();
-        player.conditionalMove();
-        //Dices.showDices(dices);
-        PawnsShower.showPawns();
-        PlayersInfoShower.showPlayersInfo();
-        if(!player.checkDoubles() || player.getInDante() > 0) {
-            Game.nextRound();
-        }
     }
 }
