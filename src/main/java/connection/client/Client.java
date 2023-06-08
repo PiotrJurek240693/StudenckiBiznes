@@ -3,6 +3,8 @@ package connection.client;
 import gameLogic.Board;
 import gameLogic.Game;
 import gameLogic.Player;
+import gui.MenuShower;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
@@ -73,6 +75,10 @@ public class Client extends Thread {
             System.out.println(Game.getActivePlayerIndex());
             Game.setBoard((Board)objectInput.readObject());
             Game.setPlayers((ArrayList<Player>)objectInput.readObject());
+            Platform.runLater(() -> {
+                MenuShower.showNickAndPawnMenu();
+                System.out.println("Polaczono");
+            });
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

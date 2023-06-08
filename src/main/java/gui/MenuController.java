@@ -52,8 +52,6 @@ public class MenuController {
             //TODO: Okno z errorem
             throw new RuntimeException(e);
         }
-        MenuShower.showNickAndPawnMenu();
-        System.out.println("Polaczono");
     }
 
     public static void onQuantityButtonClick(GameType gameType, int numberOfPlayers) {
@@ -72,7 +70,7 @@ public class MenuController {
 
     public static void onPawnButtonClick(String nick, PawnColor color) {
         Game.addPlayer(new Player(nick, color));
-        if(Game.getNumberOfPlayers() < Game.getMaxPlayers()){
+        if (Game.getGameType() == Singleplayer && Game.getNumberOfPlayers() < Game.getMaxPlayers()) {
             MenuShower.showNickAndPawnMenu();
             return;
         }

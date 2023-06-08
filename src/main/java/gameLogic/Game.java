@@ -15,7 +15,8 @@ public class Game implements Serializable {
     private static ArrayList<Player> players;
     private static Server server;
     private static Client client;
-    private static boolean started;
+    private static boolean initiated = false;
+    private static boolean started = false;
     private static GameType gameType;
 
     public static void init(String serverIP) throws IOException {
@@ -170,7 +171,7 @@ public class Game implements Serializable {
 
     public static void start() {
         for (int i = players.size(); i < maxPlayers; i++) {
-            players.add(new Bot("", PawnColor.yellow));
+            players.add(new Bot("", Game.availableColors().get(0)));
         }
         Game.started = true;
     }
@@ -212,6 +213,14 @@ public class Game implements Serializable {
             }
         }
         return output;
+    }
+
+    public static boolean isInitiated() {
+        return initiated;
+    }
+
+    public static void setInitiated(boolean initiated) {
+        Game.initiated = initiated;
     }
 }
 
