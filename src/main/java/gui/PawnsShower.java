@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 public class PawnsShower {
     private static StackPane pawns = new StackPane();
 
-    private static final int possiblePositions[][] = new int[][]
+    private static final int[][] possiblePositions = new int[][]
             {{1685, 888}, {1596, 888}, {1518, 888}, {1440, 888}, {1362, 888}, {1284, 888}, {1206, 888}, {1128, 888}, {1050, 888}, {972, 888},
             {883, 888}, {883, 799}, {883, 721}, {883, 643}, {883, 565}, {883, 487}, {883, 409}, {883, 331}, {883, 253}, {883, 175},
             {883, 86}, {972, 86}, {1050, 86}, {1128, 86}, {1206, 86}, {1284, 86}, {1362, 86}, {1440, 86}, {1518, 86}, {1596, 86},
@@ -25,14 +25,16 @@ public class PawnsShower {
         pawns.setMouseTransparent(true);
 
         for (Player player : Game.getPlayers()) {
-            ImageView pawnImg = new ImageView();
-            Pawn pawn = player.getPawn();
-            pawnImg.setImage(Chooser.choosePawn(pawn.getColor()));
-            pawnImg.setTranslateX(possiblePositions[pawn.getPosition()][0]);
-            pawnImg.setTranslateY(possiblePositions[pawn.getPosition()][1]);
-            pawnImg.setFitWidth(30);
-            pawnImg.setFitHeight(30);
-            pawns.getChildren().add(pawnImg);
+            if(!player.isBankrupt()){
+                ImageView pawnImg = new ImageView();
+                Pawn pawn = player.getPawn();
+                pawnImg.setImage(Chooser.choosePawn(pawn.getColor()));
+                pawnImg.setTranslateX(possiblePositions[pawn.getPosition()][0]);
+                pawnImg.setTranslateY(possiblePositions[pawn.getPosition()][1]);
+                pawnImg.setFitWidth(30);
+                pawnImg.setFitHeight(30);
+                pawns.getChildren().add(pawnImg);
+            }
         }
 
         stackPane.getChildren().add(pawns);

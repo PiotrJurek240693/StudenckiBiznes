@@ -10,14 +10,12 @@ public class Property extends Square implements Serializable {
     private Player owner;
     private boolean mortgaged;
     private int upgrades;
-
     private int stopPrices[];
+    private int faculty;
 
     public boolean isMortgaged() {
         return mortgaged;
     }
-
-    private int faculty;
 
     public int getFaculty() {
         return faculty;
@@ -41,9 +39,12 @@ public class Property extends Square implements Serializable {
         return upgrades;
     }
 
-    public void upgrade() {
-        upgrades++;
-        calculateNewFee();
+    public int upgrade() {
+        if(upgrades < MAX_UPGRADE){
+            upgrades++;
+            calculateNewFee();
+        }
+        return upgradePrice;
     }
 
     public int getUpgradePrice() {
@@ -124,5 +125,96 @@ public class Property extends Square implements Serializable {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean buy(Player activePlayer) {
+        if (activePlayer.getMoneyAmount() >= price) {
+            activePlayer.takeMoney(price);
+            owner = activePlayer;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canBeUpgraded() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return false;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getOwner() != this.getOwner() || property.getUpgrades() - this.getUpgrades() < 0) {
+                    return false;
+                }
+            }
+        }
+        return upgrades <= MAX_UPGRADE;
+    }
+
+    public boolean canBeDegraded() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return false;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getOwner() != this.getOwner() || property.getUpgrades() - this.getUpgrades() > 0) {
+                    return false;
+                }
+            }
+        }
+        return upgrades > 0;
+    }
+
+    public int degrade() {
+        if(upgrades > 0){
+            upgrades--;
+            calculateNewFee();
+        }
+        return upgradePrice / 2;
+    }
+
+    public boolean canBeSell() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return true;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getUpgrades() > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int getStopPrice() {
+        return switch(type){
+            case INSTITUTE -> getInstituteStopPrice();
+            case PARKING -> getParkingStopPrice();
+            case SPORT_VENUE -> getSportVenueStopPrice();
+            default -> 0;
+        };
+    }
+
+    private int getSportVenueStopPrice() {
+        var board = Game.getBoard().getSquares();
+        if(((Property)board.get(GameInfo.FIRST_SPORT_VENUE_INDEX)).getOwner() == ((Property)board.get(GameInfo.SECOND_SPORT_VENUE_INDEX)).getOwner()){
+            return 10 * Game.getActivePlayer().getDicesSum();
+        }
+        return 4 * Game.getActivePlayer().getDicesSum();
+    }
+
+    private int getParkingStopPrice() {
+        int output = 0;
+        for(int i = 5; i < 40; i += 10){
+            Property parking = (Property) Game.getBoard().getSquares().get(i);
+            if(parking != this && parking.getOwner() == owner){
+                output++;
+            }
+        }
+        return stopPrices[output];
+    }
+
+    private int getInstituteStopPrice() {
+        return stopPrices[upgrades];
     }
 }

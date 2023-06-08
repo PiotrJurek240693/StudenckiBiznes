@@ -7,10 +7,9 @@ public enum TypesOfSqueres
     STUDENT_CASH,
     STUDENT_CARD,
     PARKING,
-    CATHEDRAL,
     CHANCE,
     DANTE,
-    SPORT_VANUE,
+    SPORT_VENUE,
     LIBRARY,
     DANTE_AGAIN,
     FAILED_SUBIECT_FEE
