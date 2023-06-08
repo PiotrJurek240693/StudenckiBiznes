@@ -44,7 +44,7 @@ public class DecisionButtonsShower {
         decisionButtons.setTranslateY(450);
 
         Button button1;
-        button1 = new Button("Rzuć kośćmi");
+        button1 = new Button("Rzuc koscmi");
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
             MenuController.onDicesButtonClick();

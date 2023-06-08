@@ -27,7 +27,7 @@ public class MenuShower {
         MenuPowitalne.setFitHeight(ScreenSettings.screenHeight);
 
         // Tworzenie przycisku 1
-        Button button1 = new Button("Rozpocznij grę");
+        Button button1 = new Button("Rozpocznij gre");
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(20);
         button1.setTranslateY(110);
@@ -42,7 +42,7 @@ public class MenuShower {
         button2.setTranslateY(130);
 
         // Tworzenie przycisku 3
-        Button button3 = new Button("Wyjście");
+        Button button3 = new Button("Wyjscie");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
@@ -97,7 +97,7 @@ public class MenuShower {
         });
 
         // Tworzenie przycisku 3
-        Button button3 = new Button("Powrót");
+        Button button3 = new Button("Powrot");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
@@ -143,7 +143,7 @@ public class MenuShower {
         });
 
         // Tworzenie przycisku 2
-        Button button2 = new Button("Dołącz");
+        Button button2 = new Button("Dolacz");
         button2.getStyleClass().add("przyciski_menu_powitalne");
         button2.setTranslateX(20);
         button2.setTranslateY(130);
@@ -152,7 +152,7 @@ public class MenuShower {
         });
 
         // Tworzenie przycisku 3
-        Button button3 = new Button("Powrót");
+        Button button3 = new Button("Powrot");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
@@ -196,7 +196,7 @@ public class MenuShower {
         textField.setTranslateY(110);
 
         // Tworzenie przycisku 2
-        Button button2 = new Button("Dołącz");
+        Button button2 = new Button("Dolacz");
         button2.getStyleClass().add("przyciski_menu_powitalne");
         button2.setTranslateX(20);
         button2.setTranslateY(130);
@@ -205,7 +205,7 @@ public class MenuShower {
         });
 
         // Tworzenie przycisku 3
-        Button button3 = new Button("Powrót");
+        Button button3 = new Button("Powrot");
         button3.getStyleClass().add("przyciski_menu_powitalne");
         button3.setTranslateX(20);
         button3.setTranslateY(150);
@@ -239,7 +239,7 @@ public class MenuShower {
         Quantity.setFitHeight(ScreenSettings.screenHeight);
 
         // Tworzenie przycisku 1
-        Button button1 = new Button("Wyjście");
+        Button button1 = new Button("Wyjscie");
         button1.getStyleClass().add("przyciski_menu_powitalne");
         button1.setTranslateX(0);
         button1.setTranslateY(300);
@@ -302,7 +302,7 @@ public class MenuShower {
         MenuPowitalne.setFitHeight(ScreenSettings.screenHeight);
 
         //Podaj swój nick
-        Button button5 = new Button("PODAJ SWÓJ NICK");
+        Button button5 = new Button("PODAJ SWOJ NICK");
         button5.getStyleClass().add("tekst");
         button5.setTranslateX(30);
         button5.setTranslateY(-80);
@@ -316,7 +316,7 @@ public class MenuShower {
         textField.setTranslateY(0);
 
         //Wybierz swój pionek
-        Button button6 = new Button("WYBIERZ SWÓJ PIONEK");
+        Button button6 = new Button("WYBIERZ SWOJ PIONEK");
         button6.getStyleClass().add("tekst");
         button6.setTranslateX(30);
         button6.setTranslateY(140);
