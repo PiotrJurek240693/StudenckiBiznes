@@ -252,6 +252,7 @@ public class BoardShower {
         Biblioteka.setImage(BibliotekaImage);
         Biblioteka.setTranslateY(0);
         Biblioteka.setTranslateX(0);
+        Biblioteka.setRotate(90);
 
 
         //BAiS 1
