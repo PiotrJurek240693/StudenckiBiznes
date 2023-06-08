@@ -10,6 +10,8 @@ import javafx.scene.layout.*;
 
 public class BoardShower {
     private static StackPane board = new StackPane();
+    private static BoardMode mode = BoardMode.Info;
+
     public static void showBoard() {
         Scene scene = ScreenSettings.primaryStage.getScene();
         Pane stackPane = (Pane) scene.getRoot();
@@ -45,7 +47,7 @@ public class BoardShower {
         Weeia2.setTranslateY(724);
         Weeia2.setTranslateX(802);
         Weeia2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(39));
+            onSquareClick((Property) Game.getBoard().getSquares().get(39));
         });
 
         //WOiZ1
@@ -56,7 +58,7 @@ public class BoardShower {
         Woiz1.setTranslateY(802);
         Woiz1.setTranslateX(724);
         Woiz1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(1));
+            onSquareClick((Property) Game.getBoard().getSquares().get(1));
         });
 
         //Kasa studencka 1
@@ -75,7 +77,7 @@ public class BoardShower {
         Woiz2.setTranslateY(802);
         Woiz2.setTranslateX(568);
         Woiz2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(3));
+            onSquareClick((Property) Game.getBoard().getSquares().get(3));
         });
 
         //Legitymacja
@@ -93,6 +95,9 @@ public class BoardShower {
         ParkingA.setImage(ParkingAImage);
         ParkingA.setTranslateY(802);
         ParkingA.setTranslateX(412);
+        ParkingA.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(5));
+        });
 
         //WM1
 
@@ -102,7 +107,7 @@ public class BoardShower {
         Wm1.setTranslateY(802);
         Wm1.setTranslateX(334);
         Wm1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(6));
+            onSquareClick((Property) Game.getBoard().getSquares().get(6));
         });
 
         //Szansa 1
@@ -121,7 +126,7 @@ public class BoardShower {
         Wm2.setTranslateY(802);
         Wm2.setTranslateX(178);
         Wm2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(8));
+            onSquareClick((Property) Game.getBoard().getSquares().get(8));
         });
 
         //WM3
@@ -132,7 +137,7 @@ public class BoardShower {
         Wm3.setTranslateY(802);
         Wm3.setTranslateX(100);
         Wm3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(9));
+            onSquareClick((Property) Game.getBoard().getSquares().get(9));
         });
 
         //Wiezienie
@@ -151,7 +156,7 @@ public class BoardShower {
         Wch1.setTranslateY(724);
         Wch1.setTranslateX(0);
         Wch1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(11));
+            onSquareClick((Property) Game.getBoard().getSquares().get(11));
         });
 
         //Zatoka Sportu
@@ -161,6 +166,9 @@ public class BoardShower {
         ZatokaSportu.setImage(ZatokaSportuImage);
         ZatokaSportu.setTranslateY(646);
         ZatokaSportu.setTranslateX(0);
+        ZatokaSportu.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(12));
+        });
 
         //WCH2
 
@@ -170,7 +178,7 @@ public class BoardShower {
         Wch2.setTranslateY(568);
         Wch2.setTranslateX(0);
         Wch2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(13));
+            onSquareClick((Property) Game.getBoard().getSquares().get(13));
         });
 
 
@@ -182,7 +190,7 @@ public class BoardShower {
         Wch3.setTranslateY(490);
         Wch3.setTranslateX(0);
         Wch3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(14));
+            onSquareClick((Property) Game.getBoard().getSquares().get(14));
         });
 
         //Parking B
@@ -192,6 +200,9 @@ public class BoardShower {
         ParkingB.setImage(ParkingBImage);
         ParkingB.setTranslateY(412);
         ParkingB.setTranslateX(0);
+        ParkingB.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(15));
+        });
 
         //WTMiWT1
 
@@ -201,7 +212,7 @@ public class BoardShower {
         Wtmiwt1.setTranslateY(334);
         Wtmiwt1.setTranslateX(0);
         Wtmiwt1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(16));
+            onSquareClick((Property) Game.getBoard().getSquares().get(16));
         });
 
         //Kasa studencka 2
@@ -220,7 +231,7 @@ public class BoardShower {
         Wtmiwt2.setTranslateY(178);
         Wtmiwt2.setTranslateX(0);
         Wtmiwt2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(18));
+            onSquareClick((Property) Game.getBoard().getSquares().get(18));
         });
 
         //WTMiWT3
@@ -231,7 +242,7 @@ public class BoardShower {
         Wtmiwt3.setTranslateY(100);
         Wtmiwt3.setTranslateX(0);
         Wtmiwt3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(19));
+            onSquareClick((Property) Game.getBoard().getSquares().get(19));
         });
 
         //Biblioteka
@@ -252,7 +263,7 @@ public class BoardShower {
         Bais1.setTranslateY(0);
         Bais1.setTranslateX(100);
         Bais1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(21));
+            onSquareClick((Property) Game.getBoard().getSquares().get(21));
         });
 
         //Szansa 2
@@ -272,7 +283,7 @@ public class BoardShower {
         Bais2.setTranslateY(0);
         Bais2.setTranslateX(256);
         Bais2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(23));
+            onSquareClick((Property) Game.getBoard().getSquares().get(23));
         });
 
         //BAiS 3
@@ -283,7 +294,7 @@ public class BoardShower {
         Bais3.setTranslateY(0);
         Bais3.setTranslateX(334);
         Bais3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(24));
+            onSquareClick((Property) Game.getBoard().getSquares().get(24));
         });
 
 
@@ -294,6 +305,9 @@ public class BoardShower {
         ParkingC.setImage(ParkingCImage);
         ParkingC.setTranslateY(0);
         ParkingC.setTranslateX(412);
+        ParkingC.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(25));
+        });
 
         //IPiOS 1
 
@@ -303,7 +317,7 @@ public class BoardShower {
         Ipios1.setTranslateY(0);
         Ipios1.setTranslateX(490);
         Ipios1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(26));
+            onSquareClick((Property) Game.getBoard().getSquares().get(26));
         });
 
         //IPiOS 2
@@ -314,7 +328,7 @@ public class BoardShower {
         Ipios2.setTranslateY(0);
         Ipios2.setTranslateX(568);
         Ipios2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(27));
+            onSquareClick((Property) Game.getBoard().getSquares().get(27));
         });
 
         //Centrum Sportu
@@ -324,6 +338,9 @@ public class BoardShower {
         CentrumSportu.setImage(CentrumSportuImage);
         CentrumSportu.setTranslateY(0);
         CentrumSportu.setTranslateX(646);
+        CentrumSportu.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(28));
+        });
 
         //IPiOS 3
 
@@ -333,7 +350,7 @@ public class BoardShower {
         Ipios3.setTranslateY(0);
         Ipios3.setTranslateX(724);
         Ipios3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(29));
+            onSquareClick((Property) Game.getBoard().getSquares().get(29));
         });
 
         //Pora na Dante
@@ -362,7 +379,7 @@ public class BoardShower {
         Weeia1.setTranslateY(568);
         Weeia1.setTranslateX(802);
         Weeia1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(37));
+            onSquareClick((Property) Game.getBoard().getSquares().get(37));
         });
 
         //Szansa 3
@@ -380,6 +397,9 @@ public class BoardShower {
         ParkingRektora.setImage(ParkingRektoraImage);
         ParkingRektora.setTranslateY(412);
         ParkingRektora.setTranslateX(802);
+        ParkingRektora.setOnMouseClicked(event -> {
+            onSquareClick((Property) Game.getBoard().getSquares().get(35));
+        });
 
         //FTIMS 3
 
@@ -389,7 +409,7 @@ public class BoardShower {
         Ftims3.setTranslateY(334);
         Ftims3.setTranslateX(802);
         Ftims3.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(34));
+            onSquareClick((Property) Game.getBoard().getSquares().get(34));
         });
 
         //Kasa studencka 3
@@ -408,7 +428,7 @@ public class BoardShower {
         Ftims2.setTranslateY(178);
         Ftims2.setTranslateX(802);
         Ftims2.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(32));
+            onSquareClick((Property) Game.getBoard().getSquares().get(32));
         });
 
         //FTIMS 1
@@ -419,7 +439,7 @@ public class BoardShower {
         Ftims1.setTranslateY(100);
         Ftims1.setTranslateX(802);
         Ftims1.setOnMouseClicked(event -> {
-            MenuController.onSquareClick((Property) Game.getBoard().getSquares().get(31));
+            onSquareClick((Property) Game.getBoard().getSquares().get(31));
         });
 
         board.getChildren().addAll(Board, Start, Weeia2, Woiz1, Kasastudencka1, Woiz2, Legitymacja, ParkingA,
@@ -430,4 +450,23 @@ public class BoardShower {
         stackPane.getChildren().add(board);
     }
 
+    public static void onSquareClick(Property property) {
+        switch (mode) {
+            case Info -> PropertyInfoBox.showPropertyInfo(property);
+            case Upgrade -> {
+                Game.conditionalActivePlayerBuyOrUpgrade(property);
+                PropertyIconsShower.showPropertyIcons();
+                PlayersInfoShower.showPlayersInfo();
+            }
+            case Sell -> {
+                Game.conditionalActivePlayerSellOrDegrade(property);
+                PropertyIconsShower.showPropertyIcons();
+                PlayersInfoShower.showPlayersInfo();
+            }
+        }
+    }
+
+    public static void setMode(BoardMode mode) {
+        BoardShower.mode = mode;
+    }
 }

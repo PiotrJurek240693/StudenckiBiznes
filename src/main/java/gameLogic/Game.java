@@ -55,14 +55,29 @@ public class Game implements Serializable {
         return players.size();
     }
 
-    public static void nextRound() {
-        activePlayerIndex++;
-        if (activePlayerIndex >= players.size()) {
-            activePlayerIndex = 0;
+    public static void conditionalNextRound() {
+        if (getActivePlayer().checkDoubles() && !getActivePlayer().isBankrupt()) {
+            getActivePlayer().makeDecision(DecisionType.RoundStart);
+            return;
         }
-        for(Player player : players){
+        do {
+            activePlayerIndex++;
+            if (activePlayerIndex >= players.size()) {
+                activePlayerIndex = 0;
+            }
+        } while (getActivePlayer().isBankrupt());
+        for (Player player : players) {
             player.setNumberOfDoublets(0);
         }
+        getActivePlayer().makeDecision(DecisionType.RoundStart);
+    }
+
+    public static void conditionalEndRound() {
+        if (getActivePlayer().checkDoubles()) {
+            getActivePlayer().makeDecision(DecisionType.RoundStart);
+            return;
+        }
+        getActivePlayer().makeDecision(DecisionType.EndRound);
     }
 
     public static void removePlayerAndCleanProperties() {
@@ -83,8 +98,10 @@ public class Game implements Serializable {
     }
 
     public static void pay(Player from, Player to, int amount) {
-        players.get(activePlayerIndex).takeMoney(amount);
-        players.get(activePlayerIndex).giveMoney(amount);
+        from.takeMoney(amount);
+        if (to != null) {
+            to.giveMoney(amount);
+        }
     }
 
     public static Player getPlayer(int playerIndex) {
@@ -123,7 +140,7 @@ public class Game implements Serializable {
         Game.players = players;
     }
 
-    public static ArrayList<PawnColor> availableColors(){
+    public static ArrayList<PawnColor> availableColors() {
         ArrayList<PawnColor> output = new ArrayList<>();
         output.add(PawnColor.yellow);
         output.add(PawnColor.red);
@@ -135,12 +152,24 @@ public class Game implements Serializable {
         return output;
     }
 
+    public static boolean activePlayerBuyProperty() {
+        if (board.getSquares().get(getActivePlayer().getPawn().getPosition()) instanceof Property property) {
+            return property.buy(getActivePlayer());
+        }
+        return false;
+    }
+
+    public static void evaluateActivePlayerPosition() {
+        Player player = getActivePlayer();
+        board.getSquares().get(player.getPawn().getPosition()).standOn(player);
+    }
+
     public static boolean isStarted() {
         return started;
     }
 
     public static void start() {
-        for(int i = players.size(); i < maxPlayers; i++){
+        for (int i = players.size(); i < maxPlayers; i++) {
             players.add(new Bot("", PawnColor.yellow));
         }
         Game.started = true;
@@ -154,5 +183,35 @@ public class Game implements Serializable {
         Game.gameType = gameType;
     }
 
+    public static void conditionalActivePlayerBuyOrUpgrade(Property property) {
+        Player player = getActivePlayer();
+        if (property.getOwner() == player && property.canBeUpgraded() && player.getMoneyAmount() >= property.getUpgradePrice()) {
+            player.takeMoney(property.upgrade());
+        }
+    }
+
+    public static void conditionalActivePlayerSellOrDegrade(Property property) {
+        Player player = getActivePlayer();
+        if (property.getOwner() == player) {
+            if (property.canBeDegraded()) {
+                player.giveMoney(property.degrade());
+            } else if ((property.canBeSell())) {
+                player.giveMoney(property.sellProperty());
+            }
+        }
+    }
+
+    public static Player checkWinner(){
+        Player output = null;
+        for (Player player : players) {
+            if(!player.isBankrupt()){
+                if(output != null){
+                    return null;
+                }
+                output = player;
+            }
+        }
+        return output;
+    }
 }
 

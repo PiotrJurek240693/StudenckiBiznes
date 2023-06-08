@@ -1,6 +1,7 @@
 package gui;
 
 import gameLogic.PawnColor;
+import gameLogic.Property;
 import javafx.scene.image.Image;
 
 public class Chooser {
@@ -33,5 +34,17 @@ public class Chooser {
             case green -> new Image("file:../../assets/SALDOZIELONY.png");
             case yellow -> new Image("file:../../assets/SALDOZOLTY.png");
         };
+    }
+
+    public static Image choosePropertyIcon(Property property) {
+        String file = "file:../../assets/Property";
+        switch (property.getOwner().getPawn().getColor()) {
+            case red -> file += "Red";
+            case blue -> file += "Blue";
+            case green -> file += "Green";
+            case yellow -> file += "Yellow";
+        }
+        file += property.getUpgrades() + ".png";
+        return new Image(file);
     }
 }
