@@ -96,6 +96,7 @@ public class Player implements Serializable {
         if (checkDoubles()) {
             numberOfDoublets++;
             if (checkTooMuchDoubles()) {
+                makeDecision(DecisionType.GoToDante);
                 goToDante(3);
             }
         }
@@ -116,7 +117,7 @@ public class Player implements Serializable {
     }
 
     private void goToDante(int time) {
-        inDante += time;
+        inDante = time;
         unconditionalMove(GameInfo.DANTE_SQUARE_INDEX);
     }
 
@@ -172,8 +173,8 @@ public class Player implements Serializable {
                 DecisionButtonsShower.showPayDecisionButtons(Game.getActivePlayer(), property.getOwner(), property.getStopPrice());
                 break;
             case PayToBank:
-                //DecisionButtonsShower.showPayToBankDecisionButtons();
-                Game.conditionalNextRound();
+                Square square = Game.getBoard().getSquares().get(Game.getActivePlayer().getPawn().getPosition());
+                DecisionButtonsShower.showPayDecisionButtons(Game.getActivePlayer(), null, square.getFee());
                 break;
             case GoToDante:
                 DecisionButtonsShower.showGoToDanteDecisionButtons();

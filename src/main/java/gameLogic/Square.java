@@ -78,7 +78,7 @@ public class Square implements Serializable {
                 player.setDanteDuration(3);
                 player.makeDecision(DecisionType.GoToDante);
             }
-            //case FAILED_SUBIECT_FEE, STUDENT_CARD -> player.makeDecision(DecisionType.PayToBank);
+            case FAILED_SUBIECT_FEE, STUDENT_CARD -> player.makeDecision(DecisionType.PayToBank);
             default -> Game.conditionalEndRound();
         }
     }
