@@ -78,4 +78,19 @@ public class DecisionButtonsController {
         Game.conditionalNextRound();
         ActivePlayerInfoShower.showActivePlayerInfo();
     }
+
+    public static void onActivateSellModeButtonClick() {
+        BoardShower.setMode(BoardMode.Sell);
+        DecisionButtonsShower.showBackToInfoModeButton();
+    }
+
+    public static void onActivateUpgradeModeButtonClick() {
+        BoardShower.setMode(BoardMode.Upgrade);
+        DecisionButtonsShower.showBackToInfoModeButton();
+    }
+
+    public static void onBackToInfoModeButtonClick() {
+        BoardShower.setMode(BoardMode.Info);
+        DecisionButtonsShower.removeBackToInfoModeButton();
+    }
 }

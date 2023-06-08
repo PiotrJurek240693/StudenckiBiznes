@@ -179,5 +179,23 @@ public class Game implements Serializable {
         Game.gameType = gameType;
     }
 
+    public static void conditionalActivePlayerBuyOrUpgrade(Property property) {
+        Player player = getActivePlayer();
+        if(property.getOwner() == player && property.canBeUpgraded() && player.getMoneyAmount() >= property.getUpgradePrice()){
+            player.takeMoney(property.upgrade());
+        }
+    }
+
+    public static void conditionalActivePlayerSellOrDegrade(Property property) {
+        Player player = getActivePlayer();
+        if(property.getOwner() == player){
+            if(property.canBeDegraded()){
+                player.giveMoney(property.degrade());
+            }
+            else if ((property.canBeSelled())){
+                player.giveMoney(property.sellProperty());
+            }
+        }
+    }
 }
 

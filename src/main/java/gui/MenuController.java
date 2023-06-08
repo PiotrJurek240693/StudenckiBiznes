@@ -79,10 +79,6 @@ public class MenuController {
         GameShower.showGame();
     }
 
-    public static void onSquareClick(Property property) {
-        PropertyInfoBox.showPropertyInfo(property);
-    }
-
     public static void onCloseInfoButtonClick() {
         PropertyInfoBox.closePropertyInfo();
     }

@@ -34,7 +34,7 @@ public class Square implements Serializable {
     }
     public boolean isProperty()
     {
-        if(type==INSTITUTE||type==PARKING||type==CATHEDRAL||type==SPORT_VANUE)
+        if(type==INSTITUTE||type==PARKING||type==SPORT_VANUE)
         {
             return true;
         }

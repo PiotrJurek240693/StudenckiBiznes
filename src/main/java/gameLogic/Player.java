@@ -29,7 +29,7 @@ public class Player implements Serializable {
         this.nick = nick;
         pawn = new Pawn(color);
         dices = new ArrayList<>();
-        for(int i = 0; i < GameInfo.INITIAL_NUMBER_OF_DICES; i++){
+        for (int i = 0; i < GameInfo.INITIAL_NUMBER_OF_DICES; i++) {
             dices.add(0);
         }
     }
@@ -89,13 +89,13 @@ public class Player implements Serializable {
         return amount;
     }
 
-    public  ArrayList<Integer> rollDices(){
-        for(int i = 0; i < dices.size(); i++){
+    public ArrayList<Integer> rollDices() {
+        for (int i = 0; i < dices.size(); i++) {
             dices.set(i, randomGenerator.nextInt(6) + 1);
         }
-        if(checkDoubles()) {
+        if (checkDoubles()) {
             numberOfDoublets++;
-            if(checkTooMuchDoubles()) {
+            if (checkTooMuchDoubles()) {
                 goToDante(3);
             }
         }
@@ -103,8 +103,8 @@ public class Player implements Serializable {
     }
 
     public boolean checkDoubles() {
-        for(int i = 1; i < dices.size(); i++) {
-            if(!Objects.equals(dices.get(i), dices.get(i - 1))) {
+        for (int i = 1; i < dices.size(); i++) {
+            if (!Objects.equals(dices.get(i), dices.get(i - 1))) {
                 return false;
             }
         }
@@ -127,7 +127,7 @@ public class Player implements Serializable {
     public void conditionalMove(int shift) {
         int startPosition = pawn.getPosition();
         pawn.move(shift);
-        if(startPosition > pawn.getPosition()){
+        if (startPosition > pawn.getPosition()) {
             giveMoney(GameInfo.START_SQUARE_ADDITION);
         }
     }
@@ -142,7 +142,7 @@ public class Player implements Serializable {
         System.out.println("Shift: " + shift);
         int startPosition = pawn.getPosition();
         pawn.move(shift);
-        if(startPosition > pawn.getPosition()){
+        if (startPosition > pawn.getPosition()) {
             giveMoney(GameInfo.START_SQUARE_ADDITION);
         }
     }
@@ -151,19 +151,12 @@ public class Player implements Serializable {
         return valueOfProperties(ownedProperties()) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
     }
 
-    public void makeDecision(DecisionType type){
-        switch(type){
+    public void makeDecision(DecisionType type) {
+        switch (type) {
             case RoundStart:
-                if(inDante > 0){
-                    if(hasCardChance){
-                        DecisionButtonsShower.showInDanteDecisionButtons(true);
-                        Game.conditionalNextRound();
-                    }
-                    else{
-                        DecisionButtonsShower.showInDanteDecisionButtons(false);
-                    }
-                }
-                else{
+                if (inDante > 0) {
+                    DecisionButtonsShower.showInDanteDecisionButtons(hasCardChance);
+                } else {
                     DecisionButtonsShower.showRoundStartDecisionButtons();
                 }
                 break;
@@ -172,7 +165,7 @@ public class Player implements Serializable {
                 Game.conditionalNextRound();
                 break;
             case Buy:
-               DecisionButtonsShower.showBuyDecisionButtons();
+                DecisionButtonsShower.showBuyDecisionButtons();
                 break;
             case Pay:
                 //DecisionButtonsShower.showPayDecisionButtons();
@@ -276,5 +269,27 @@ public class Player implements Serializable {
 
     public void setNumberOfDoublets(int numberOfDoublets) {
         this.numberOfDoublets = numberOfDoublets;
+    }
+
+    public boolean canSellOrDegradeSomething() {
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getOwner() == this) {
+                if (property.canBeSelled() || property.canBeDegraded()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean canUpgradeSomething() {
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getOwner() == this) {
+                if (property.canBeUpgraded()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

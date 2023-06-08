@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 
 public class DecisionButtonsShower {
     private static StackPane decisionButtons = new StackPane();
+    private static StackPane backButton = new StackPane();
 
     private static void init(){
         Scene scene = ScreenSettings.primaryStage.getScene();
@@ -47,6 +48,32 @@ public class DecisionButtonsShower {
             DecisionButtonsController.onDicesButtonClick();
         });
         decisionButtons.getChildren().add(button1);
+
+        Button button2 = null;
+        if(Game.getActivePlayer().canSellOrDegradeSomething()){
+            button2 = new Button("Sprzedaj");
+            button2.setTranslateY(100);
+            button2.getStyleClass().add("przyciski_losowania");
+            button2.setOnAction(event -> {
+                DecisionButtonsController.onActivateSellModeButtonClick();
+            });
+            decisionButtons.getChildren().add(button2);
+        }
+
+        if(Game.getActivePlayer().canUpgradeSomething()){
+            Button button3;
+            button3 = new Button("Ulepsz");
+            button3.setTranslateY(100);
+            if(button2 != null){
+                button2.setTranslateX(150);
+                button3.setTranslateX(-150);
+            }
+            button3.getStyleClass().add("przyciski_losowania");
+            button3.setOnAction(event -> {
+                DecisionButtonsController.onActivateUpgradeModeButtonClick();
+            });
+            decisionButtons.getChildren().add(button3);
+        }
     }
 
     public static void showBuyDecisionButtons() {
@@ -157,5 +184,34 @@ public class DecisionButtonsShower {
             DecisionButtonsController.onEndTurnOkButtonClick();
         });
         decisionButtons.getChildren().add(button1);
+    }
+
+    public static void showBackToInfoModeButton() {
+        decisionButtons.setVisible(false);
+        Scene scene = ScreenSettings.primaryStage.getScene();
+        Pane stackPane = (Pane) scene.getRoot();
+        stackPane.getChildren().remove(backButton);
+        backButton = new StackPane();
+        backButton.setAlignment(Pos.CENTER);
+        backButton.setPrefWidth(696);
+        backButton.setPrefHeight(262);
+        backButton.setTranslateX(152);
+        backButton.setTranslateY(490);
+        stackPane.getChildren().add(backButton);
+
+        Button button1;
+        button1 = new Button("Powrot");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onBackToInfoModeButtonClick();
+        });
+        backButton.getChildren().add(button1);
+    }
+
+    public static void removeBackToInfoModeButton() {
+        Scene scene = ScreenSettings.primaryStage.getScene();
+        Pane stackPane = (Pane) scene.getRoot();
+        stackPane.getChildren().remove(backButton);
+        decisionButtons.setVisible(true);
     }
 }

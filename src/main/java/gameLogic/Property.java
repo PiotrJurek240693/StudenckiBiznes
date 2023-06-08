@@ -41,9 +41,12 @@ public class Property extends Square implements Serializable {
         return upgrades;
     }
 
-    public void upgrade() {
-        upgrades++;
-        calculateNewFee();
+    public int upgrade() {
+        if(upgrades < MAX_UPGRADE){
+            upgrades++;
+            calculateNewFee();
+        }
+        return upgradePrice;
     }
 
     public int getUpgradePrice() {
@@ -127,11 +130,61 @@ public class Property extends Square implements Serializable {
     }
 
     public boolean buy(Player activePlayer) {
-        if(activePlayer.getMoneyAmount() >= price){
+        if (activePlayer.getMoneyAmount() >= price) {
             activePlayer.takeMoney(price);
             owner = activePlayer;
             return true;
         }
         return false;
+    }
+
+    public boolean canBeUpgraded() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return false;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getOwner() != this.getOwner() || property.getUpgrades() - this.getUpgrades() < 0) {
+                    return false;
+                }
+            }
+        }
+        return upgrades <= MAX_UPGRADE;
+    }
+
+    public boolean canBeDegraded() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return false;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getOwner() != this.getOwner() || property.getUpgrades() - this.getUpgrades() > 0) {
+                    return false;
+                }
+            }
+        }
+        return upgrades > 0;
+    }
+
+    public int degrade() {
+        if(upgrades > 0){
+            upgrades--;
+            calculateNewFee();
+        }
+        return upgradePrice / 2;
+    }
+
+    public boolean canBeSelled() {
+        if(getType() != TypesOfSqueres.INSTITUTE){
+            return true;
+        }
+        for (Square square : Game.getBoard().getSquares()) {
+            if (square instanceof Property property && property.getFaculty() == this.getFaculty() && property.getType() == TypesOfSqueres.INSTITUTE) {
+                if (property.getUpgrades() > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
