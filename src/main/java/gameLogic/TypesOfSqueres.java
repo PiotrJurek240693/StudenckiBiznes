@@ -9,7 +9,7 @@ public enum TypesOfSqueres
     PARKING,
     CHANCE,
     DANTE,
-    SPORT_VANUE,
+    SPORT_VENUE,
     LIBRARY,
     DANTE_AGAIN,
     FAILED_SUBIECT_FEE

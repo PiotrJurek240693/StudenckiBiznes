@@ -10,14 +10,12 @@ public class Property extends Square implements Serializable {
     private Player owner;
     private boolean mortgaged;
     private int upgrades;
-
     private int stopPrices[];
+    private int faculty;
 
     public boolean isMortgaged() {
         return mortgaged;
     }
-
-    private int faculty;
 
     public int getFaculty() {
         return faculty;
@@ -174,7 +172,7 @@ public class Property extends Square implements Serializable {
         return upgradePrice / 2;
     }
 
-    public boolean canBeSelled() {
+    public boolean canBeSell() {
         if(getType() != TypesOfSqueres.INSTITUTE){
             return true;
         }
@@ -186,5 +184,37 @@ public class Property extends Square implements Serializable {
             }
         }
         return true;
+    }
+
+    public int getStopPrice() {
+        return switch(type){
+            case INSTITUTE -> getInstituteStopPrice();
+            case PARKING -> getParkingStopPrice();
+            case SPORT_VENUE -> getSportVenueStopPrice();
+            default -> 0;
+        };
+    }
+
+    private int getSportVenueStopPrice() {
+        var board = Game.getBoard().getSquares();
+        if(((Property)board.get(GameInfo.FIRST_SPORT_VENUE_INDEX)).getOwner() == ((Property)board.get(GameInfo.SECOND_SPORT_VENUE_INDEX)).getOwner()){
+            return 10 * Game.getActivePlayer().getDicesSum();
+        }
+        return 4 * Game.getActivePlayer().getDicesSum();
+    }
+
+    private int getParkingStopPrice() {
+        int output = 0;
+        for(int i = 5; i < 40; i += 10){
+            Property parking = (Property) Game.getBoard().getSquares().get(i);
+            if(parking != this && parking.getOwner() == owner){
+                output++;
+            }
+        }
+        return stopPrices[output];
+    }
+
+    private int getInstituteStopPrice() {
+        return stopPrices[upgrades];
     }
 }

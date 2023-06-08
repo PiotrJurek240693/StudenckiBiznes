@@ -2,6 +2,8 @@ package gui;
 
 import gameLogic.Game;
 import gameLogic.GameInfo;
+import gameLogic.Player;
+import gameLogic.Property;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -104,8 +106,38 @@ public class DecisionButtonsShower {
         decisionButtons.getChildren().add(button2);
     }
 
-    public static void showPayDecisionButtons() {
+    public static void showPayDecisionButtons(Player payer, Player receiver, int amount) {
         init();
+        Label label = new Label("Placisz " + (receiver == null ? "do banku" : "graczowi" + receiver.getNick()) + " " + amount + " M$");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        if(payer.getMoneyAmount() >= amount){
+            Button button1;
+            button1 = new Button("Zaplac");
+            button1.getStyleClass().add("przyciski_losowania");
+            button1.setOnAction(event -> {
+                DecisionButtonsController.onPayToPlayerButtonClick(payer, receiver, amount);
+            });
+            decisionButtons.getChildren().add(button1);
+        }
+        else{
+            Button button2;
+            Label label2 = new Label("Sprzedaj pola/ulepszenia by starczylo na oplaty");
+            label2.getStyleClass().add("nazwa");
+            label2.setTranslateX(0);
+            label2.setTranslateY(-50);
+            decisionButtons.getChildren().add(label2);
+            button2 = new Button("Sprzedaj");
+            button2.setTranslateY(50);
+            button2.getStyleClass().add("przyciski_losowania");
+            button2.setOnAction(event -> {
+                DecisionButtonsController.onActivateNeedToSellModeButtonClick(payer, receiver, amount);
+            });
+            decisionButtons.getChildren().add(button2);
+        }
     }
 
     public static void showGoToDanteDecisionButtons() {
@@ -186,6 +218,42 @@ public class DecisionButtonsShower {
         decisionButtons.getChildren().add(button1);
     }
 
+    public static void showBankruptDecisionButtons() {
+        init();
+
+        Label label = new Label("Splajtowales! Odpadasz z gry.");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        Button button1;
+        button1 = new Button("Ok");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onBankruptOkButtonClick();
+        });
+        decisionButtons.getChildren().add(button1);
+    }
+
+    public static void showWinDecisionButtons() {
+        init();
+
+        Label label = new Label(Game.checkWinner().getNick() + " wygral!!!");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        Button button1;
+        button1 = new Button("Menu");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onEndGameButtonClick();
+        });
+        decisionButtons.getChildren().add(button1);
+    }
+
     public static void showBackToInfoModeButton() {
         decisionButtons.setVisible(false);
         Scene scene = ScreenSettings.primaryStage.getScene();
@@ -213,5 +281,27 @@ public class DecisionButtonsShower {
         Pane stackPane = (Pane) scene.getRoot();
         stackPane.getChildren().remove(backButton);
         decisionButtons.setVisible(true);
+    }
+
+    public static void showBackToPaymentButton(Player payer, Player receiver, int amount) {
+        decisionButtons.setVisible(false);
+        Scene scene = ScreenSettings.primaryStage.getScene();
+        Pane stackPane = (Pane) scene.getRoot();
+        stackPane.getChildren().remove(backButton);
+        backButton = new StackPane();
+        backButton.setAlignment(Pos.CENTER);
+        backButton.setPrefWidth(696);
+        backButton.setPrefHeight(262);
+        backButton.setTranslateX(152);
+        backButton.setTranslateY(490);
+        stackPane.getChildren().add(backButton);
+
+        Button button1;
+        button1 = new Button("Powrot");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onBackToPaymentButtonClick(payer, receiver, amount);
+        });
+        backButton.getChildren().add(button1);
     }
 }

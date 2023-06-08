@@ -147,8 +147,8 @@ public class Player implements Serializable {
         }
     }
 
-    public boolean checkIfCanTakeMoney(int amount) {
-        return valueOfProperties(ownedProperties()) + getMoneyAmount() < amount; // True jezeli mozna zabrac gotowke bez bankructwa
+    public boolean checkIfCanTakeMoneyWithoutBankrupt(int amount) {
+        return valueOfProperties(ownedProperties()) + getMoneyAmount() >= amount; // True jezeli mozna zabrac gotowke bez bankructwa
     }
 
     public void makeDecision(DecisionType type) {
@@ -167,9 +167,9 @@ public class Player implements Serializable {
             case Buy:
                 DecisionButtonsShower.showBuyDecisionButtons();
                 break;
-            case Pay:
-                //DecisionButtonsShower.showPayDecisionButtons();
-                Game.conditionalNextRound();
+            case PayForStop:
+                Property property = (Property) Game.getBoard().getSquares().get(Game.getActivePlayer().getPawn().getPosition());
+                DecisionButtonsShower.showPayDecisionButtons(Game.getActivePlayer(), property.getOwner(), property.getStopPrice());
                 break;
             case PayToBank:
                 //DecisionButtonsShower.showPayToBankDecisionButtons();
@@ -180,6 +180,12 @@ public class Player implements Serializable {
                 break;
             case EndRound:
                 DecisionButtonsShower.showEndRoundDecisionButtons();
+                break;
+            case Bankrupt:
+                DecisionButtonsShower.showBankruptDecisionButtons();
+                break;
+            case Win:
+                DecisionButtonsShower.showWinDecisionButtons();
                 break;
             default:
                 Game.conditionalNextRound();
@@ -267,6 +273,14 @@ public class Player implements Serializable {
         return dices;
     }
 
+    public int getDicesSum() {
+        int output = 0;
+        for (int dice : dices) {
+            output += dice;
+        }
+        return output;
+    }
+
     public void setNumberOfDoublets(int numberOfDoublets) {
         this.numberOfDoublets = numberOfDoublets;
     }
@@ -274,7 +288,7 @@ public class Player implements Serializable {
     public boolean canSellOrDegradeSomething() {
         for (Square square : Game.getBoard().getSquares()) {
             if (square instanceof Property property && property.getOwner() == this) {
-                if (property.canBeSelled() || property.canBeDegraded()) {
+                if (property.canBeSell() || property.canBeDegraded()) {
                     return true;
                 }
             }
@@ -291,5 +305,17 @@ public class Player implements Serializable {
             }
         }
         return false;
+    }
+
+    public int giveEverythingAndBankrupt() {
+        int output = valueOfProperties(ownedProperties()) + getMoneyAmount();
+        for (Square square : Game.getBoard().getSquares()) {
+            if(square instanceof Property property && property.getOwner() == this){
+                property.cleanProperty();
+            }
+        }
+        moneyAmount = 0;
+        isBankrupt = true;
+        return output;
     }
 }

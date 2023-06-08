@@ -4,8 +4,8 @@ public enum DecisionType {
     RoundStart,
     DrawCard,
     Buy,
-    Pay,
+    PayForStop,
     PayToBank,
     EndRound,
-    GoToDante,
+    GoToDante, Bankrupt, Win,
 }

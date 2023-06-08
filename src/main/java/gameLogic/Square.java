@@ -6,8 +6,8 @@ import static gameLogic.TypesOfSqueres.*;
 
 public class Square implements Serializable {
 
-    private TypesOfSqueres type;
-    private String name;
+    protected TypesOfSqueres type;
+    protected String name;
     protected int fee;
 
 
@@ -34,7 +34,7 @@ public class Square implements Serializable {
     }
     public boolean isProperty()
     {
-        if(type==INSTITUTE||type==PARKING||type==SPORT_VANUE)
+        if(type==INSTITUTE||type==PARKING||type== SPORT_VENUE)
         {
             return true;
         }
@@ -60,11 +60,17 @@ public class Square implements Serializable {
         if(this instanceof Property property){
             if(property.getOwner() == null){
                 player.makeDecision(DecisionType.Buy);
-                return;
             }
-            else{
-                //player.makeDecision(DecisionType.Pay);
+            else if(property.getOwner() != player){
+                if(player.checkIfCanTakeMoneyWithoutBankrupt(property.getStopPrice())) {
+                    player.makeDecision(DecisionType.PayForStop);
+                }
+                else {
+                    property.getOwner().giveMoney(player.giveEverythingAndBankrupt());
+                    player.makeDecision(DecisionType.Bankrupt);
+                }
             }
+            return;
         }
         switch (type) {
             //case CHANCE, STUDENT_CASH -> player.makeDecision(DecisionType.DrawCard);

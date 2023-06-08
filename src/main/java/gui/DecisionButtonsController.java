@@ -93,4 +93,39 @@ public class DecisionButtonsController {
         BoardShower.setMode(BoardMode.Info);
         DecisionButtonsShower.removeBackToInfoModeButton();
     }
+
+    public static void onActivateNeedToSellModeButtonClick(Player payer, Player receiver, int amount) {
+        BoardShower.setMode(BoardMode.Sell);
+        DecisionButtonsShower.showBackToPaymentButton(payer, receiver, amount);
+    }
+
+    public static void onBackToPaymentButtonClick(Player payer, Player receiver, int amount) {
+        BoardShower.setMode(BoardMode.Info);
+        DecisionButtonsShower.showPayDecisionButtons(payer, receiver, amount);
+        DecisionButtonsShower.removeBackToInfoModeButton();
+    }
+
+    public static void onPayToPlayerButtonClick(Player payer, Player receiver, int amount) {
+        Game.pay(payer, receiver, amount);
+        PlayersInfoShower.showPlayersInfo();
+        Game.conditionalEndRound();
+    }
+
+    public static void onBankruptOkButtonClick() {
+        PlayersInfoShower.showPlayersInfo();
+        PropertyIconsShower.showPropertyIcons();
+        PawnsShower.showPawns();
+        Player winner = Game.checkWinner();
+        if(winner != null){
+            winner.makeDecision(DecisionType.Win);
+        }
+        else{
+            Game.conditionalNextRound();
+        }
+        ActivePlayerInfoShower.showActivePlayerInfo();
+    }
+
+    public static void onEndGameButtonClick() {
+        MenuShower.showMainMenu();
+    }
 }

@@ -25,14 +25,16 @@ public class PawnsShower {
         pawns.setMouseTransparent(true);
 
         for (Player player : Game.getPlayers()) {
-            ImageView pawnImg = new ImageView();
-            Pawn pawn = player.getPawn();
-            pawnImg.setImage(Chooser.choosePawn(pawn.getColor()));
-            pawnImg.setTranslateX(possiblePositions[pawn.getPosition()][0]);
-            pawnImg.setTranslateY(possiblePositions[pawn.getPosition()][1]);
-            pawnImg.setFitWidth(30);
-            pawnImg.setFitHeight(30);
-            pawns.getChildren().add(pawnImg);
+            if(!player.isBankrupt()){
+                ImageView pawnImg = new ImageView();
+                Pawn pawn = player.getPawn();
+                pawnImg.setImage(Chooser.choosePawn(pawn.getColor()));
+                pawnImg.setTranslateX(possiblePositions[pawn.getPosition()][0]);
+                pawnImg.setTranslateY(possiblePositions[pawn.getPosition()][1]);
+                pawnImg.setFitWidth(30);
+                pawnImg.setFitHeight(30);
+                pawns.getChildren().add(pawnImg);
+            }
         }
 
         stackPane.getChildren().add(pawns);

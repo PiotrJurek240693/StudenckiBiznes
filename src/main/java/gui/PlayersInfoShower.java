@@ -31,7 +31,7 @@ public class PlayersInfoShower {
             SaldoNiebieski.setTranslateY(0);
 
             //Label dla gracza 1
-            Label Gracz1 = new Label(Game.getPlayer(0).getNick());
+            Label Gracz1 = new Label(Game.getPlayer(0).isBankrupt() ? "Bankrut" : Game.getPlayer(0).getNick());
             Gracz1.getStyleClass().add("label");
             Gracz1.setTranslateX(5);
             Gracz1.setTranslateY(10);
@@ -55,7 +55,7 @@ public class PlayersInfoShower {
             SaldoCzerwony.setTranslateY(0);
 
             //Label dla gracza 2
-            Label Gracz2 = new Label(Game.getPlayer(1).getNick());
+            Label Gracz2 = new Label(Game.getPlayer(1).isBankrupt() ? "Bankrut" : Game.getPlayer(1).getNick());
             Gracz2.getStyleClass().add("label");
             Gracz2.setTranslateX(353);
             Gracz2.setTranslateY(10);
@@ -78,7 +78,7 @@ public class PlayersInfoShower {
             SaldoZolty.setTranslateY(200);
 
             //Label dla gracza 3
-            Label Gracz3 = new Label(Game.getPlayer(2).getNick());
+            Label Gracz3 = new Label(Game.getPlayer(2).isBankrupt() ? "Bankrut" : Game.getPlayer(2).getNick());
             Gracz3.getStyleClass().add("label");
             Gracz3.setTranslateX(5);
             Gracz3.setTranslateY(210);
@@ -101,7 +101,7 @@ public class PlayersInfoShower {
             SaldoZielony.setTranslateY(200);
 
             //Label dla gracza 4
-            Label Gracz4 = new Label(Game.getPlayer(3).getNick());
+            Label Gracz4 = new Label(Game.getPlayer(3).isBankrupt() ? "Bankrut" : Game.getPlayer(3).getNick());
             Gracz4.getStyleClass().add("label");
             Gracz4.setTranslateX(353);
             Gracz4.setTranslateY(210);
