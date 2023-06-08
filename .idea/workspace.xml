@@ -4,54 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="a43aeb55-1760-44bc-860c-8d460713ef16" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/BIBLIOTEKA.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/BIBLIOTEKA.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/PORANADANTE.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/PORANADANTE.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/BoardShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/BoardShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/MenuShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/MenuShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/PropertyInfoBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/PropertyInfoBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gui/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/PropertyInfoBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/PropertyInfoBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/styles.css" afterDir="false" />
-=======
     <list default="true" id="f17c3bc7-9fdf-4ed1-a403-3b77fde27963" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" afterDir="false" />
->>>>>>> master
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/BoardShower$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/BoardShower$1.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< HEAD
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "C:/Users/marty/OneDrive/Pulpit/StudenckiBiznes",
-    "node.js.selected.package.tslint": "(autodetect)"
-  }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\marty\OneDrive\Pulpit\Boszehelp\assets" />
-    </key>
-  </component>
-  <component name="TaskManager">
-    <servers />
-  </component>
-=======
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -115,5 +76,4 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
->>>>>>> master
 </project>
