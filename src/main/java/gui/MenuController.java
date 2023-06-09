@@ -1,5 +1,6 @@
 package gui;
 
+import connection.InfoSender;
 import gameLogic.*;
 import javafx.application.Platform;
 
@@ -52,8 +53,6 @@ public class MenuController {
             //TODO: Okno z errorem
             throw new RuntimeException(e);
         }
-        MenuShower.showNickAndPawnMenu();
-        System.out.println("Polaczono");
     }
 
     public static void onQuantityButtonClick(GameType gameType, int numberOfPlayers) {
@@ -71,11 +70,16 @@ public class MenuController {
     }
 
     public static void onPawnButtonClick(String nick, PawnColor color) {
-        Game.addPlayer(new Player(nick, color));
-        if(Game.getNumberOfPlayers() < Game.getMaxPlayers()){
+        Player player = new Player(nick, color);
+        Game.addPlayer(player);
+        if(Game.getGameType() == MultiplayerClient || Game.getGameType() == MultiplayerHost) {
+            Game.setMyPlayerIndex(Game.getPlayers().size() - 1);
+        }
+        if (Game.getGameType() == Singleplayer && Game.getNumberOfPlayers() < Game.getMaxPlayers()) {
             MenuShower.showNickAndPawnMenu();
             return;
         }
+        InfoSender.sendInfo();
         GameShower.showGame();
     }
 

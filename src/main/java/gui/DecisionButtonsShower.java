@@ -45,6 +45,7 @@ public class DecisionButtonsShower {
 
         Button button1;
         button1 = new Button("Rzuć kośćmi");
+        button1.setTranslateY(-50);
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
             DecisionButtonsController.onDicesButtonClick();
@@ -274,6 +275,12 @@ public class DecisionButtonsShower {
             DecisionButtonsController.onBackToInfoModeButtonClick();
         });
         backButton.getChildren().add(button1);
+    }
+
+    public static void removeDecisionButtons(){
+        Scene scene = ScreenSettings.primaryStage.getScene();
+        Pane stackPane = (Pane) scene.getRoot();
+        stackPane.getChildren().remove(decisionButtons);
     }
 
     public static void removeBackToInfoModeButton() {
