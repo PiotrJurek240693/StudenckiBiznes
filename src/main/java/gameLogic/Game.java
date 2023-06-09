@@ -85,10 +85,6 @@ public class Game implements Serializable {
         getActivePlayer().makeDecision(DecisionType.EndRound);
     }
 
-    public static void removePlayerAndCleanProperties() {
-        // TODO: wysłać i wyświetlić pola z powrotem do kupienia, gracz wyszarzony
-    }
-
     public static void closeGame() {
         if (server != null) {
             server.close();
@@ -207,6 +203,17 @@ public class Game implements Serializable {
             } else if ((property.canBeSell())) {
                 player.giveMoney(property.sellProperty());
             }
+        }
+    }
+
+    public static void activePlayerDrawCard() {
+        Square square = board.getSquares().get(getActivePlayer().getPawn().getPosition());
+
+        if(square.getType() == TypesOfSqueres.CHANCE) {
+            board.setDrawnCard(board.getChance().drawCard());
+        }
+        else if(square.getType() == TypesOfSqueres.STUDENT_CASH) {
+            board.setDrawnCard(board.getStudentCash().drawCard());
         }
     }
 

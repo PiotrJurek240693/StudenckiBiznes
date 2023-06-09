@@ -44,7 +44,7 @@ public class DecisionButtonsShower {
         init();
 
         Button button1;
-        button1 = new Button("Rzuć kośćmi");
+        button1 = new Button("Rzuc koscmi");
         button1.setTranslateY(-50);
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
@@ -199,6 +199,24 @@ public class DecisionButtonsShower {
             });
             decisionButtons.getChildren().add(button3);
         }
+    }
+
+    public static void showDrawCardDecisionButtons() {
+        init();
+
+        Label label = new Label("Dobierasz karte.");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        Button button1;
+        button1 = new Button("Ok");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onDrawCardButtonClick();
+        });
+        decisionButtons.getChildren().add(button1);
     }
 
     public static void showEndRoundDecisionButtons() {

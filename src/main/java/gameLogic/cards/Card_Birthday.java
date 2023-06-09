@@ -7,6 +7,8 @@ import gameLogic.Player;
 
 public class Card_Birthday implements Card
 {
+    private final static String name = "Card_Birthday";
+
     // Wszyscy gracze idą na pole DARMOWA HERBATA W BIBLIOTECE
     // i każdy ze studentów daje po 20m$. Nie otrzymują pieniędzy za przejście przez start
     public void takeAction(Player player)
@@ -19,5 +21,10 @@ public class Card_Birthday implements Card
                 money += current.takeMoney(LIBRARY_TEA_SQUARE_VALUE);
         }
         player.giveMoney(money);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Card_Busted implements Card
 {
+    private final static String name = "Card_Busted";
+
     // Gracz ktory dobral te karte moze wyslac innego gracza do dante (wiezienia) na jedna kolejke
     public void takeAction(Player player)
     { /*
@@ -17,5 +19,10 @@ public class Card_Busted implements Card
                 toChooseFrom.add(current);
         sendToDante = Game.choosePlayer(toChooseFrom);
         sendToDante.setDanteDuration(BUSTED_ROUNDS);*/
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

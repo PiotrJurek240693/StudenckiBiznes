@@ -5,6 +5,8 @@ import gameLogic.Property;
 
 public class Card_Busy implements Card
 {
+    private final static String name = "Card_Busy";
+
     // karta ma niszczyc aule gracza
     public void takeAction(Player player)
     {
@@ -14,5 +16,10 @@ public class Card_Busy implements Card
                 property.destroyAuditorium();
                 break;
             }
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

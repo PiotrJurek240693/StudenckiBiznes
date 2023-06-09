@@ -116,6 +116,12 @@ public class DecisionButtonsController {
         DecisionButtonsShower.removeBackToInfoModeButton();
     }
 
+    public static void onDrawCardButtonClick() {
+        Game.activePlayerDrawCard();
+        CardShower.showCard();
+        InfoSender.sendInfo();
+    }
+
     public static void onPayToPlayerButtonClick(Player payer, Player receiver, int amount) {
         Game.pay(payer, receiver, amount);
         PlayersInfoShower.showPlayersInfo();
@@ -139,6 +145,7 @@ public class DecisionButtonsController {
     }
 
     public static void onEndGameButtonClick() {
+        Game.closeGame();
         MenuShower.showMainMenu();
     }
 }

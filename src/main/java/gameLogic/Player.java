@@ -162,8 +162,7 @@ public class Player implements Serializable {
                 }
                 break;
             case DrawCard:
-                //DecisionButtonsShower.showDrawCardDecisionButtons();
-                Game.conditionalNextRound();
+                DecisionButtonsShower.showDrawCardDecisionButtons();
                 break;
             case Buy:
                 DecisionButtonsShower.showBuyDecisionButtons();

@@ -24,6 +24,7 @@ public class Board implements Serializable {
     private static Random randomGenerator = new Random();
 
     private ArrayList<Square> squares = new ArrayList<Square>();
+    private Card drawnCard = null;
     private StackOfCards chance = new StackOfCards();
     private StackOfCards studentCash = new StackOfCards();
 
@@ -31,93 +32,6 @@ public class Board implements Serializable {
         initSquares();
         chance.initStackOfCardsChance();
         studentCash.initStackOfCardsStudentCash();
-    }
-
-    private boolean checkIfPlayerOwnsFaculty(int faculty) {
-        boolean owns = true;
-        for (Square square : squares) {
-            if (square.isProperty()) {
-                Property property = (Property) square;
-                if (property.getFaculty() == faculty) {
-                    if (property.getOwner() != Game.getActivePlayer()) {
-                        owns = false;
-                        break;
-                    }
-                }
-            }
-        }
-        return owns;
-    }
-
-    private void checkIfUpgradePossibleAndOfferUpgrading() {
-        ArrayList<Property> upgradeable = new ArrayList<Property>();
-        for (Square square : squares) {
-            if (square.isProperty()) {
-                Property property = (Property) square;
-                if (property.getUpgradePrice() != UNUPGRADABLE && property.getOwner() == Game.getActivePlayer()) {
-                    if (checkIfPlayerOwnsFaculty(property.getFaculty())) {
-                        upgradeable.add(property);
-                    }
-                }
-            }
-        }
-    }
-
-    private void handleCardDrawing(TypesOfSqueres type) {
-        if (type == STUDENT_CASH) {
-            Card card = studentCash.drawCard();
-            card.takeAction(Game.getActivePlayer());
-            if (!(card instanceof Card_FreeFromDante)) {
-                studentCash.returnCard(card);
-            }
-        } else if (type == CHANCE) {
-            Card card = chance.drawCard();
-            card.takeAction(Game.getActivePlayer());
-            chance.returnCard(card);
-        }
-        // TODO: wysłać i wyświetlić kartę
-    }
-
-    private void handleSquareAction() {
-        int position = Game.getActivePlayer().getPosition();
-        Square square = squares.get(position);
-        if (square.isCards()) {
-            handleCardDrawing(square.getType());
-        } else if (square.isSpecial()) {
-            handleSpecialSquareAction(square);
-        } else if (square.isProperty()) {
-            handleProperty((Property) square);
-        } else {
-            Game.getActivePlayer().takeMoney(square.getFee());
-        }
-    }
-
-    private void handleSpecialSquareAction(Square square) {
-        switch (square.getType()) {
-            case DANTE:
-                // TODO: jeśli getInDante()==0 to należy wyświetlić na polu dla odwiedzających
-                break;
-            case LIBRARY:
-                Game.getActivePlayer().setHowManyDicesToThrow(3);
-                // TODO: wysłanie i wyświetlenie darmowej herbaty
-                break;
-            case DANTE_AGAIN:
-                Game.getActivePlayer().setDanteDuration(3);
-                break;
-        }
-    }
-
-    private void handleProperty(Property square) {
-        if (square.isMortgaged()) {
-            return;
-        }
-        Property property = square;
-        Player owner = property.getOwner();
-        if (owner == null) {
-            //TODO: okienko z wyborem
-        } else if (Game.getActivePlayer() != owner) {
-            Game.pay(Game.getActivePlayer(), owner, square.getFee());
-        }
     }
 
     private void initSquares() {
@@ -167,4 +81,19 @@ public class Board implements Serializable {
         return squares;
     }
 
+    public Card getDrawnCard() {
+        return drawnCard;
+    }
+
+    public void setDrawnCard(Card drawedCard) {
+        this.drawnCard = drawedCard;
+    }
+
+    public StackOfCards getChance() {
+        return chance;
+    }
+
+    public StackOfCards getStudentCash() {
+        return studentCash;
+    }
 }

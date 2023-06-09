@@ -5,26 +5,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f17c3bc7-9fdf-4ed1-a403-3b77fde27963" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/CardShower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/connection/Decryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connection/InfoSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connection/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connection/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/connection/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connection/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/connection/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/connection/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/StackOfCards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/StackOfCards.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Birthday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Birthday.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_BrokenLeg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_BrokenLeg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Busted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Busted.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Busy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Busy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Connections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Connections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_CrossingRedLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_CrossingRedLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_ElectricDeficiency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_ElectricDeficiency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Erasmus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Erasmus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_FoundMoney.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_FoundMoney.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_FreeFromDante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_FreeFromDante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_GoodGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_GoodGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Lost.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Lost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_OnlineSite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_OnlineSite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_PP2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_PP2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Renovation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Renovation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Scholarship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameLogic/cards/Card_Scholarship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/DecisionButtonsShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameShower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameShower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/connection/Decryptor.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/connection/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/connection/client/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/connection/server/ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/connection/server/ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/connection/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/connection/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Board$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Board.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Square$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Square$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/Square.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/StackOfCards.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/StackOfCards.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Birthday.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Birthday.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_BrokenLeg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_BrokenLeg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Busted.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Busted.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Busy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Busy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Condition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Condition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Connections.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Connections.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_CrossingRedLight.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_CrossingRedLight.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_ElectricDeficiency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_ElectricDeficiency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Erasmus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Erasmus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_FoundMoney.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_FoundMoney.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_FreeFromDante.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_FreeFromDante.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_GoodGrade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_GoodGrade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Lost.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Lost.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_OnlineSite.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_OnlineSite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_PP2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_PP2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Renovation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Renovation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Scholarship.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gameLogic/cards/Card_Scholarship.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/DecisionButtonsShower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameShower.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameShower.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/MenuController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -11,6 +11,7 @@ public class StackOfCards implements Serializable
 
     public void initStackOfCardsChance()
     {
+        usedCards = new ArrayList<>();
         deck = new ArrayList<>();
         deck.add(new Card_PP2());
         deck.add(new Card_Condition());
@@ -25,6 +26,7 @@ public class StackOfCards implements Serializable
 
     public void initStackOfCardsStudentCash()
     {
+        usedCards = new ArrayList<>();
         deck = new ArrayList<>();
         deck.add(new Card_Birthday());
         deck.add(new Card_Busted());
@@ -49,11 +51,7 @@ public class StackOfCards implements Serializable
         Card result;
         result = deck.get(deck.size()+GameInfo.SUB_INDEX);
         deck.remove(deck.size()+GameInfo.SUB_INDEX);
+        usedCards.add(result);
         return result;
-    }
-
-    public void returnCard(Card card)
-    {
-        usedCards.add(card);
     }
 }
