@@ -1,26 +1,26 @@
 package connection.server;
 
 import gameLogic.Board;
+import gameLogic.DecisionType;
 import gameLogic.Game;
 import gameLogic.Player;
+import gui.*;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Objects;
-
-import static connection.Decryptor.decryptMessage;
 
 public class ClientHandler extends Thread {
     private final Socket clientSocket;
-    private final ObjectInputStream objectInput;
     ObjectOutputStream objectOutput;
+    private final ObjectInputStream objectInput;
     private boolean working;
 
     public ClientHandler(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        objectInput = new ObjectInputStream(clientSocket.getInputStream());
         objectOutput = new ObjectOutputStream(clientSocket.getOutputStream());
+        objectInput = new ObjectInputStream(clientSocket.getInputStream());
         working = true;
         System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " rozpoczoł działanie.");
     }
@@ -30,13 +30,8 @@ public class ClientHandler extends Thread {
         try {
             sendGameInfo();
             while (working) {
-                Object notificationContent = objectInput.readObject();
-                if (notificationContent == null) {
-                    break;
-                }
-                decryptMessage(notificationContent);
-                Game.getServer().forwardMessage(notificationContent, this);
-                System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " otrzymał wiadomość:\n" + notificationContent);
+                updateGameInfo();
+                Game.getServer().forwardInfoUpdate(this);
                 // TODO: Napisać funkcję interpretującą otrzymane wiadomości
             }
         } catch (IOException e) {
@@ -48,10 +43,36 @@ public class ClientHandler extends Thread {
                     System.out.println("Bład podczas zamykania gniazda!");
                 }
             }
+        }
+        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " zakończył działanie.");
+    }
+
+    private void updateGameInfo() throws IOException {
+        try {
+            Game.setMaxPlayers(objectInput.readInt());
+            Game.setActivePlayerIndex(objectInput.readInt());
+            Game.setBoard((Board) objectInput.readObject());
+            Game.setPlayers((ArrayList<Player>) objectInput.readObject());
+            Game.setStarted(objectInput.readBoolean());
+
+            Platform.runLater(() -> {
+                if (Game.isStarted()) {
+                    ActivePlayerInfoShower.showActivePlayerInfo();
+                    if(Game.getActivePlayerIndex() == Game.getMyPlayerIndex()){
+                        Game.getActivePlayer().makeDecision(DecisionType.RoundStart);
+                    }
+                    if(Game.checkWinner() != null){
+                        DecisionButtonsShower.showWinDecisionButtons();
+                    }
+                }
+                DicesShower.showDices(Game.getActivePlayer().getDices());
+                PawnsShower.showPawns();
+                PlayersInfoShower.showPlayersInfo();
+                PropertyIconsShower.showPropertyIcons();
+            });
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("ClientHandler na sokecie o numerze portu: " + clientSocket.getPort() + " zakończył działanie.");
     }
 
     public void sendMessage(Object message) throws IOException {
@@ -63,6 +84,8 @@ public class ClientHandler extends Thread {
         objectOutput.writeInt(Game.getActivePlayerIndex());
         objectOutput.writeObject(Game.getBoard());
         objectOutput.writeObject(Game.getPlayers());
+        objectOutput.writeBoolean(Game.isStarted());
+        objectOutput.reset();
     }
 
     public void close() {

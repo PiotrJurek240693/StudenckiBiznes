@@ -38,16 +38,16 @@ public class Server extends Thread {
         System.out.println("Serwer zakończył działanie.");
     }
 
-    public void sendMessage(Object message) throws IOException {
+    public void sendGameInfo() throws IOException {
         for (ClientHandler ch : clientHandlers) {
-            ch.sendMessage(message);
+            ch.sendGameInfo();
         }
     }
 
-    public void forwardMessage(Object message, ClientHandler sender) throws IOException {
+    public void forwardInfoUpdate(ClientHandler sender) throws IOException {
         for (ClientHandler ch : clientHandlers) {
             if(ch != sender){
-                ch.sendMessage(message);
+                ch.sendGameInfo();
             }
         }
     }

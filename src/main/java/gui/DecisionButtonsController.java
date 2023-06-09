@@ -1,5 +1,6 @@
 package gui;
 
+import connection.InfoSender;
 import gameLogic.DecisionType;
 import gameLogic.Game;
 import gameLogic.GameInfo;
@@ -12,6 +13,7 @@ public class DecisionButtonsController {
         ActivePlayerInfoShower.showActivePlayerInfo();
         PawnsShower.showPawns();
         Game.getActivePlayer().makeDecision(DecisionType.RoundStart);
+        InfoSender.sendInfo();
     }
 
     public static void onDicesButtonClick() {
@@ -23,6 +25,7 @@ public class DecisionButtonsController {
         ActivePlayerInfoShower.showActivePlayerInfo();
         PlayersInfoShower.showPlayersInfo();
         Game.evaluateActivePlayerPosition();
+        InfoSender.sendInfo();
     }
 
     public static void onBuyButtonClick() {
@@ -31,11 +34,13 @@ public class DecisionButtonsController {
         PlayersInfoShower.showPlayersInfo();
         PropertyIconsShower.showPropertyIcons();
         ActivePlayerInfoShower.showActivePlayerInfo();
+        InfoSender.sendInfo();
     }
 
     public static void onSkipBuyingButtonClick() {
         Game.conditionalEndRound();
         ActivePlayerInfoShower.showActivePlayerInfo();
+        InfoSender.sendInfo();
     }
 
     public static void onGoToDanteOkButtonClick() {
@@ -43,6 +48,7 @@ public class DecisionButtonsController {
         Game.conditionalNextRound();
         PawnsShower.showPawns();
         ActivePlayerInfoShower.showActivePlayerInfo();
+        InfoSender.sendInfo();
     }
 
     public static void onDicesInDanteButtonClick() {
@@ -57,6 +63,7 @@ public class DecisionButtonsController {
             player.setDanteDuration(player.getInDante() - 1);
             player.makeDecision(DecisionType.EndRound);
         }
+        InfoSender.sendInfo();
     }
 
     public static void onPayInDanteButtonClick() {
@@ -65,6 +72,7 @@ public class DecisionButtonsController {
         player.setDanteDuration(0);
         PlayersInfoShower.showPlayersInfo();
         player.makeDecision(DecisionType.RoundStart);
+        InfoSender.sendInfo();
     }
 
     public static void onUseCardInDanteButtonClick() {
@@ -72,11 +80,14 @@ public class DecisionButtonsController {
         player.setCardChanceStatus(false);
         player.setDanteDuration(0);
         player.makeDecision(DecisionType.RoundStart);
+        InfoSender.sendInfo();
     }
 
     public static void onEndTurnOkButtonClick() {
+        DecisionButtonsShower.removeDecisionButtons();
         Game.conditionalNextRound();
         ActivePlayerInfoShower.showActivePlayerInfo();
+        InfoSender.sendInfo();
     }
 
     public static void onActivateSellModeButtonClick() {
@@ -109,6 +120,7 @@ public class DecisionButtonsController {
         Game.pay(payer, receiver, amount);
         PlayersInfoShower.showPlayersInfo();
         Game.conditionalEndRound();
+        InfoSender.sendInfo();
     }
 
     public static void onBankruptOkButtonClick() {
@@ -123,6 +135,7 @@ public class DecisionButtonsController {
             Game.conditionalNextRound();
         }
         ActivePlayerInfoShower.showActivePlayerInfo();
+        InfoSender.sendInfo();
     }
 
     public static void onEndGameButtonClick() {
