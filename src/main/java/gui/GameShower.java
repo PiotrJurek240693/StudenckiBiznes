@@ -26,6 +26,7 @@ public class GameShower {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(MenuShower.class.getResource("styles.css").toExternalForm());
 
+        ScreenSettings.resize(scene);
         ScreenSettings.primaryStage.setScene(scene);
 
         BoardShower.showBoard();

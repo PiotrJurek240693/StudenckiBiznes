@@ -16,6 +16,9 @@ public class MenuController {
     public static void onPlayButtonClick() {
         MenuShower.showMultiOrSingleMenu();
     }
+    public static void onSettingsButtonClick() {
+        MenuShower.showSettingsMenu();
+    }
 
     public static void onReturnToMainMenuButtonClick() {
         MenuShower.showMainMenu();
@@ -85,5 +88,10 @@ public class MenuController {
 
     public static void onCloseInfoButtonClick() {
         PropertyInfoBox.closePropertyInfo();
+    }
+
+    public static void onResizeButtonClick(double scaleChange) {
+        ScreenSettings.changeScale(scaleChange);
+        MenuShower.showSettingsMenu();
     }
 }
