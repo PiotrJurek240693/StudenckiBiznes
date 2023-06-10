@@ -18,9 +18,9 @@ public class DecisionButtonsController {
 
     public static void onDicesButtonClick() {
         Player player = Game.getActivePlayer();
-        player.rollDices();
-        player.conditionalMove();
-        DicesShower.showDices(player.getDices());
+        var dices = player.rollDices();
+        player.conditionalMove(dices);
+        DicesShower.showDices(dices);
         PawnsShower.showPawns();
         ActivePlayerInfoShower.showActivePlayerInfo();
         PlayersInfoShower.showPlayersInfo();
@@ -44,7 +44,7 @@ public class DecisionButtonsController {
     }
 
     public static void onGoToDanteOkButtonClick() {
-        Game.getActivePlayer().unconditionalMove(GameInfo.DANTE_SQUARE_INDEX);;
+        Game.getActivePlayer().unconditionalMove(GameInfo.DANTE_SQUARE_INDEX);
         Game.conditionalNextRound();
         PawnsShower.showPawns();
         ActivePlayerInfoShower.showActivePlayerInfo();
@@ -53,9 +53,8 @@ public class DecisionButtonsController {
 
     public static void onDicesInDanteButtonClick() {
         Player player = Game.getActivePlayer();
-        player.rollDices();
-        DicesShower.showDices(player.getDices());
-        if(player.checkDoubles()){
+        DicesShower.showDices(player.rollDices());
+        if(player.isDoubleLastMove()){
             player.setDanteDuration(0);
             player.makeDecision(DecisionType.RoundStart);
         }
@@ -119,12 +118,54 @@ public class DecisionButtonsController {
     public static void onDrawCardButtonClick() {
         Game.activePlayerDrawCard();
         CardShower.showCard();
+        if(Game.getBoard().getDrawnCard().isDecisionNeeded()){
+            Game.getBoard().getDrawnCard().takeAction(Game.getActivePlayer());
+        }
+        else{
+            DecisionButtonsShower.showDoCardActionDecisionButtons();
+        }
+        InfoSender.sendInfo();
+    }
+
+    public static void onDoCardActionButtonClick() {
+        Game.getBoard().getDrawnCard().takeAction(Game.getActivePlayer());
+        Game.getBoard().setDrawnCard(null);
+        Game.conditionalEndRound();
+        PlayersInfoShower.showPlayersInfo();
+        PawnsShower.showPawns();
+        CardShower.removeCard();
+        InfoSender.sendInfo();
+    }
+
+    public static void onDoCardBustedActionButtonClick(int i) {
+        Game.getPlayer(i).changeDanteDuration(1);
+        Game.getPlayer(i).unconditionalMove(GameInfo.DANTE_SQUARE_INDEX);
+        Game.getBoard().setDrawnCard(null);
+        Game.conditionalEndRound();
+        PlayersInfoShower.showPlayersInfo();
+        PawnsShower.showPawns();
+        CardShower.removeCard();
+        InfoSender.sendInfo();
+    }
+
+    public static void onDoCardGoodGradeActionButtonClick(int i) {
+        Game.getActivePlayer().conditionalMove(i);
+        Game.evaluateActivePlayerPosition();
+        Game.getBoard().setDrawnCard(null);
+        PlayersInfoShower.showPlayersInfo();
+        PawnsShower.showPawns();
+        CardShower.removeCard();
         InfoSender.sendInfo();
     }
 
     public static void onPayToPlayerButtonClick(Player payer, Player receiver, int amount) {
         Game.pay(payer, receiver, amount);
         PlayersInfoShower.showPlayersInfo();
+        Game.conditionalEndRound();
+        InfoSender.sendInfo();
+    }
+
+    public static void onDontNeedToPayButtonClick() {
         Game.conditionalEndRound();
         InfoSender.sendInfo();
     }

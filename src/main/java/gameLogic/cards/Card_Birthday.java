@@ -8,9 +8,11 @@ import gameLogic.Player;
 public class Card_Birthday implements Card
 {
     private final static String name = "Card_Birthday";
+    private final static boolean decisionNeeded = false;
 
     // Wszyscy gracze idą na pole DARMOWA HERBATA W BIBLIOTECE
     // i każdy ze studentów daje po 20m$. Nie otrzymują pieniędzy za przejście przez start
+    @Override
     public void takeAction(Player player)
     {
         int money = GameInfo.NONE;
@@ -26,5 +28,10 @@ public class Card_Birthday implements Card
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean isDecisionNeeded() {
+        return decisionNeeded;
     }
 }

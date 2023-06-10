@@ -21,4 +21,6 @@ public interface Card extends Serializable
     int ONE_DICE = 1;
     void takeAction(Player player);
     String getName();
+
+    boolean isDecisionNeeded();
 }

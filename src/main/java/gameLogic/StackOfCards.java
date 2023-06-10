@@ -19,7 +19,6 @@ public class StackOfCards implements Serializable
         deck.add(new Card_CrossingRedLight());
         deck.add(new Card_Busy());
         deck.add(new Card_BrokenLeg());
-        deck.add(new Card_Renovation());
         deck.add(new Card_Lost());
         Collections.shuffle(deck);
     }

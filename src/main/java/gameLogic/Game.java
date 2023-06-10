@@ -57,7 +57,7 @@ public class Game implements Serializable {
     }
 
     public static void conditionalNextRound() {
-        if (getActivePlayer().checkDoubles() && !getActivePlayer().isBankrupt()) {
+        if (getActivePlayer().isDoubleLastMove() && !getActivePlayer().isBankrupt()) {
             if(gameType == GameType.Singleplayer || getActivePlayerIndex() == myPlayerIndex) {
                 getActivePlayer().makeDecision(DecisionType.RoundStart);
             }
@@ -69,8 +69,11 @@ public class Game implements Serializable {
                 activePlayerIndex = 0;
             }
         } while (getActivePlayer().isBankrupt());
-        for (Player player : players) {
-            player.setNumberOfDoublets(0);
+        getActivePlayer().setNumberOfDoublets(0);
+        getActivePlayer().setElectricDeficiencyStatus(false);
+        getActivePlayer().setOnErasmus(getActivePlayer().getOnErasmus() - 1);
+        if(getActivePlayer().getOnErasmus() < 0){
+            getActivePlayer().setOnErasmus(0);
         }
         if(gameType == GameType.Singleplayer || getActivePlayerIndex() == myPlayerIndex){
             getActivePlayer().makeDecision(DecisionType.RoundStart);
@@ -78,7 +81,7 @@ public class Game implements Serializable {
     }
 
     public static void conditionalEndRound() {
-        if (getActivePlayer().checkDoubles()) {
+        if (getActivePlayer().isDoubleLastMove()) {
             getActivePlayer().makeDecision(DecisionType.RoundStart);
             return;
         }

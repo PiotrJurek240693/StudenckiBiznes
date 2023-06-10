@@ -1,5 +1,6 @@
 package gameLogic.cards;
 
+import gameLogic.DecisionType;
 import gameLogic.Game;
 import gameLogic.Player;
 
@@ -8,21 +9,22 @@ import java.util.ArrayList;
 public class Card_Busted implements Card
 {
     private final static String name = "Card_Busted";
+    private final static boolean decisionNeeded = true;
 
     // Gracz ktory dobral te karte moze wyslac innego gracza do dante (wiezienia) na jedna kolejke
+    @Override
     public void takeAction(Player player)
-    { /*
-        Player sendToDante;
-        ArrayList<Player> toChooseFrom = new ArrayList<>();
-        for(Player current : Game.getPlayers())
-            if(current!=player)
-                toChooseFrom.add(current);
-        sendToDante = Game.choosePlayer(toChooseFrom);
-        sendToDante.setDanteDuration(BUSTED_ROUNDS);*/
+    {
+        player.makeDecision(DecisionType.CardBusted);
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean isDecisionNeeded() {
+        return decisionNeeded;
     }
 }

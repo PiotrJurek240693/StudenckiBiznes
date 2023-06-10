@@ -53,7 +53,7 @@ public class DecisionButtonsShower {
         decisionButtons.getChildren().add(button1);
 
         Button button2 = null;
-        if(Game.getActivePlayer().canSellOrDegradeSomething()){
+        if(Game.getActivePlayer().canSellOrDegradeSomething() && Game.getActivePlayer().getInDante() <= 0){
             button2 = new Button("Sprzedaj");
             button2.setTranslateY(100);
             button2.getStyleClass().add("przyciski_losowania");
@@ -63,7 +63,7 @@ public class DecisionButtonsShower {
             decisionButtons.getChildren().add(button2);
         }
 
-        if(Game.getActivePlayer().canUpgradeSomething()){
+        if(Game.getActivePlayer().canUpgradeSomething() && Game.getActivePlayer().getInDante() <= 0){
             Button button3;
             button3 = new Button("Ulepsz");
             button3.setTranslateY(100);
@@ -109,6 +109,58 @@ public class DecisionButtonsShower {
 
     public static void showPayDecisionButtons(Player payer, Player receiver, int amount) {
         init();
+
+        if(receiver != null && receiver.getInDante() > 0) {
+            Label label = new Label("Gracz siedzi w wiezieniu i nie moze pobrac od ciebie oplaty");
+            label.getStyleClass().add("nazwa");
+            label.setTranslateX(0);
+            label.setTranslateY(-100);
+            decisionButtons.getChildren().add(label);
+
+            Button button1;
+            button1 = new Button("Ok");
+            button1.getStyleClass().add("przyciski_losowania");
+            button1.setOnAction(event -> {
+                DecisionButtonsController.onDontNeedToPayButtonClick();
+            });
+            decisionButtons.getChildren().add(button1);
+            return;
+        }
+
+        if(receiver != null && receiver.isHasElectricDeficiency()) {
+            Label label = new Label("Gracz nie ma pradu i nie moze pobrac od ciebie oplaty");
+            label.getStyleClass().add("nazwa");
+            label.setTranslateX(0);
+            label.setTranslateY(-100);
+            decisionButtons.getChildren().add(label);
+
+            Button button1;
+            button1 = new Button("Ok");
+            button1.getStyleClass().add("przyciski_losowania");
+            button1.setOnAction(event -> {
+                DecisionButtonsController.onDontNeedToPayButtonClick();
+            });
+            decisionButtons.getChildren().add(button1);
+            return;
+        }
+
+        if(payer.getOnErasmus() > 0) {
+            Label label = new Label("Jestes na erazmusie i nie musisz za nic placic");
+            label.getStyleClass().add("nazwa");
+            label.setTranslateX(0);
+            label.setTranslateY(-100);
+            decisionButtons.getChildren().add(label);
+
+            Button button1;
+            button1 = new Button("Ok");
+            button1.getStyleClass().add("przyciski_losowania");
+            button1.setOnAction(event -> {
+                DecisionButtonsController.onDontNeedToPayButtonClick();
+            });
+            decisionButtons.getChildren().add(button1);
+            return;
+        }
+
         Label label = new Label("Placisz " + (receiver == null ? "do banku" : "graczowi" + receiver.getNick()) + " " + amount + " M$");
         label.getStyleClass().add("nazwa");
         label.setTranslateX(0);
@@ -177,7 +229,7 @@ public class DecisionButtonsShower {
         decisionButtons.getChildren().add(button1);
 
         if(Game.getActivePlayer().getMoneyAmount() >= GameInfo.LEAVE_DANTE_PAY){
-            button1.setTranslateX(-150);
+            button1.setTranslateX(-200);
 
             Button button2;
             button2 = new Button("Zaplac " + GameInfo.LEAVE_DANTE_PAY + "M$");
@@ -217,6 +269,90 @@ public class DecisionButtonsShower {
             DecisionButtonsController.onDrawCardButtonClick();
         });
         decisionButtons.getChildren().add(button1);
+    }
+
+    public static void showDoCardActionDecisionButtons() {
+        init();
+
+        Label label = new Label("Wykonaj akcje na karcie.");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        Button button1;
+        button1 = new Button("Ok");
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onDoCardActionButtonClick();
+        });
+        decisionButtons.getChildren().add(button1);
+    }
+
+
+    public static void showCardGoodGradeDecisionButtons() {
+        init();
+
+        Label label = new Label("Wybierz w ktora strone chcesz sie ruszyc:");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        Button button1;
+        button1 = new Button("Wstecz");
+        label.setTranslateX(-200);
+        button1.getStyleClass().add("przyciski_losowania");
+        button1.setOnAction(event -> {
+            DecisionButtonsController.onDoCardGoodGradeActionButtonClick(-3);
+        });
+        decisionButtons.getChildren().add(button1);
+
+        Button button2;
+        button2 = new Button("Przod");
+        label.setTranslateX(150);
+        button2.getStyleClass().add("przyciski_losowania");
+        button2.setOnAction(event -> {
+            DecisionButtonsController.onDoCardGoodGradeActionButtonClick(3);
+        });
+        decisionButtons.getChildren().add(button2);
+    }
+
+    public static void showCardBustedDecisionButtons() {
+        init();
+
+        Label label = new Label("Wybierz gracza:");
+        label.getStyleClass().add("nazwa");
+        label.setTranslateX(0);
+        label.setTranslateY(-100);
+        decisionButtons.getChildren().add(label);
+
+        int i = 0;
+        for (Player player : Game.getPlayers()) {
+            if(!player.isBankrupt() && player.getInDante() <= 0) {
+                Button button1;
+                button1 = new Button(player.getNick());
+                if(i == 0 || i == 1) {
+                    button1.setTranslateY(-25);
+                }
+                else {
+                    button1.setTranslateY(125);
+                }
+                if(i == 0 || i == 2) {
+                    button1.setTranslateX(-200);
+                }
+                else {
+                    button1.setTranslateX(150);
+                }
+                button1.getStyleClass().add("przyciski_losowania");
+                int finalI = i;
+                button1.setOnAction(event -> {
+                    DecisionButtonsController.onDoCardBustedActionButtonClick(finalI);
+                });
+                decisionButtons.getChildren().add(button1);
+            }
+            i++;
+        }
     }
 
     public static void showEndRoundDecisionButtons() {
