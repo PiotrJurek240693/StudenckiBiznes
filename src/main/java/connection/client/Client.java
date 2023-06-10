@@ -4,6 +4,7 @@ import gameLogic.Board;
 import gameLogic.DecisionType;
 import gameLogic.Game;
 import gameLogic.Player;
+import gameLogic.cards.Card;
 import gui.*;
 import javafx.application.Platform;
 
@@ -63,6 +64,7 @@ public class Client extends Thread {
             Game.setActivePlayerIndex(objectInput.readInt());
             Game.setBoard((Board)objectInput.readObject());
             Game.setPlayers((ArrayList<Player>)objectInput.readObject());
+            Game.getBoard().setDrawnCard((Card) objectInput.readObject());
             Game.setStarted(objectInput.readBoolean());
             Platform.runLater(() -> {
                 MenuShower.showNickAndPawnMenu();
@@ -77,10 +79,9 @@ public class Client extends Thread {
         try{
             Game.setMaxPlayers(objectInput.readInt());
             Game.setActivePlayerIndex(objectInput.readInt());
-          //  System.out.println(Game.getActivePlayerIndex());
             Game.setBoard((Board)objectInput.readObject());
-            ArrayList<Player> tab = (ArrayList<Player>)objectInput.readObject();
-            Game.setPlayers(tab);
+            Game.setPlayers((ArrayList<Player>)objectInput.readObject());
+            Game.getBoard().setDrawnCard((Card) objectInput.readObject());
             Game.setStarted(objectInput.readBoolean());
 
             Platform.runLater(() -> {
@@ -91,6 +92,12 @@ public class Client extends Thread {
                     }
                     if(Game.checkWinner() != null){
                         DecisionButtonsShower.showWinDecisionButtons();
+                    }
+                    if(Game.getBoard().getDrawnCard() != null){
+                        CardShower.showCard();
+                    }
+                    else{
+                        CardShower.removeCard();
                     }
                 }
                 DicesShower.showDices(Game.getActivePlayer().getDices());
@@ -108,6 +115,7 @@ public class Client extends Thread {
         objectOutput.writeInt(Game.getActivePlayerIndex());
         objectOutput.writeObject(Game.getBoard());
         objectOutput.writeObject(Game.getPlayers());
+        objectOutput.writeObject(Game.getBoard().getDrawnCard());
         objectOutput.writeBoolean(Game.isStarted());
         objectOutput.reset();
     }

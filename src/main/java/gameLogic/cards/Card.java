@@ -20,4 +20,7 @@ public interface Card extends Serializable
     int AUDITORIUM_RENOVATION_PRICE = 125;
     int ONE_DICE = 1;
     void takeAction(Player player);
+    String getName();
+
+    boolean isDecisionNeeded();
 }

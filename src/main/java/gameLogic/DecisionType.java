@@ -7,5 +7,9 @@ public enum DecisionType {
     PayForStop,
     PayToBank,
     EndRound,
-    GoToDante, Bankrupt, Win,
+    GoToDante,
+    Bankrupt,
+    Win,
+    CardBusted,
+    CardGoodGrade,
 }
