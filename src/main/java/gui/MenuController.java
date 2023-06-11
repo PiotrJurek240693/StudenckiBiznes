@@ -53,8 +53,7 @@ public class MenuController {
         try {
             Game.init(ip);
         } catch (IOException e) {
-            //TODO: Okno z errorem
-            throw new RuntimeException(e);
+            ErrorShower.showError("Nie udalo sie polaczyc z serwerem!");
         }
     }
 
@@ -63,13 +62,11 @@ public class MenuController {
         try {
             Game.init(gameType, numberOfPlayers);
         } catch (IOException e) {
-            //TODO: Okno z errorem
-            throw new RuntimeException(e);
+            ErrorShower.showError("Nie udalo sie uruchomic serwera!");
+            return;
         }
         MenuShower.showNickAndPawnMenu();
         System.out.println("Uruchomoino");
-
-        //TODO: Dodac polaczenie z serwerem gry.
     }
 
     public static void onPawnButtonClick(String nick, PawnColor color) {

@@ -87,6 +87,10 @@ public class Client extends Thread {
             Platform.runLater(() -> {
                 if(Game.isStarted()){
                     ActivePlayerInfoShower.showActivePlayerInfo();
+                    if(Game.getActivePlayer().getDices() != null){
+                        DicesShower.showDices(Game.getActivePlayer().getDices());
+                    }
+                    PawnsShower.showPawns();
                     if(Game.getActivePlayerIndex() == Game.getMyPlayerIndex()){
                         Game.getActivePlayer().makeDecision(DecisionType.RoundStart);
                     }
@@ -100,8 +104,6 @@ public class Client extends Thread {
                         CardShower.removeCard();
                     }
                 }
-                DicesShower.showDices(Game.getActivePlayer().getDices());
-                PawnsShower.showPawns();
                 PlayersInfoShower.showPlayersInfo();
                 PropertyIconsShower.showPropertyIcons();
             });
