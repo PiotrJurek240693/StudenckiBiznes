@@ -177,18 +177,11 @@ public class Game implements Serializable {
     }
 
     public static void start() {
-        for (int i = players.size(); i < maxPlayers; i++) {
-            players.add(new Bot("", Game.availableColors().get(0)));
-        }
         Game.started = true;
     }
 
     public static GameType getGameType() {
         return gameType;
-    }
-
-    public static void setGameType(GameType gameType) {
-        Game.gameType = gameType;
     }
 
     public static void conditionalActivePlayerBuyOrUpgrade(Property property) {

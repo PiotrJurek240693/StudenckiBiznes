@@ -88,14 +88,16 @@ public class DecisionButtonsShower {
         label.setTranslateY(-100);
         decisionButtons.getChildren().add(label);
 
-        Button button1;
-        button1 = new Button("Kup");
-        button1.getStyleClass().add("przyciski_losowania");
-        button1.setTranslateX(-100);
-        button1.setOnAction(event -> {
-            DecisionButtonsController.onBuyButtonClick();
-        });
-        decisionButtons.getChildren().add(button1);
+        if(Game.getActivePlayer().getMoneyAmount() >= ((Property)Game.getBoard().getSquares().get(Game.getActivePlayer().getPawn().getPosition())).getPrice()){
+            Button button1;
+            button1 = new Button("Kup");
+            button1.getStyleClass().add("przyciski_losowania");
+            button1.setTranslateX(-100);
+            button1.setOnAction(event -> {
+                DecisionButtonsController.onBuyButtonClick();
+            });
+            decisionButtons.getChildren().add(button1);
+        }
 
         Button button2;
         button2 = new Button("Pomin");
