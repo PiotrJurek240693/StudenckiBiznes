@@ -10,7 +10,24 @@
     -fx-font-family: "Bauhaus 93";
     -fx-min-width: 400px;
     -fx-min-height: 80px;
+
 }
+
+.przyciski_menu_powitalne:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right,#FDFF75, yellow);
+    -fx-border-radius: 20px;
+    -fx-border-width: 15px;
+    -fx-cursor: hand;
+
+    -fx-text-fill: linear-gradient(to bottom right,#FDFF75, yellow);
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-font-family: "Bauhaus 93";
+    -fx-min-width: 400px;
+    -fx-min-height: 80px;
+}
+
 
 .przyciski_losowania {
     -fx-background-color: transparent;
@@ -26,11 +43,34 @@
     -fx-min-height: 10px;
 }
 
+.przyciski_losowania:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right,#FDFF75, yellow);
+    -fx-border-radius: 10px;
+    -fx-border-width: 15px;
+    -fx-cursor: hand;
+
+    -fx-text-fill: linear-gradient(to bottom right,#FDFF75, yellow);
+    -fx-font-weight: bold;
+    -fx-font-size: 42px;
+    -fx-font-family: "Bauhaus 93";
+    -fx-min-width: 20px;
+    -fx-min-height: 10px;
+}
+
 .przyciski_niewidzialne
 {
     -fx-min-width: 900px;
     -fx-min-height: 140px;
     -fx-background-color: transparent;
+}
+
+.przyciski_niewidzialne:hover
+{
+    -fx-cursor: hand;
+    -fx-min-width: 900px;
+    -fx-min-height: 140px;
+    -fx-background-color: transparent
 }
 .tekst
 {
@@ -62,6 +102,16 @@
     -fx-background-color: transparent;
 }
 
+.pionki:hover
+{
+    -fx-cursor: hand;
+    -fx-min-width: 145px;
+    -fx-min-height: 145px;
+    -fx-background-color: transparent;
+}
+
+
+
 .label
 {
     -fx-background-color: transparent;
@@ -78,6 +128,8 @@
     -fx-font-size: 60px;
 }
 
+
+
 .saldo_red
 {
     -fx-background-color: transparent;
@@ -85,6 +137,7 @@
     -fx-text-fill: #AD1818;
     -fx-font-size: 60px;
 }
+
 
 .saldo_green
 {
@@ -196,5 +249,6 @@
 {
     -fx-fill: #0A4799;
 }
+
 
 
