@@ -4,6 +4,7 @@ import gameLogic.Board;
 import gameLogic.DecisionType;
 import gameLogic.Game;
 import gameLogic.Player;
+import gameLogic.cards.Card;
 import gui.*;
 import javafx.application.Platform;
 
@@ -53,20 +54,29 @@ public class ClientHandler extends Thread {
             Game.setActivePlayerIndex(objectInput.readInt());
             Game.setBoard((Board) objectInput.readObject());
             Game.setPlayers((ArrayList<Player>) objectInput.readObject());
+            Game.getBoard().setDrawnCard((Card) objectInput.readObject());
             Game.setStarted(objectInput.readBoolean());
 
             Platform.runLater(() -> {
                 if (Game.isStarted()) {
                     ActivePlayerInfoShower.showActivePlayerInfo();
+                    if(Game.getActivePlayer().getDices() != null){
+                        DicesShower.showDices(Game.getActivePlayer().getDices());
+                    }
+                    PawnsShower.showPawns();
                     if(Game.getActivePlayerIndex() == Game.getMyPlayerIndex()){
                         Game.getActivePlayer().makeDecision(DecisionType.RoundStart);
                     }
                     if(Game.checkWinner() != null){
                         DecisionButtonsShower.showWinDecisionButtons();
                     }
+                    if(Game.getBoard().getDrawnCard() != null){
+                        CardShower.showCard();
+                    }
+                    else{
+                        CardShower.removeCard();
+                    }
                 }
-                DicesShower.showDices(Game.getActivePlayer().getDices());
-                PawnsShower.showPawns();
                 PlayersInfoShower.showPlayersInfo();
                 PropertyIconsShower.showPropertyIcons();
             });
@@ -75,15 +85,12 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public void sendMessage(Object message) throws IOException {
-        objectOutput.writeObject(message);
-    }
-
     public void sendGameInfo() throws IOException {
         objectOutput.writeInt(Game.getMaxPlayers());
         objectOutput.writeInt(Game.getActivePlayerIndex());
         objectOutput.writeObject(Game.getBoard());
         objectOutput.writeObject(Game.getPlayers());
+        objectOutput.writeObject(Game.getBoard().getDrawnCard());
         objectOutput.writeBoolean(Game.isStarted());
         objectOutput.reset();
     }

@@ -57,7 +57,7 @@ public class Game implements Serializable {
     }
 
     public static void conditionalNextRound() {
-        if (getActivePlayer().checkDoubles() && !getActivePlayer().isBankrupt()) {
+        if (getActivePlayer().isDoubleLastMove() && !getActivePlayer().isBankrupt()) {
             if(gameType == GameType.Singleplayer || getActivePlayerIndex() == myPlayerIndex) {
                 getActivePlayer().makeDecision(DecisionType.RoundStart);
             }
@@ -69,8 +69,11 @@ public class Game implements Serializable {
                 activePlayerIndex = 0;
             }
         } while (getActivePlayer().isBankrupt());
-        for (Player player : players) {
-            player.setNumberOfDoublets(0);
+        getActivePlayer().setNumberOfDoublets(0);
+        getActivePlayer().setElectricDeficiencyStatus(false);
+        getActivePlayer().setOnErasmus(getActivePlayer().getOnErasmus() - 1);
+        if(getActivePlayer().getOnErasmus() < 0){
+            getActivePlayer().setOnErasmus(0);
         }
         if(gameType == GameType.Singleplayer || getActivePlayerIndex() == myPlayerIndex){
             getActivePlayer().makeDecision(DecisionType.RoundStart);
@@ -78,15 +81,11 @@ public class Game implements Serializable {
     }
 
     public static void conditionalEndRound() {
-        if (getActivePlayer().checkDoubles()) {
+        if (getActivePlayer().isDoubleLastMove()) {
             getActivePlayer().makeDecision(DecisionType.RoundStart);
             return;
         }
         getActivePlayer().makeDecision(DecisionType.EndRound);
-    }
-
-    public static void removePlayerAndCleanProperties() {
-        // TODO: wysłać i wyświetlić pola z powrotem do kupienia, gracz wyszarzony
     }
 
     public static void closeGame() {
@@ -178,18 +177,11 @@ public class Game implements Serializable {
     }
 
     public static void start() {
-        for (int i = players.size(); i < maxPlayers; i++) {
-            players.add(new Bot("", Game.availableColors().get(0)));
-        }
         Game.started = true;
     }
 
     public static GameType getGameType() {
         return gameType;
-    }
-
-    public static void setGameType(GameType gameType) {
-        Game.gameType = gameType;
     }
 
     public static void conditionalActivePlayerBuyOrUpgrade(Property property) {
@@ -207,6 +199,17 @@ public class Game implements Serializable {
             } else if ((property.canBeSell())) {
                 player.giveMoney(property.sellProperty());
             }
+        }
+    }
+
+    public static void activePlayerDrawCard() {
+        Square square = board.getSquares().get(getActivePlayer().getPawn().getPosition());
+
+        if(square.getType() == TypesOfSqueres.CHANCE) {
+            board.setDrawnCard(board.getChance().drawCard());
+        }
+        else if(square.getType() == TypesOfSqueres.STUDENT_CASH) {
+            board.setDrawnCard(board.getStudentCash().drawCard());
         }
     }
 

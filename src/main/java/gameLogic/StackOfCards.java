@@ -11,6 +11,7 @@ public class StackOfCards implements Serializable
 
     public void initStackOfCardsChance()
     {
+        usedCards = new ArrayList<>();
         deck = new ArrayList<>();
         deck.add(new Card_PP2());
         deck.add(new Card_Condition());
@@ -18,13 +19,13 @@ public class StackOfCards implements Serializable
         deck.add(new Card_CrossingRedLight());
         deck.add(new Card_Busy());
         deck.add(new Card_BrokenLeg());
-        deck.add(new Card_Renovation());
         deck.add(new Card_Lost());
         Collections.shuffle(deck);
     }
 
     public void initStackOfCardsStudentCash()
     {
+        usedCards = new ArrayList<>();
         deck = new ArrayList<>();
         deck.add(new Card_Birthday());
         deck.add(new Card_Busted());
@@ -49,11 +50,7 @@ public class StackOfCards implements Serializable
         Card result;
         result = deck.get(deck.size()+GameInfo.SUB_INDEX);
         deck.remove(deck.size()+GameInfo.SUB_INDEX);
+        usedCards.add(result);
         return result;
-    }
-
-    public void returnCard(Card card)
-    {
-        usedCards.add(card);
     }
 }

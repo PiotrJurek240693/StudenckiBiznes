@@ -147,7 +147,7 @@ public class Property extends Square implements Serializable {
                 }
             }
         }
-        return upgrades <= MAX_UPGRADE;
+        return upgrades < MAX_UPGRADE;
     }
 
     public boolean canBeDegraded() {

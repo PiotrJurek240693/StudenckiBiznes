@@ -13,11 +13,11 @@ public class Player implements Serializable {
     private int inDante = 0;
     private boolean isBankrupt = false;
     private boolean hasCardChance = false;
-    private boolean isOnErasmus = false;
+    private int onErasmus = 0;
     private boolean hasElectricDeficiency = false;
-
+    private ArrayList<Integer> lastDices;
     private ArrayList<Integer> dices;
-
+    private boolean doubleLastMove = false;
     private int numberOfDoublets = 0;
     private static Random randomGenerator = new Random();
     private String nick;
@@ -69,22 +69,11 @@ public class Player implements Serializable {
     }
 
     public int takeMoney(int amount) {
-        /*if (!checkIfCanTakeMoney(amount)) {
-            for (Property property : ownedProperties())
-                property.sellProperty();
-            setBankruptStatus();
-            Game.removePlayerAndCleanProperties();
-            return moneyAmount;
-        }
-
-        Property property;
-
-        while (amount > moneyAmount) {
-            // property = Game.chooseProperty( ownedProperties(), amount-moneyAmount );
-            // moneyAmount += property.sellProperty();
-        }*/
-
         moneyAmount -= amount;
+
+        if(moneyAmount < 0){
+            moneyAmount = 0;
+        }
 
         return amount;
     }
@@ -100,15 +89,23 @@ public class Player implements Serializable {
                 goToDante(3);
             }
         }
-        return dices;
+        lastDices = new ArrayList<Integer>(dices);
+        setHowManyDicesToThrow(GameInfo.INITIAL_NUMBER_OF_DICES);
+        return lastDices;
     }
 
-    public boolean checkDoubles() {
+    private boolean checkDoubles() {
+        if(dices.size() < 2) {
+            return false;
+        }
+
         for (int i = 1; i < dices.size(); i++) {
             if (!Objects.equals(dices.get(i), dices.get(i - 1))) {
+                doubleLastMove = false;
                 return false;
             }
         }
+        doubleLastMove = true;
         return true;
     }
 
@@ -125,7 +122,12 @@ public class Player implements Serializable {
         pawn.getToSquare(squareNumber);
     }
 
-    public void conditionalMove(int shift) {
+    public void conditionalMove(ArrayList<Integer> moves) {
+        int shift = 0;
+        for (int dice : moves) {
+            shift += dice;
+        }
+
         int startPosition = pawn.getPosition();
         pawn.move(shift);
         if (startPosition > pawn.getPosition()) {
@@ -133,16 +135,9 @@ public class Player implements Serializable {
         }
     }
 
-    public void conditionalMove() {
-        int shift = 0;
-        for (int dice : dices) {
-            shift += dice;
-            System.out.println(dice);
-        }
-
-        System.out.println("Shift: " + shift);
+    public void conditionalMove(int moves) {
         int startPosition = pawn.getPosition();
-        pawn.move(shift);
+        pawn.move(moves);
         if (startPosition > pawn.getPosition()) {
             giveMoney(GameInfo.START_SQUARE_ADDITION);
         }
@@ -162,8 +157,7 @@ public class Player implements Serializable {
                 }
                 break;
             case DrawCard:
-                //DecisionButtonsShower.showDrawCardDecisionButtons();
-                Game.conditionalNextRound();
+                DecisionButtonsShower.showDrawCardDecisionButtons();
                 break;
             case Buy:
                 DecisionButtonsShower.showBuyDecisionButtons();
@@ -188,6 +182,12 @@ public class Player implements Serializable {
             case Win:
                 DecisionButtonsShower.showWinDecisionButtons();
                 break;
+            case CardBusted:
+                DecisionButtonsShower.showCardBustedDecisionButtons();
+                break;
+            case CardGoodGrade:
+                DecisionButtonsShower.showCardGoodGradeDecisionButtons();
+                break;
             default:
                 Game.conditionalNextRound();
                 break;
@@ -206,6 +206,9 @@ public class Player implements Serializable {
         return isBankrupt;
     }
 
+    public void changeDanteDuration(int numberOfRounds) {
+        inDante += numberOfRounds;
+    }
     public void setDanteDuration(int numberOfRounds) {
         inDante = numberOfRounds;
     }
@@ -226,12 +229,12 @@ public class Player implements Serializable {
         this.hasCardChance = hasCardChance;
     }
 
-    public boolean isOnErasmus() {
-        return isOnErasmus;
+    public int getOnErasmus() {
+        return onErasmus;
     }
 
-    public void setOnErasmus(boolean onErasmus) {
-        this.isOnErasmus = onErasmus;
+    public void setOnErasmus(int onErasmus) {
+        this.onErasmus = onErasmus;
     }
 
     public boolean hasElectricDeficiency() {
@@ -248,6 +251,9 @@ public class Player implements Serializable {
 
     public void setHowManyDicesToThrow(int howManyDicesToThrow) {
         this.dices = new ArrayList<>(howManyDicesToThrow);
+        for (int i = 0; i < howManyDicesToThrow; i++) {
+            dices.add(0);
+        }
     }
 
     public int getMoneyAmount() {
@@ -271,7 +277,7 @@ public class Player implements Serializable {
     }
 
     public ArrayList<Integer> getDices() {
-        return dices;
+        return lastDices;
     }
 
     public int getDicesSum() {
@@ -318,5 +324,9 @@ public class Player implements Serializable {
         moneyAmount = 0;
         isBankrupt = true;
         return output;
+    }
+
+    public boolean isDoubleLastMove() {
+        return doubleLastMove;
     }
 }
