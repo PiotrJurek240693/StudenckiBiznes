@@ -1,11 +1,16 @@
 package gui;
 
+import gameLogic.Player;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -25,9 +30,25 @@ public class DicesShower {
         stackPane.getChildren().add(dices);
     }
 
-    public static void showDices(ArrayList<Integer> dicesNumbers) {
-        init();
+    public static void showDicesAnimation(ArrayList<Integer> dicesNumbers) {
+        Timeline timeline = new Timeline();
 
+        for (int i = 1; i < 10; i++) {
+            int delay = i * 50;
+            ArrayList<Integer> tempDices = Player.randomDices(dicesNumbers.size());
+
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(delay), event -> showDices(tempDices));
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(500), event -> showDices(dicesNumbers));
+        timeline.getKeyFrames().add(keyFrame);
+
+        timeline.play();
+    }
+
+    private static void showDices(ArrayList<Integer> dicesNumbers) {
+        init();
         if(dicesNumbers.size() >= 1){
             ImageView Kostka1 = new ImageView();
             Image Kostka1Image = Chooser.chooseDice(dicesNumbers.get(0));
