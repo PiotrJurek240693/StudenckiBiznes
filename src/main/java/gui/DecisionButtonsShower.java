@@ -303,7 +303,7 @@ public class DecisionButtonsShower {
 
         Button button1;
         button1 = new Button("Wstecz");
-        label.setTranslateX(-200);
+        button1.setTranslateX(-200);
         button1.getStyleClass().add("przyciski_losowania");
         button1.setOnAction(event -> {
             DecisionButtonsController.onDoCardGoodGradeActionButtonClick(-3);
@@ -312,7 +312,7 @@ public class DecisionButtonsShower {
 
         Button button2;
         button2 = new Button("Przod");
-        label.setTranslateX(150);
+        button2.setTranslateX(150);
         button2.getStyleClass().add("przyciski_losowania");
         button2.setOnAction(event -> {
             DecisionButtonsController.onDoCardGoodGradeActionButtonClick(3);
