@@ -88,7 +88,7 @@ public class Client extends Thread {
                 if(Game.isStarted()){
                     ActivePlayerInfoShower.showActivePlayerInfo();
                     if(Game.getActivePlayer().getDices() != null){
-                        DicesShower.showDices(Game.getActivePlayer().getDices());
+                        DicesShower.showDicesAnimation(Game.getActivePlayer().getDices());
                     }
                     PawnsShower.showPawns();
                     if(Game.getActivePlayerIndex() == Game.getMyPlayerIndex()){

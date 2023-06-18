@@ -94,6 +94,14 @@ public class Player implements Serializable {
         return lastDices;
     }
 
+    public static ArrayList<Integer> randomDices(int size) {
+        ArrayList<Integer> dices=new ArrayList<Integer>();
+
+        for (int i = 0; i < size; i++) {
+            dices.add(randomGenerator.nextInt(6) + 1);
+        }
+        return dices;
+    }
     private boolean checkDoubles() {
         if(dices.size() < 2) {
             return false;

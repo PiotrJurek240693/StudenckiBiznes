@@ -20,7 +20,7 @@ public class DecisionButtonsController {
         Player player = Game.getActivePlayer();
         var dices = player.rollDices();
         player.conditionalMove(dices);
-        DicesShower.showDices(dices);
+        DicesShower.showDicesAnimation(dices);
         PawnsShower.showPawns();
         ActivePlayerInfoShower.showActivePlayerInfo();
         PlayersInfoShower.showPlayersInfo();
@@ -53,7 +53,7 @@ public class DecisionButtonsController {
 
     public static void onDicesInDanteButtonClick() {
         Player player = Game.getActivePlayer();
-        DicesShower.showDices(player.rollDices());
+        DicesShower.showDicesAnimation(player.rollDices());
         if(player.isDoubleLastMove()){
             player.setDanteDuration(0);
             player.makeDecision(DecisionType.RoundStart);
